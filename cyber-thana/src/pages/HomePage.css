@@ -1,0 +1,211 @@
+/* ===== BASE ===== */
+.rp-page {
+  font-family: Inter, sans-serif;
+  color: #0f172a;
+}
+
+/* ===== HEADER ===== */
+.rp-header {
+  position: sticky;
+  top: 0;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #e5e7eb;
+  z-index: 100;
+}
+
+.rp-header-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rp-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.rp-logo img {
+  height: 34px;
+}
+
+.rp-nav {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.rp-nav a {
+  text-decoration: none;
+  color: #334155;
+  font-weight: 500;
+}
+
+/* ===== BUTTONS ===== */
+.rp-btn-primary {
+  background: #0f172a;
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.rp-btn-outline {
+  border: 1px solid #0f172a;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  color: #0f172a;
+  text-decoration: none;
+}
+
+.rp-btn-primary.lg {
+  padding: 14px 28px;
+  border-radius: 10px;
+}
+
+.rp-btn-light {
+  background: #fff;
+  color: #0f172a;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* ===== HERO ===== */
+.rp-hero {
+  padding: 120px 20px;
+  background: #f8fafc;
+}
+
+.rp-hero-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.rp-hero h1 {
+  font-size: 52px;
+  margin-bottom: 20px;
+}
+
+.rp-hero p {
+  font-size: 18px;
+  line-height: 1.7;
+  max-width: 520px;
+  margin-bottom: 36px;
+}
+
+.rp-actions {
+  display: flex;
+  gap: 16px;
+}
+
+/* ===== MOCKUP ===== */
+.rp-mockup {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.rp-mockup-header {
+  background: #0f172a;
+  color: #fff;
+  padding: 16px;
+  font-weight: 600;
+}
+
+.rp-mockup-body {
+  padding: 24px;
+}
+
+.line {
+  height: 14px;
+  background: #e5e7eb;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.line.small {
+  width: 60%;
+}
+
+/* ===== SECTIONS ===== */
+.rp-section {
+  padding: 100px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.rp-section.alt {
+  background: #f8fafc;
+}
+
+.rp-section h2 {
+  text-align: center;
+  font-size: 34px;
+  margin-bottom: 60px;
+}
+
+.rp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+}
+
+.rp-card {
+  background: #fff;
+  padding: 28px;
+  border-radius: 14px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* ===== STEPS ===== */
+.rp-steps {
+  max-width: 900px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 32px;
+  text-align: center;
+}
+
+.rp-step span {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+/* ===== CTA ===== */
+.rp-cta {
+  padding: 100px 20px;
+  background: #0f172a;
+  color: #fff;
+  text-align: center;
+}
+
+/* ===== FOOTER ===== */
+.rp-footer {
+  padding: 40px 20px;
+  background: #020617;
+  color: #cbd5f5;
+}
+
+.rp-footer-inner {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
