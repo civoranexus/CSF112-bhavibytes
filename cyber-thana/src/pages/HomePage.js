@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import civoraLogo from "../assets/civora-nexus-logo.png";
 
 /* ================= ANIMATIONS ================= */
-
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
   visible: {
@@ -26,24 +25,20 @@ const floatAnim = {
 };
 
 /* ================= COMPONENT ================= */
-
 export default function HomePage() {
   const { scrollYProgress } = useScroll();
-  const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "25%"]);
-  const parallaxOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.35]);
+  const parallaxY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
+  const parallaxOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0.4]);
 
   return (
     <div style={styles.page}>
-
       {/* ============ HEADER ============ */}
-      <motion.header
-        style={styles.header}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-      >
+      <motion.header style={styles.header} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <div style={styles.headerInner}>
           <div style={styles.logoWrapper}>
-            <img src={civoraLogo} alt="Civora Nexus" style={styles.logoImg} />
+            <div style={styles.logoGlass}>
+              <img src={civoraLogo} alt="Civora Nexus" style={styles.logoImg} />
+            </div>
             <span style={styles.logoText}>Cyber Thana</span>
           </div>
 
@@ -59,15 +54,20 @@ export default function HomePage() {
 
       {/* ============ HERO ============ */}
       <section style={styles.hero}>
-        <motion.div style={styles.heroInner} variants={stagger} initial="hidden" animate="visible">
+        <motion.div
+          style={styles.heroInner}
+          variants={stagger}
+          initial="hidden"
+          animate="visible"
+        >
           <div>
             <motion.h1 style={styles.heroTitle} variants={fadeUp}>
               Securely Report & Track Cyber Incidents
             </motion.h1>
 
             <motion.p style={styles.heroDesc} variants={fadeUp}>
-              A citizen-first digital platform for transparent cybercrime reporting,
-              real-time tracking, and verified safety resources.
+              A citizen-first digital platform enabling secure cybercrime reporting,
+              transparent case tracking, and verified safety guidance.
             </motion.p>
 
             <motion.div style={styles.heroActions} variants={fadeUp}>
@@ -76,25 +76,72 @@ export default function HomePage() {
             </motion.div>
           </div>
 
+          {/* ===== DASHBOARD PREVIEW ===== */}
           <motion.div style={styles.heroVisual} {...floatAnim} variants={fadeUp}>
-            <div style={styles.mockup}>
-              <div style={styles.mockupHeader}>Cyber Thana Dashboard</div>
-              <div style={styles.mockupBody}>
-                <div style={styles.mockLine} />
-                <div style={styles.mockLine} />
-                <div style={{ ...styles.mockLine, width: "60%" }} />
+            <div style={styles.dashboard}>
+              <div style={styles.dashboardHeader}>
+                <strong>Cyber Thana – Live Dashboard</strong>
+                <span style={styles.statusBadge}>Secure</span>
+              </div>
+
+              <div style={styles.dashboardStats}>
+                <div style={styles.statCard}>
+                  <h4>Active Cases</h4>
+                  <span>128</span>
+                </div>
+                <div style={styles.statCard}>
+                  <h4>Resolved</h4>
+                  <span>2,431</span>
+                </div>
+                <div style={styles.statCard}>
+                  <h4>Avg. Resolution</h4>
+                  <span>48 hrs</span>
+                </div>
+              </div>
+
+              <div style={styles.chart}>
+                <div style={{ ...styles.bar, width: "82%" }} />
+                <div style={{ ...styles.bar, width: "64%" }} />
+                <div style={{ ...styles.bar, width: "71%" }} />
+              </div>
+
+              <div style={styles.activity}>
+                <h4>Recent Activity</h4>
+                <ul>
+                  <li>✔ Complaint #92831 resolved</li>
+                  <li>⚠ UPI fraud reported</li>
+                  <li>✔ Case verified</li>
+                </ul>
               </div>
             </div>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* ============ TRUST PARALLAX ============ */}
+      {/* ============ TRUST SECTION ============ */}
       <motion.section
-        style={{ ...styles.parallax, y: parallaxY, opacity: parallaxOpacity }}
+        style={{ ...styles.trustSection, y: parallaxY, opacity: parallaxOpacity }}
+        initial="hidden"
+        whileInView="visible"
+        variants={stagger}
       >
-        <h2>Trusted · Secure · Transparent</h2>
-        <p>Built with enterprise-grade security and civic trust.</p>
+        <motion.h2 style={styles.trustTitle} variants={fadeUp}>
+          Built for Trust. Designed for Citizens.
+        </motion.h2>
+
+        <motion.p style={styles.trustSubtitle} variants={fadeUp}>
+          Cyber Thana is engineered with security, transparency, and accountability
+          at its core — ensuring citizens can report incidents with confidence.
+        </motion.p>
+
+        <div style={styles.trustGrid}>
+          {trustPoints.map((t, i) => (
+            <motion.div key={i} style={styles.trustCard} variants={fadeUp}>
+              <h3>{t.title}</h3>
+              <p>{t.desc}</p>
+            </motion.div>
+          ))}
+        </div>
       </motion.section>
 
       {/* ============ FEATURES ============ */}
@@ -102,11 +149,10 @@ export default function HomePage() {
         style={styles.section}
         initial="hidden"
         whileInView="visible"
-        viewport={{ once: true }}
         variants={stagger}
       >
         <motion.h2 style={styles.sectionTitle} variants={fadeUp}>
-          Why Cyber Thana
+          Platform Capabilities
         </motion.h2>
 
         <div style={styles.grid}>
@@ -119,36 +165,6 @@ export default function HomePage() {
         </div>
       </motion.section>
 
-      {/* ============ PROCESS ============ */}
-      <motion.section
-        style={styles.altSection}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={stagger}
-      >
-        <motion.h2 style={styles.sectionTitle} variants={fadeUp}>
-          How It Works
-        </motion.h2>
-
-        <div style={styles.steps}>
-          {steps.map((s, i) => (
-            <motion.div key={i} style={styles.step} variants={fadeUp}>
-              <span style={styles.stepNum}>{i + 1}</span>
-              <h4>{s.title}</h4>
-              <p>{s.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      {/* ============ CTA ============ */}
-      <motion.section style={styles.cta}>
-        <h2>Report Cybercrime with Confidence</h2>
-        <p>Your safety matters. Start securely today.</p>
-        <Link to="/report" style={styles.ctaBtn}>Get Started</Link>
-      </motion.section>
-
       {/* ============ FOOTER ============ */}
       <footer style={styles.footer}>
         <div style={styles.footerInner}>
@@ -159,205 +175,226 @@ export default function HomePage() {
           <div>© {new Date().getFullYear()} Civora Nexus</div>
         </div>
       </footer>
-
     </div>
   );
 }
 
 /* ================= DATA ================= */
-
-const features = [
-  { title: "Secure Reporting", desc: "Encrypted and confidential incident submission." },
-  { title: "Live Tracking", desc: "Transparent complaint progress updates." },
-  { title: "Verified Resources", desc: "Authoritative cyber safety guidance." },
-  { title: "Citizen-First Design", desc: "Accessible, inclusive, modern UI." },
+const trustPoints = [
+  {
+    title: "End-to-End Encryption",
+    desc: "All reports are encrypted in transit and at rest to ensure complete confidentiality.",
+  },
+  {
+    title: "Authorized Access Only",
+    desc: "Case data is accessible only to verified cyber officials and authorized personnel.",
+  },
+  {
+    title: "Transparent Case Tracking",
+    desc: "Real-time status updates with clear milestones and accountability.",
+  },
+  {
+    title: "Audit-Ready Architecture",
+    desc: "Built to support compliance, evidence integrity, and audit trails.",
+  },
 ];
 
-const steps = [
-  { title: "Submit Complaint", desc: "Guided and secure reporting flow." },
-  { title: "Verification", desc: "Authorities validate the incident." },
-  { title: "Resolution", desc: "Track progress until closure." },
+const features = [
+  { title: "Secure Incident Reporting", desc: "Confidential and encrypted submission workflow." },
+  { title: "Live Case Tracking", desc: "Track progress with real-time updates." },
+  { title: "Verified Safety Resources", desc: "Government-approved cyber safety guidance." },
+  { title: "Citizen-First Design", desc: "Accessible, inclusive, and modern interface." },
 ];
 
 /* ================= STYLES ================= */
-
 const styles = {
   page: {
-    fontFamily: "Inter, sans-serif",
-    background:
-      "radial-gradient(80% 80% at 50% -20%, #142C52 0%, #071426 65%)",
-    color: "#E5E7EB",
+    fontFamily: "Inter, system-ui, sans-serif",
+    background: "#F8FAFC",
+    color: "#0F172A",
   },
 
   header: {
     position: "sticky",
     top: 0,
-    backdropFilter: "blur(16px)",
-    background: "rgba(7,20,38,0.75)",
-    borderBottom: "1px solid rgba(255,255,255,0.08)",
+    backdropFilter: "blur(18px)",
+    background: "rgba(255,255,255,0.9)",
+    borderBottom: "1px solid rgba(15,23,42,0.08)",
     zIndex: 100,
   },
 
   headerInner: {
-    maxWidth: "1200px",
+    maxWidth: 1200,
     margin: "0 auto",
-    padding: "16px 20px",
+    padding: "16px 22px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
   },
 
-  logoWrapper: { display: "flex", alignItems: "center", gap: "10px" },
-  logoImg: { height: "34px" },
-  logoText: { fontWeight: 700 },
+  logoWrapper: { display: "flex", alignItems: "center", gap: 12 },
+  logoGlass: {
+    padding: "6px 10px",
+    borderRadius: 12,
+    background: "#FFF",
+    border: "1px solid rgba(15,23,42,0.15)",
+  },
+  logoImg: { height: 30 },
+  logoText: { fontWeight: 800 },
 
-  nav: { display: "flex", gap: "18px", alignItems: "center" },
-  navLink: { color: "#CBD5E1", textDecoration: "none" },
+  nav: { display: "flex", gap: 22, alignItems: "center" },
+  navLink: { textDecoration: "none", fontWeight: 500, color: "#0F172A" },
 
   primaryBtn: {
-    padding: "10px 18px",
-    background: "#16808D",
-    color: "#fff",
-    borderRadius: "999px",
+    padding: "10px 20px",
+    background: "linear-gradient(135deg,#1B9AAA,#14B8A6)",
+    borderRadius: 999,
+    fontWeight: 800,
+    color: "#02131F",
     textDecoration: "none",
-    fontWeight: 700,
   },
 
-  hero: { padding: "160px 20px 140px" },
-
+  hero: { padding: "140px 20px" },
   heroInner: {
-    maxWidth: "1200px",
+    maxWidth: 1200,
     margin: "0 auto",
     display: "grid",
     gridTemplateColumns: "1.1fr 0.9fr",
-    gap: "70px",
-    alignItems: "center",
+    gap: 70,
   },
 
-  heroTitle: {
-    fontSize: "64px",
-    fontWeight: 800,
-    lineHeight: 1.1,
-    marginBottom: "24px",
-  },
-
-  heroDesc: {
-    fontSize: "18px",
-    color: "#94A3B8",
-    maxWidth: "540px",
-    marginBottom: "44px",
-  },
-
-  heroActions: { display: "flex", gap: "16px" },
+  heroTitle: { fontSize: 60, fontWeight: 800 },
+  heroDesc: { color: "#475569", maxWidth: 520, marginBottom: 40 },
+  heroActions: { display: "flex", gap: 16 },
 
   primaryBtnLg: {
     padding: "14px 30px",
-    background: "linear-gradient(135deg, #1B9AAA, #16808D)",
-    borderRadius: "999px",
-    color: "#071426",
+    background: "#1B9AAA",
+    borderRadius: 999,
     fontWeight: 800,
+    color: "#02131F",
     textDecoration: "none",
-    boxShadow: "0 0 40px rgba(27,154,170,0.35)",
   },
 
   secondaryBtnLg: {
     padding: "14px 30px",
-    border: "1px solid rgba(255,255,255,0.2)",
-    borderRadius: "999px",
-    color: "#E5E7EB",
+    border: "1px solid #CBD5E1",
+    borderRadius: 999,
+    color: "#0F172A",
     textDecoration: "none",
   },
 
   heroVisual: { display: "flex", justifyContent: "center" },
 
-  mockup: {
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    borderRadius: "20px",
-    overflow: "hidden",
-    boxShadow: "0 40px 80px rgba(0,0,0,0.6)",
+  dashboard: {
+    width: 420,
+    background: "#FFF",
+    borderRadius: 20,
+    padding: 22,
+    boxShadow: "0 40px 80px rgba(15,23,42,0.15)",
   },
 
-  mockupHeader: {
-    padding: "16px",
-    background: "#142C52",
-    fontWeight: 600,
+  dashboardHeader: {
+    display: "flex",
+    justifyContent: "space-between",
+    marginBottom: 18,
   },
 
-  mockupBody: { padding: "24px" },
-  mockLine: {
-    height: "14px",
-    background: "rgba(255,255,255,0.2)",
-    borderRadius: "6px",
-    marginBottom: "12px",
+  statusBadge: {
+    background: "#DCFCE7",
+    color: "#166534",
+    padding: "4px 10px",
+    borderRadius: 999,
+    fontSize: 12,
+    fontWeight: 700,
   },
 
-  parallax: {
-    padding: "120px 20px",
-    textAlign: "center",
-    background: "#071426",
-  },
-
-  section: { padding: "120px 20px", maxWidth: "1200px", margin: "0 auto" },
-  altSection: { padding: "120px 20px", background: "#020F1F" },
-
-  sectionTitle: { textAlign: "center", fontSize: "36px", marginBottom: "70px" },
-
-  grid: {
+  dashboardStats: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(240px,1fr))",
-    gap: "26px",
+    gridTemplateColumns: "repeat(3,1fr)",
+    gap: 12,
+    marginBottom: 20,
   },
 
-  card: {
-    background: "rgba(255,255,255,0.06)",
-    border: "1px solid rgba(255,255,255,0.12)",
-    padding: "32px",
-    borderRadius: "20px",
+  statCard: {
+    background: "#F1F5F9",
+    padding: 14,
+    borderRadius: 12,
+    textAlign: "center",
   },
 
-  steps: {
-    maxWidth: "900px",
+  chart: {
+    background: "#F8FAFC",
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 20,
+  },
+
+  bar: {
+    height: 10,
+    background: "linear-gradient(90deg,#1B9AAA,#14B8A6)",
+    borderRadius: 6,
+    marginBottom: 10,
+  },
+
+  activity: { fontSize: 14, color: "#334155" },
+
+  trustSection: {
+    padding: "140px 20px",
+    textAlign: "center",
+    background: "linear-gradient(180deg, rgba(27,154,170,0.06), transparent)",
+  },
+
+  trustTitle: { fontSize: 40, fontWeight: 800, marginBottom: 16 },
+  trustSubtitle: {
+    maxWidth: 720,
+    margin: "0 auto 70px",
+    color: "#475569",
+    fontSize: 18,
+  },
+
+  trustGrid: {
+    maxWidth: 1200,
     margin: "0 auto",
     display: "grid",
     gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-    gap: "36px",
+    gap: 28,
   },
 
-  step: { textAlign: "center" },
-  stepNum: { fontSize: "28px", fontWeight: 800, color: "#1B9AAA" },
-
-  cta: {
-    padding: "140px 20px",
-    textAlign: "center",
-    background:
-      "radial-gradient(60% 60% at 50% 0%, #142C52 0%, #071426 70%)",
+  trustCard: {
+    background: "#FFF",
+    padding: 32,
+    borderRadius: 20,
+    boxShadow: "0 10px 30px rgba(15,23,42,0.08)",
   },
 
-  ctaBtn: {
-    marginTop: "28px",
-    display: "inline-block",
-    padding: "14px 30px",
-    background: "#1B9AAA",
-    color: "#071426",
-    borderRadius: "999px",
-    fontWeight: 800,
-    textDecoration: "none",
+  section: { padding: "140px 20px", maxWidth: 1200, margin: "0 auto" },
+  sectionTitle: { textAlign: "center", fontSize: 36, marginBottom: 70 },
+
+  grid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit,minmax(240px,1fr))",
+    gap: 26,
+  },
+
+  card: {
+    background: "#FFF",
+    padding: 32,
+    borderRadius: 20,
+    boxShadow: "0 10px 30px rgba(15,23,42,0.08)",
   },
 
   footer: {
     padding: "50px 20px",
-    background: "#071426",
-    color: "#94A3B8",
-    borderTop: "1px solid rgba(255,255,255,0.08)",
+    background: "#F1F5F9",
+    borderTop: "1px solid #E2E8F0",
   },
 
   footerInner: {
-    maxWidth: "1200px",
+    maxWidth: 1200,
     margin: "0 auto",
     display: "flex",
     justifyContent: "space-between",
     flexWrap: "wrap",
-    gap: "20px",
   },
 };
