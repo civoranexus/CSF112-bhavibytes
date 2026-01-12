@@ -33,7 +33,11 @@ export default function HomePage() {
   return (
     <div style={styles.page}>
       {/* ============ HEADER ============ */}
-      <motion.header style={styles.header} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+      <motion.header
+        style={styles.header}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
         <div style={styles.headerInner}>
           <div style={styles.logoWrapper}>
             <div style={styles.logoGlass}>
@@ -66,18 +70,31 @@ export default function HomePage() {
             </motion.h1>
 
             <motion.p style={styles.heroDesc} variants={fadeUp}>
-              A citizen-first digital platform enabling secure cybercrime reporting,
-              transparent case tracking, and verified safety guidance.
+              A citizen-first digital platform enabling secure cybercrime
+              reporting, transparent case tracking, and verified safety guidance.
             </motion.p>
 
             <motion.div style={styles.heroActions} variants={fadeUp}>
-              <Link to="/report" style={styles.primaryBtnLg}>Report Incident</Link>
-              <Link to="/track" style={styles.secondaryBtnLg}>Track Complaint</Link>
+              <Link to="/report" style={styles.primaryBtnLg}>
+                Report Incident
+              </Link>
+
+              <Link to="/track" style={styles.secondaryBtnLg}>
+                Track Complaint
+              </Link>
+
+              <Link to="/resources" style={styles.ghostBtnLg}>
+                Explore Resources
+              </Link>
             </motion.div>
           </div>
 
           {/* ===== DASHBOARD PREVIEW ===== */}
-          <motion.div style={styles.heroVisual} {...floatAnim} variants={fadeUp}>
+          <motion.div
+            style={styles.heroVisual}
+            {...floatAnim}
+            variants={fadeUp}
+          >
             <div style={styles.dashboard}>
               <div style={styles.dashboardHeader}>
                 <strong>Cyber Thana – Live Dashboard</strong>
@@ -183,27 +200,27 @@ export default function HomePage() {
 const trustPoints = [
   {
     title: "End-to-End Encryption",
-    desc: "All reports are encrypted in transit and at rest to ensure complete confidentiality.",
+    desc: "All reports are encrypted in transit and at rest.",
   },
   {
     title: "Authorized Access Only",
-    desc: "Case data is accessible only to verified cyber officials and authorized personnel.",
+    desc: "Accessible only to verified cyber officials.",
   },
   {
     title: "Transparent Case Tracking",
-    desc: "Real-time status updates with clear milestones and accountability.",
+    desc: "Clear milestones and real-time updates.",
   },
   {
     title: "Audit-Ready Architecture",
-    desc: "Built to support compliance, evidence integrity, and audit trails.",
+    desc: "Supports compliance and evidence integrity.",
   },
 ];
 
 const features = [
-  { title: "Secure Incident Reporting", desc: "Confidential and encrypted submission workflow." },
-  { title: "Live Case Tracking", desc: "Track progress with real-time updates." },
-  { title: "Verified Safety Resources", desc: "Government-approved cyber safety guidance." },
-  { title: "Citizen-First Design", desc: "Accessible, inclusive, and modern interface." },
+  { title: "Secure Incident Reporting", desc: "Confidential encrypted workflow." },
+  { title: "Live Case Tracking", desc: "Real-time progress updates." },
+  { title: "Verified Safety Resources", desc: "Government-approved guidance." },
+  { title: "Citizen-First Design", desc: "Inclusive and accessible UI." },
 ];
 
 /* ================= STYLES ================= */
@@ -265,7 +282,7 @@ const styles = {
 
   heroTitle: { fontSize: 60, fontWeight: 800 },
   heroDesc: { color: "#475569", maxWidth: 520, marginBottom: 40 },
-  heroActions: { display: "flex", gap: 16 },
+  heroActions: { display: "flex", gap: 16, flexWrap: "wrap" },
 
   primaryBtnLg: {
     padding: "14px 30px",
@@ -282,6 +299,15 @@ const styles = {
     borderRadius: 999,
     color: "#0F172A",
     textDecoration: "none",
+  },
+
+  ghostBtnLg: {
+    padding: "14px 30px",
+    border: "1px dashed #94A3B8",
+    borderRadius: 999,
+    color: "#334155",
+    textDecoration: "none",
+    fontWeight: 700,
   },
 
   heroVisual: { display: "flex", justifyContent: "center" },
