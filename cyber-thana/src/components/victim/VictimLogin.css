@@ -1,0 +1,247 @@
+.victim-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    padding: 20px;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 450px;
+}
+
+.login-box {
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(27, 154, 170, 0.15);
+    border: 1px solid #e2e8f0;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.login-header h2 {
+    color: #1e293b;
+    margin: 0 0 8px 0;
+    font-size: 28px;
+}
+
+.login-subtitle {
+    color: #64748b;
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    color: #475569;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.form-input {
+    padding: 14px 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s;
+    background: #f8fafc;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1B9AAA;
+    box-shadow: 0 0 0 3px rgba(27, 154, 170, 0.1);
+    background: white;
+}
+
+.password-input {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    color: #64748b;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #475569;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.remember-me input {
+    width: 16px;
+    height: 16px;
+}
+
+.forgot-link {
+    color: #1B9AAA;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.forgot-link:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    padding: 16px;
+    background: linear-gradient(135deg, #1B9AAA, #14B8A6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.login-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(27, 154, 170, 0.3);
+}
+
+.login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.login-divider span {
+    padding: 0 15px;
+}
+
+.secondary-button {
+    padding: 16px;
+    background: white;
+    color: #1B9AAA;
+    border: 2px solid #1B9AAA;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.secondary-button:hover {
+    background: #f0f9ff;
+}
+
+.login-links {
+    text-align: center;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.login-links p {
+    margin: 8px 0;
+}
+
+.link {
+    color: #1B9AAA;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.security-info {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.security-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 20px;
+    font-size: 12px;
+    color: #0369a1;
+    font-weight: 500;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 20px;
+    }
+
+    .login-header h2 {
+        font-size: 24px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .security-info {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+}

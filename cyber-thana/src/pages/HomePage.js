@@ -48,10 +48,11 @@ export default function HomePage() {
 
           <nav style={styles.nav}>
             <Link to="/" style={styles.navLink}>Home</Link>
-            <Link to="/report" style={styles.navLink}>Report</Link>
-            <Link to="/track" style={styles.navLink}>Track</Link>
+            <Link to="/victim" style={styles.navLink}>Report Crime</Link>
+            <Link to="/track" style={styles.navLink}>Track Complaint</Link>
             <Link to="/resources" style={styles.navLink}>Resources</Link>
-            <Link to="/report" style={styles.primaryBtn}>Report Incident</Link>
+            <Link to="/police" style={styles.navLink}>Police Login</Link>
+            <Link to="/victim" style={styles.primaryBtn}>Report Incident</Link>
           </nav>
         </div>
       </motion.header>
@@ -75,7 +76,7 @@ export default function HomePage() {
             </motion.p>
 
             <motion.div style={styles.heroActions} variants={fadeUp}>
-              <Link to="/report" style={styles.primaryBtnLg}>
+              <Link to="/victim" style={styles.primaryBtnLg}>
                 Report Incident
               </Link>
 
@@ -92,7 +93,7 @@ export default function HomePage() {
           {/* ===== DASHBOARD PREVIEW ===== */}
           <motion.div
             style={styles.heroVisual}
-            {...floatAnim}
+            animate={floatAnim.animate}
             variants={fadeUp}
           >
             <div style={styles.dashboard}>
@@ -124,7 +125,7 @@ export default function HomePage() {
 
               <div style={styles.activity}>
                 <h4>Recent Activity</h4>
-                <ul>
+                <ul style={styles.activityList}>
                   <li>✔ Complaint #92831 resolved</li>
                   <li>⚠ UPI fraud reported</li>
                   <li>✔ Case verified</li>
@@ -158,6 +159,70 @@ export default function HomePage() {
               <p>{t.desc}</p>
             </motion.div>
           ))}
+        </div>
+      </motion.section>
+
+      {/* ============ PORTAL ACCESS SECTION ============ */}
+      <motion.section
+        style={styles.portalSection}
+        initial="hidden"
+        whileInView="visible"
+        variants={stagger}
+      >
+        <motion.h2 style={styles.portalTitle} variants={fadeUp}>
+          Access Secure Portals
+        </motion.h2>
+        
+        <motion.p style={styles.portalSubtitle} variants={fadeUp}>
+          Choose your portal based on your role. All access is secured with end-to-end encryption.
+        </motion.p>
+
+        <div style={styles.portalGrid}>
+          {/* VICTIM PORTAL CARD */}
+          <motion.div style={styles.portalCard} variants={fadeUp} whileHover={{ y: -10 }}>
+            <div style={styles.portalIconVictim}>👤</div>
+            <h3 style={styles.portalCardTitle}>Victim Portal</h3>
+            <p style={styles.portalCardDesc}>
+              Report cybercrimes securely. Choose between anonymous or registered reporting.
+              Track your complaint status in real-time.
+            </p>
+            <div style={styles.portalFeatures}>
+              <span style={styles.featureBadge}>Anonymous Option</span>
+              <span style={styles.featureBadge}>Secure Upload</span>
+              <span style={styles.featureBadge}>Real-time Tracking</span>
+            </div>
+            <div style={styles.portalActions}>
+              <Link to="/victim" style={styles.portalPrimaryBtn}>
+                Enter Victim Portal
+              </Link>
+              <Link to="/anonymous-report" style={styles.portalSecondaryBtn}>
+                Report Anonymously
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* POLICE PORTAL CARD */}
+          <motion.div style={styles.portalCard} variants={fadeUp} whileHover={{ y: -10 }}>
+            <div style={styles.portalIconPolice}>👮</div>
+            <h3 style={styles.portalCardTitle}>Police Portal</h3>
+            <p style={styles.portalCardDesc}>
+              Official access for cyber cell personnel. Manage cases, update status,
+              and access investigation tools. Role-based secure login required.
+            </p>
+            <div style={styles.portalFeatures}>
+              <span style={styles.featureBadge}>Role-Based Access</span>
+              <span style={styles.featureBadge}>Case Management</span>
+              <span style={styles.featureBadge}>Audit Logs</span>
+            </div>
+            <div style={styles.portalActions}>
+              <Link to="/police" style={styles.portalPoliceBtn}>
+                Enter Police Portal
+              </Link>
+              <small style={styles.portalNote}>
+                * Official ID verification required
+              </small>
+            </div>
+          </motion.div>
         </div>
       </motion.section>
 
@@ -364,6 +429,7 @@ const styles = {
   },
 
   activity: { fontSize: 14, color: "#334155" },
+  activityList: { paddingLeft: 20, marginTop: 8 },
 
   trustSection: {
     padding: "140px 20px",
@@ -392,6 +458,144 @@ const styles = {
     padding: 32,
     borderRadius: 20,
     boxShadow: "0 10px 30px rgba(15,23,42,0.08)",
+  },
+
+  // PORTAL SECTION STYLES
+  portalSection: {
+    padding: "120px 20px",
+    background: "linear-gradient(180deg, transparent, rgba(27,154,170,0.04))",
+  },
+
+  portalTitle: {
+    fontSize: 40,
+    fontWeight: 800,
+    textAlign: "center",
+    marginBottom: 16,
+  },
+
+  portalSubtitle: {
+    textAlign: "center",
+    maxWidth: 720,
+    margin: "0 auto 60px",
+    color: "#475569",
+    fontSize: 18,
+  },
+
+  portalGrid: {
+    maxWidth: 1000,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+    gap: 32,
+  },
+
+  portalCard: {
+    background: "#FFF",
+    borderRadius: 24,
+    padding: 36,
+    boxShadow: "0 20px 60px rgba(15,23,42,0.08)",
+    border: "1px solid rgba(15,23,42,0.05)",
+    display: "flex",
+    flexDirection: "column",
+  },
+
+  portalIconVictim: {
+    fontSize: 48,
+    marginBottom: 20,
+    background: "linear-gradient(135deg, #1B9AAA, #14B8A6)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+  },
+
+  portalIconPolice: {
+    fontSize: 48,
+    marginBottom: 20,
+    background: "linear-gradient(135deg, #0F172A, #334155)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+  },
+
+  portalCardTitle: {
+    fontSize: 28,
+    fontWeight: 800,
+    marginBottom: 12,
+  },
+
+  portalCardDesc: {
+    color: "#475569",
+    marginBottom: 24,
+    lineHeight: 1.6,
+  },
+
+  portalFeatures: {
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+    marginBottom: 28,
+  },
+
+  featureBadge: {
+    background: "#F1F5F9",
+    color: "#334155",
+    padding: "6px 14px",
+    borderRadius: 20,
+    fontSize: 13,
+    fontWeight: 600,
+  },
+
+  portalActions: {
+    marginTop: "auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: 12,
+  },
+
+  portalPrimaryBtn: {
+    padding: "16px 24px",
+    background: "linear-gradient(135deg, #1B9AAA, #14B8A6)",
+    borderRadius: 12,
+    fontWeight: 700,
+    color: "#02131F",
+    textDecoration: "none",
+    textAlign: "center",
+  },
+
+  portalSecondaryBtn: {
+    padding: "16px 24px",
+    border: "2px solid #1B9AAA",
+    borderRadius: 12,
+    color: "#1B9AAA",
+    textDecoration: "none",
+    textAlign: "center",
+    fontWeight: 600,
+    background: "transparent",
+  },
+
+  portalPoliceBtn: {
+    padding: "16px 24px",
+    background: "linear-gradient(135deg, #0F172A, #334155)",
+    borderRadius: 12,
+    fontWeight: 700,
+    color: "white",
+    textDecoration: "none",
+    textAlign: "center",
+  },
+
+  portalNote: {
+    color: "#64748B",
+    textAlign: "center",
+    fontSize: 12,
+    marginTop: 8,
   },
 
   section: { padding: "140px 20px", maxWidth: 1200, margin: "0 auto" },
