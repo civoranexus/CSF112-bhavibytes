@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import ReportPage from "./pages/ReportPage";
 import TrackPage from "./pages/TrackPage";
 import ResourcesPage from "./pages/ResourcesPage";
+import AnonymousReport from "./pages/AnonymousReport"; // Import here
 
 // Portal Layouts
 import VictimPortal from "./pages/VictimPortal";
@@ -64,6 +65,9 @@ const SafetyTips = () => (
 // Police components
 const PoliceDashboard = () => <div>Police Dashboard - Coming Soon</div>;
 const CaseManagement = () => <div>Case Management - Coming Soon</div>;
+const PoliceAnalytics = () => <div>Analytics - Coming Soon</div>;
+const PoliceUserManagement = () => <div>User Management - Coming Soon</div>;
+const PoliceSystemLogs = () => <div>System Logs - Coming Soon</div>;
 
 // 404 Page
 const NotFound = () => (
@@ -78,13 +82,14 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          {/* Public Routes */}
+          {/* Public Routes - STANDALONE ROUTES */}
           <Route path="/" element={<HomePage />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/track" element={<TrackPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/anonymous" element={<AnonymousReport />} /> {/* STANDALONE - NOT NESTED */}
           
-          {/* Victim Portal Routes */}
+          {/* Victim Portal Routes - NESTED under /victim */}
           <Route path="/victim" element={<VictimPortal />}>
             <Route index element={<Navigate to="login" />} />
             <Route path="login" element={<VictimLogin />} />
@@ -94,12 +99,16 @@ function App() {
             <Route path="safety-tips" element={<SafetyTips />} />
           </Route>
           
-          {/* Police Portal Routes */}
+          {/* Police Portal Routes - NESTED under /police */}
           <Route path="/police" element={<PolicePortal />}>
             <Route index element={<Navigate to="login" />} />
             <Route path="login" element={<PoliceLogin />} />
             <Route path="dashboard" element={<PoliceDashboard />} />
             <Route path="cases" element={<CaseManagement />} />
+            <Route path="analytics" element={<PoliceAnalytics />} />
+            <Route path="users" element={<PoliceUserManagement />} />
+            <Route path="logs" element={<PoliceSystemLogs />} />
+            {/* NO /anonymous HERE - It's a standalone route */}
           </Route>
           
           {/* 404 Route */}

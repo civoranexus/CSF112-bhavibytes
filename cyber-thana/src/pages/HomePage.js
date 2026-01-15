@@ -195,7 +195,7 @@ export default function HomePage() {
               <Link to="/victim" style={styles.portalPrimaryBtn}>
                 Enter Victim Portal
               </Link>
-              <Link to="/anonymous-report" style={styles.portalSecondaryBtn}>
+              <Link to="/anonymous" style={styles.portalSecondaryBtn}>
                 Report Anonymously
               </Link>
             </div>
