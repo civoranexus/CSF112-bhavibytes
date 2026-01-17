@@ -1798,3 +1798,249 @@ input:focus-visible {
         font-size: 0.9375rem;
     }
 }
+
+
+/* Interactive Tools List Styles */
+.tools-list-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.tools-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.tool-list-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.tool-list-item:hover {
+    transform: translateX(5px);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.tool-list-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+}
+
+.tool-list-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    min-width: 80px;
+}
+
+.icon-emoji {
+    font-size: 2.5rem;
+    line-height: 1;
+}
+
+.interactive-badge {
+    background: linear-gradient(135deg, var(--primary-color), #1B9AAA);
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.tool-list-info {
+    flex: 1;
+    min-width: 0;
+    /* Prevents flex item from overflowing */
+}
+
+.tool-list-title {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.tool-list-description {
+    margin: 0 0 12px 0;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.4;
+}
+
+.tool-list-meta {
+    display: flex;
+    gap: 15px;
+    font-size: 0.85rem;
+}
+
+.tool-type {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: capitalize;
+}
+
+.tool-status {
+    color: #10B981;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.tool-status::before {
+    content: "";
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: #10B981;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.tool-list-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.try-tool-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.try-tool-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(27, 154, 170, 0.3);
+}
+
+.info-tool-btn {
+    background: var(--bg-secondary);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.info-tool-btn:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Active Tool Display */
+.active-tool-container {
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.active-tool-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.active-tool-content {
+    padding: 24px;
+}
+
+.close-tool-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.close-tool-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .tool-list-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .tool-list-icon {
+        flex-direction: row;
+        min-width: auto;
+        gap: 15px;
+    }
+
+    .tool-list-actions {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .try-tool-btn {
+        flex: 1;
+    }
+}
+
+/* Light theme adjustments */
+body.light .tool-list-item {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+body.light .tool-list-item:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+body.light .tool-type {
+    background: #f5f5f5;
+}
+
+body.light .info-tool-btn:hover {
+    background: #1B9AAA;
+}

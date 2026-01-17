@@ -908,33 +908,54 @@ export default function ResourcesPage() {
           </p>
         </div>
 
-        <div className="tools-grid">
-          {safetyTools.map((tool, i) => (
-            <motion.div
-              key={tool.id}
-              className="tool-card"
-              whileHover={{ y: -6, transition: { duration: 0.2 } }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1 }}
-            >
-              <div className="tool-icon">{tool.icon}</div>
-              <div className="tool-content">
-                <h3>{tool.title}</h3>
-                <p>{tool.description}</p>
-                {tool.interactive && (
-                  <span className="interactive-badge">Interactive</span>
-                )}
-              </div>
-              <button 
-                className="tool-action-btn"
-                onClick={() => handleToolClick(tool)}
+        <div className="tools-list-container">
+          <div className="tools-list">
+            {safetyTools.map((tool, i) => (
+              <motion.div
+                key={tool.id}
+                className="tool-list-item"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ delay: i * 0.05 }}
+                whileHover={{ backgroundColor: theme === "dark" ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.02)" }}
               >
-                Try Now →
-              </button>
-            </motion.div>
-          ))}
+                <div className="tool-list-content">
+                  <div className="tool-list-icon">
+                    <span className="icon-emoji">{tool.icon}</span>
+                    {tool.interactive && (
+                      <span className="interactive-badge">Interactive</span>
+                    )}
+                  </div>
+                  
+                  <div className="tool-list-info">
+                    <h3 className="tool-list-title">{tool.title}</h3>
+                    <p className="tool-list-description">{tool.description}</p>
+                    <div className="tool-list-meta">
+                      <span className="tool-type">{tool.toolType}</span>
+                      <span className="tool-status">Ready to use</span>
+                    </div>
+                  </div>
+                  
+                  <div className="tool-list-actions">
+                    <button 
+                      className="try-tool-btn"
+                      onClick={() => handleToolClick(tool)}
+                    >
+                      Try Tool
+                    </button>
+                    <button 
+                      className="info-tool-btn"
+                      onClick={() => alert(`About ${tool.title}:\n\n${tool.description}\n\nThis tool helps you practice identifying ${tool.toolType === 'quiz' ? 'scam scenarios' : 'security vulnerabilities'}.`)}
+                      title="More info"
+                    >
+                      ℹ️
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
