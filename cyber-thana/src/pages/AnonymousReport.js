@@ -1,8 +1,9 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./AnonymousReport.css";
 
 const AnonymousReport = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     incidentType: "",
     description: "",
@@ -13,6 +14,8 @@ const AnonymousReport = () => {
   const [step, setStep] = useState(1);
   const [submitted, setSubmitted] = useState(false);
   const [trackingId, setTrackingId] = useState("");
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const incidentTypes = [
     "Online Fraud / Scam",
@@ -26,6 +29,36 @@ const AnonymousReport = () => {
     "Online Blackmail",
     "Other",
   ];
+
+  // Scroll to top when component mounts or step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [step, submitted]);
+
+  // Check for unsaved changes
+  useEffect(() => {
+    const hasData = Object.values(formData).some(
+      (value) => value !== "" && value !== null
+    );
+    setHasUnsavedChanges(hasData);
+  }, [formData]);
+
+  // Handle browser back/forward navigation
+  useEffect(() => {
+    const handleBeforeUnload = (e) => {
+      if (hasUnsavedChanges && !submitted) {
+        e.preventDefault();
+        e.returnValue = "You have unsaved changes. Are you sure you want to leave?";
+        return e.returnValue;
+      }
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+    };
+  }, [hasUnsavedChanges, submitted]);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -55,6 +88,7 @@ const AnonymousReport = () => {
     const newTrackingId = `ANON-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).substr(2, 6).toUpperCase()}`;
     setTrackingId(newTrackingId);
     setSubmitted(true);
+    setHasUnsavedChanges(false);
     
     // In real app, send data to backend here
     console.log("Anonymous report submitted:", formData);
@@ -71,6 +105,24 @@ const AnonymousReport = () => {
     setStep(1);
     setSubmitted(false);
     setTrackingId("");
+    setHasUnsavedChanges(false);
+  };
+
+  const handleGoHome = () => {
+    if (hasUnsavedChanges && !submitted) {
+      setShowExitConfirm(true);
+    } else {
+      navigate("/");
+    }
+  };
+
+  const confirmExit = () => {
+    setShowExitConfirm(false);
+    navigate("/");
+  };
+
+  const cancelExit = () => {
+    setShowExitConfirm(false);
   };
 
   if (submitted) {
@@ -111,6 +163,9 @@ const AnonymousReport = () => {
             <Link to="/track" className="btn-primary">
               Track This Report
             </Link>
+            <button className="btn-home" onClick={() => navigate("/")}>
+              ← Back to Home
+            </button>
           </div>
 
           <div className="security-notice">
@@ -128,6 +183,48 @@ const AnonymousReport = () => {
 
   return (
     <div className="anonymous-report-page">
+      {/* Back Button to Home */}
+      <div className="back-to-home-container">
+        <button 
+          className="back-to-home-btn"
+          onClick={handleGoHome}
+        >
+          ← Back to Home
+        </button>
+      </div>
+
+      {/* Exit Confirmation Modal */}
+      {showExitConfirm && (
+        <div className="exit-confirm-overlay">
+          <div className="exit-confirm-modal">
+            <div className="exit-confirm-header">
+              <span className="warning-icon">⚠️</span>
+              <h3>Unsaved Changes</h3>
+            </div>
+            
+            <div className="exit-confirm-body">
+              <p>You have unsaved changes in your report.</p>
+              <p>Are you sure you want to leave? All progress will be lost.</p>
+            </div>
+            
+            <div className="exit-confirm-actions">
+              <button 
+                className="exit-cancel-btn"
+                onClick={cancelExit}
+              >
+                Cancel
+              </button>
+              <button 
+                className="exit-confirm-btn"
+                onClick={confirmExit}
+              >
+                Leave Page
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="report-container">
         {/* Header */}
         <div className="report-header">
