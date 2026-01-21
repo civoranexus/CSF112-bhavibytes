@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import "./ResourcesPage.css";
@@ -38,6 +38,25 @@ const SearchIcon = () => (
 const CheckIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
     <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const BackIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const StarIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const TrophyIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17a2 2 0 0 0 4 0v-2.34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <rect x="8" y="2" width="8" height="10" rx="4" stroke="currentColor" strokeWidth="2"/>
   </svg>
 );
 
@@ -251,12 +270,12 @@ const safetyTools = [
   },
   {
     id: 4,
-    title: "Scam Red Flags Guide",
-    icon: "🚩",
-    description: "Interactive guide to recognizing common scam patterns and tactics",
+    title: "Password Generator",
+    icon: "⚡",
+    description: "Generate strong, secure passwords with customizable options",
     interactive: true,
-    link: "#scam-guide",
-    toolType: "guide"
+    link: "#password-generator",
+    toolType: "generator"
   },
   {
     id: 5,
@@ -323,9 +342,62 @@ const officialResources = [
   },
 ];
 
+// Achievements system
+const achievements = [
+  { id: 1, name: "First Download", icon: "🎯", description: "Download your first guide", unlocked: false },
+  { id: 2, name: "Safety Expert", icon: "🏆", description: "Complete all safety checklist items", unlocked: false },
+  { id: 3, name: "Quiz Master", icon: "🧠", description: "Score 100% on any quiz", unlocked: false },
+  { id: 4, name: "Resource Collector", icon: "📚", description: "Download 5+ guides", unlocked: false },
+  { id: 5, name: "Tool Explorer", icon: "🛠️", description: "Try all interactive tools", unlocked: false },
+];
+
+// Use debounce hook
+const useDebounce = (value, delay) => {
+  const [debouncedValue, setDebouncedValue] = useState(value);
+  
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+    
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+  
+  return debouncedValue;
+};
+
+// Memoized Category Card Component
+const CategoryCard = React.memo(({ cat, onClick, index }) => (
+  <motion.div
+    className="category-card"
+    whileHover={{ y: -8, transition: { duration: 0.2 } }}
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ delay: index * 0.1 }}
+    onClick={onClick}
+  >
+    <div 
+      className="category-icon"
+      style={{ backgroundColor: `${cat.color}20` }}
+    >
+      <span style={{ color: cat.color }}>{cat.icon}</span>
+    </div>
+    <h3>{cat.title}</h3>
+    <p>{cat.desc}</p>
+    <div className="category-meta">
+      <span className="resource-count">{cat.resources} resources</span>
+      <span className="view-link">View all →</span>
+    </div>
+  </motion.div>
+));
+
 export default function ResourcesPage() {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
+  const debouncedSearch = useDebounce(searchQuery, 300);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [theme, setTheme] = useState("dark");
   const [downloadedGuides, setDownloadedGuides] = useState([]);
@@ -334,6 +406,7 @@ export default function ResourcesPage() {
   const [activeTool, setActiveTool] = useState(null);
   const [passwordStrength, setPasswordStrength] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [generatedPassword, setGeneratedPassword] = useState("");
   const [phishingQuiz, setPhishingQuiz] = useState({
     currentQuestion: 0,
     score: 0,
@@ -349,25 +422,156 @@ export default function ResourcesPage() {
     { id: 7, text: "Secure home Wi-Fi", checked: false },
     { id: 8, text: "Review privacy settings", checked: false },
   ]);
+  const [userProgress, setUserProgress] = useState({
+    guidesRead: 0,
+    toolsCompleted: 0,
+    checklistProgress: 0,
+    totalScore: 0,
+    points: 0
+  });
+  const [userAchievements, setUserAchievements] = useState(achievements);
+  const [ratings, setRatings] = useState({});
+  const [passwordOptions, setPasswordOptions] = useState({
+    length: 16,
+    uppercase: true,
+    lowercase: true,
+    numbers: true,
+    symbols: true
+  });
+  const [showEmergencyPanel, setShowEmergencyPanel] = useState(false);
+  const searchInputRef = useRef(null);
 
-  // Load theme from localStorage
+  // Load all user data from localStorage
   useEffect(() => {
-    const savedTheme = localStorage.getItem("resourcesTheme") || "dark";
-    setTheme(savedTheme);
-    document.body.className = savedTheme;
+    // Theme
+    const savedTheme = localStorage.getItem("resourcesTheme");
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.body.className = savedTheme;
+    } else {
+      // Check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const defaultTheme = prefersDark ? 'dark' : 'light';
+      setTheme(defaultTheme);
+      document.body.className = defaultTheme;
+    }
     
-    // Load downloaded guides from localStorage
+    // Downloaded guides
     const savedDownloads = localStorage.getItem("downloadedGuides");
     if (savedDownloads) {
       setDownloadedGuides(JSON.parse(savedDownloads));
     }
     
-    // Load read guides from localStorage
+    // Read guides
     const savedRead = localStorage.getItem("readGuides");
     if (savedRead) {
       setReadGuides(JSON.parse(savedRead));
     }
+    
+    // Safety checklist
+    const savedChecklist = localStorage.getItem("safetyChecklist");
+    if (savedChecklist) {
+      setSafetyChecklist(JSON.parse(savedChecklist));
+    }
+    
+    // User progress
+    const savedProgress = localStorage.getItem("userProgress");
+    if (savedProgress) {
+      setUserProgress(JSON.parse(savedProgress));
+    }
+    
+    // Achievements
+    const savedAchievements = localStorage.getItem("achievements");
+    if (savedAchievements) {
+      setUserAchievements(JSON.parse(savedAchievements));
+    }
+    
+    // Ratings
+    const savedRatings = localStorage.getItem("guideRatings");
+    if (savedRatings) {
+      setRatings(JSON.parse(savedRatings));
+    }
   }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      // Ctrl+/ to focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        searchInputRef.current?.focus();
+      }
+      
+      // Escape to close active tool or emergency panel
+      if (e.key === 'Escape') {
+        if (activeTool) setActiveTool(null);
+        if (showEmergencyPanel) setShowEmergencyPanel(false);
+      }
+      
+      // Backspace with Ctrl to go back
+      if ((e.ctrlKey || e.metaKey) && e.key === 'Backspace') {
+        handleGoBack();
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [activeTool, showEmergencyPanel]);
+
+  // Update progress when data changes
+  useEffect(() => {
+    const newProgress = {
+      guidesRead: readGuides.length,
+      toolsCompleted: downloadedGuides.length > 0 ? 1 : 0, // Simplified
+      checklistProgress: safetyChecklist.filter(item => item.checked).length,
+      totalScore: phishingQuiz.score + (readGuides.length * 10),
+      points: userProgress.points
+    };
+    
+    setUserProgress(newProgress);
+    localStorage.setItem("userProgress", JSON.stringify(newProgress));
+  }, [readGuides, downloadedGuides, safetyChecklist, phishingQuiz.score]);
+
+  // Check and award achievements
+  useEffect(() => {
+    const updatedAchievements = [...userAchievements];
+    
+    // First Download achievement
+    if (downloadedGuides.length >= 1 && !updatedAchievements[0].unlocked) {
+      updatedAchievements[0].unlocked = true;
+      awardPoints(50);
+      showAchievementNotification(updatedAchievements[0]);
+    }
+    
+    // Resource Collector achievement
+    if (downloadedGuides.length >= 5 && !updatedAchievements[3].unlocked) {
+      updatedAchievements[3].unlocked = true;
+      awardPoints(100);
+      showAchievementNotification(updatedAchievements[3]);
+    }
+    
+    // Safety Expert achievement
+    const allChecked = safetyChecklist.every(item => item.checked);
+    if (allChecked && !updatedAchievements[1].unlocked) {
+      updatedAchievements[1].unlocked = true;
+      awardPoints(150);
+      showAchievementNotification(updatedAchievements[1]);
+    }
+    
+    setUserAchievements(updatedAchievements);
+    localStorage.setItem("achievements", JSON.stringify(updatedAchievements));
+  }, [downloadedGuides.length, safetyChecklist]);
+
+  const showAchievementNotification = (achievement) => {
+    alert(`🎉 Achievement Unlocked: ${achievement.name}!\n\n${achievement.description}\n\n+${achievement.id === 1 ? 50 : achievement.id === 3 ? 100 : 150} points`);
+  };
+
+  const awardPoints = (points) => {
+    setUserProgress(prev => ({
+      ...prev,
+      points: prev.points + points
+    }));
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
@@ -376,21 +580,24 @@ export default function ResourcesPage() {
     document.body.className = newTheme;
   };
 
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
+
   const handleDownloadGuide = (guideId) => {
     if (!downloadedGuides.includes(guideId)) {
       const newDownloads = [...downloadedGuides, guideId];
       setDownloadedGuides(newDownloads);
       localStorage.setItem("downloadedGuides", JSON.stringify(newDownloads));
-      
-      // Update guide download count
-      const guideIndex = allGuides.findIndex(g => g.id === guideId);
-      if (guideIndex > -1) {
-        allGuides[guideIndex].downloads += 1;
-      }
+      awardPoints(10);
     }
     
-    // Simulate download
-    alert(`Guide "${allGuides.find(g => g.id === guideId)?.title}" downloaded successfully!`);
+    const guide = allGuides.find(g => g.id === guideId);
+    alert(`✅ Guide "${guide?.title}" downloaded successfully!\n\n+10 points`);
   };
 
   const handleReadGuide = (guideId) => {
@@ -398,10 +605,11 @@ export default function ResourcesPage() {
       const newRead = [...readGuides, guideId];
       setReadGuides(newRead);
       localStorage.setItem("readGuides", JSON.stringify(newRead));
+      awardPoints(5);
     }
     
     const guide = allGuides.find(g => g.id === guideId);
-    alert(`Opening guide: ${guide?.title}\n\n${guide?.content}`);
+    alert(`📖 Opening guide: ${guide?.title}\n\n${guide?.content}\n\n${!readGuides.includes(guideId) ? '+5 points' : ''}`);
   };
 
   const handleToggleNotification = () => {
@@ -418,20 +626,20 @@ export default function ResourcesPage() {
   };
 
   const handleContactSupport = () => {
-    alert("Support team contacted. You will receive a response within 24 hours.");
+    alert("📞 Support team contacted. You will receive a response within 24 hours.");
   };
 
   const handleExternalLink = (url, name) => {
-    if (window.confirm(`You are being redirected to: ${name}\n\nDo you want to continue?`)) {
+    if (window.confirm(`🔗 You are being redirected to: ${name}\n\nDo you want to continue?`)) {
       window.open(url, '_blank', 'noopener,noreferrer');
     }
   };
 
   const filteredGuides = allGuides.filter(guide => {
-    const matchesSearch = searchQuery === "" || 
-      guide.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      guide.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      guide.category.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = debouncedSearch === "" || 
+      guide.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      guide.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+      guide.category.toLowerCase().includes(debouncedSearch.toLowerCase());
     
     const matchesCategory = selectedCategory === "All" || guide.category === selectedCategory;
     
@@ -440,35 +648,80 @@ export default function ResourcesPage() {
 
   const categoriesList = ["All", ...new Set(allGuides.map(g => g.category))];
 
+  // Get recommended guides
+  const recommendedGuides = allGuides
+    .filter(guide => 
+      !readGuides.includes(guide.id) && 
+      !downloadedGuides.includes(guide.id)
+    )
+    .sort((a, b) => b.downloads - a.downloads)
+    .slice(0, 3);
+
   // Password Strength Checker Function
   const checkPasswordStrength = (password) => {
     let strength = 0;
     if (password.length >= 8) strength++;
+    if (password.length >= 12) strength++;
     if (/[A-Z]/.test(password)) strength++;
     if (/[0-9]/.test(password)) strength++;
     if (/[^A-Za-z0-9]/.test(password)) strength++;
     
     const strengthLevels = ["Very Weak", "Weak", "Fair", "Strong", "Very Strong"];
-    return strengthLevels[strength];
+    return strengthLevels[Math.min(strength, 4)];
   };
 
   const handlePasswordCheck = () => {
     if (!passwordInput) {
-      alert("Please enter a password to check");
+      alert("⚠️ Please enter a password to check");
       return;
     }
     const strength = checkPasswordStrength(passwordInput);
     setPasswordStrength(strength);
+    awardPoints(5);
     
-    // Create strength meter
-    let meterHTML = `Password Strength: ${strength}\n\n`;
-    meterHTML += "Recommendations:\n";
+    let meterHTML = `🔐 Password Strength: ${strength}\n\n`;
+    meterHTML += "📋 Recommendations:\n";
     if (passwordInput.length < 8) meterHTML += "• Use at least 8 characters\n";
+    if (passwordInput.length < 12) meterHTML += "• 12+ characters is better\n";
     if (!/[A-Z]/.test(passwordInput)) meterHTML += "• Add uppercase letters\n";
     if (!/[0-9]/.test(passwordInput)) meterHTML += "• Add numbers\n";
     if (!/[^A-Za-z0-9]/.test(passwordInput)) meterHTML += "• Add special characters\n";
     
-    alert(meterHTML);
+    alert(meterHTML + "\n+5 points");
+  };
+
+  // Password Generator
+  const generatePassword = () => {
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercase = "abcdefghijklmnopqrstuvwxyz";
+    const numbers = "0123456789";
+    const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
+    
+    let charset = "";
+    if (passwordOptions.lowercase) charset += lowercase;
+    if (passwordOptions.uppercase) charset += uppercase;
+    if (passwordOptions.numbers) charset += numbers;
+    if (passwordOptions.symbols) charset += symbols;
+    
+    if (!charset) {
+      alert("⚠️ Please select at least one character type");
+      return;
+    }
+    
+    let password = "";
+    for (let i = 0; i < passwordOptions.length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      password += charset[randomIndex];
+    }
+    
+    setGeneratedPassword(password);
+    awardPoints(5);
+  };
+
+  const copyToClipboard = (text) => {
+    navigator.clipboard.writeText(text).then(() => {
+      alert("✅ Password copied to clipboard!");
+    });
   };
 
   // Phishing Quiz Questions
@@ -521,20 +774,34 @@ export default function ResourcesPage() {
       completed: isCompleted
     });
     
+    if (isCorrect) awardPoints(10);
+    
     if (isCompleted) {
-      alert(`Quiz completed!\n\nYour Score: ${newScore}/${phishingQuestions.length}\n\nThank you for learning about phishing awareness!`);
+      if (newScore === phishingQuestions.length && !userAchievements[2].unlocked) {
+        const updatedAchievements = [...userAchievements];
+        updatedAchievements[2].unlocked = true;
+        setUserAchievements(updatedAchievements);
+        localStorage.setItem("achievements", JSON.stringify(updatedAchievements));
+        awardPoints(100);
+      }
+      
+      alert(`🎉 Quiz completed!\n\nYour Score: ${newScore}/${phishingQuestions.length}\n\nThank you for learning about phishing awareness!\n\n+${newScore * 10} points`);
       setPhishingQuiz({ currentQuestion: 0, score: 0, completed: false });
     } else {
-      alert(`${isCorrect ? 'Correct!' : 'Incorrect'}\n\n${phishingQuestions[phishingQuiz.currentQuestion].explanation}`);
+      alert(`${isCorrect ? '✅ Correct!' : '❌ Incorrect'}\n\n${phishingQuestions[phishingQuiz.currentQuestion].explanation}\n\n${isCorrect ? '+10 points' : ''}`);
     }
   };
 
   const handleChecklistToggle = (id) => {
-    setSafetyChecklist(prev => 
-      prev.map(item => 
-        item.id === id ? { ...item, checked: !item.checked } : item
-      )
+    const newChecklist = safetyChecklist.map(item => 
+      item.id === id ? { ...item, checked: !item.checked } : item
     );
+    setSafetyChecklist(newChecklist);
+    localStorage.setItem("safetyChecklist", JSON.stringify(newChecklist));
+    
+    if (!safetyChecklist.find(item => item.id === id)?.checked) {
+      awardPoints(5);
+    }
   };
 
   const handleCompleteChecklist = () => {
@@ -542,10 +809,24 @@ export default function ResourcesPage() {
     const total = safetyChecklist.length;
     
     if (checkedCount === total) {
-      alert("🎉 Excellent! You've completed all safety checklist items!\n\nYour digital security is top-notch!");
+      alert("🎉 Excellent! You've completed all safety checklist items!\n\nYour digital security is top-notch!\n\n+50 points");
     } else {
-      alert(`Safety Checklist Progress: ${checkedCount}/${total} completed\n\nKeep going to improve your digital security!`);
+      alert(`📋 Safety Checklist Progress: ${checkedCount}/${total} completed\n\nKeep going to improve your digital security!\n\nCurrent progress: ${Math.round((checkedCount/total)*100)}%`);
     }
+  };
+
+  const handleRateGuide = (guideId, rating) => {
+    setRatings(prev => ({
+      ...prev,
+      [guideId]: {
+        userRating: rating,
+        average: ((prev[guideId]?.average || 0) + rating) / 2,
+        count: (prev[guideId]?.count || 0) + 1
+      }
+    }));
+    localStorage.setItem("guideRatings", JSON.stringify(ratings));
+    awardPoints(15);
+    alert(`⭐ Thanks for your feedback! You rated this guide ${rating}/5 stars.\n\n+15 points`);
   };
 
   const handleToolClick = (tool) => {
@@ -564,51 +845,138 @@ export default function ResourcesPage() {
           if (email) {
             const isBreached = Math.random() > 0.7;
             alert(isBreached 
-              ? `⚠️ Alert: Email "${email}" found in simulated data breach.\n\nRecommendation: Change your password and enable 2FA.`
-              : `✅ Good news! Email "${email}" not found in simulated breaches.\n\nKeep following security best practices.`
+              ? `⚠️ Alert: Email "${email}" found in simulated data breach.\n\nRecommendation: Change your password and enable 2FA.\n\n+10 points for checking`
+              : `✅ Good news! Email "${email}" not found in simulated breaches.\n\nKeep following security best practices.\n\n+10 points for checking`
             );
+            awardPoints(10);
           }
         }
         break;
         
       case "quiz":
         setPhishingQuiz({ currentQuestion: 0, score: 0, completed: false });
-        alert("Starting Phishing Awareness Quiz!\n\nYou'll be shown common scam scenarios. Choose the safest response.");
+        alert("🎯 Starting Phishing Awareness Quiz!\n\nYou'll be shown common scam scenarios. Choose the safest response.\n\nEarn 10 points per correct answer!");
         break;
         
       case "checklist":
-        alert("Opening Safety Checklist\n\nCheck off items as you complete them to track your security progress.");
+        alert("📋 Opening Safety Checklist\n\nCheck off items as you complete them to track your security progress.\n\nEarn 5 points per completed item!");
         break;
         
-      case "guide":
-        alert("Opening Scam Red Flags Guide\n\nLearn to recognize 10 common signs of online scams.");
+      case "generator":
+        alert("⚡ Password Generator\n\nGenerate strong, secure passwords with customizable options.\n\nEarn 5 points per generated password!");
         break;
         
       case "scanner":
         const networkStatus = Math.random() > 0.3 ? "secure" : "needs attention";
-        alert(`Network Security Scan Results:\n\nStatus: ${networkStatus.toUpperCase()}\n\n${networkStatus === "secure" 
+        alert(`📡 Network Security Scan Results:\n\nStatus: ${networkStatus.toUpperCase()}\n\n${networkStatus === "secure" 
           ? "✅ Your simulated network appears secure.\nContinue regular security updates."
           : "⚠️ Your simulated network may have vulnerabilities.\nConsider updating router firmware and changing Wi-Fi password."
-        }`);
+        }\n\n+15 points for scanning`);
+        awardPoints(15);
         break;
     }
   };
 
   const handleDownloadAll = () => {
     const confirmDownload = window.confirm(
-      "Download Complete Resource Pack?\n\nThis includes all guides, checklists, and templates (25+ MB)."
+      "📥 Download Complete Resource Pack?\n\nThis includes all guides, checklists, and templates (25+ MB)."
     );
     
     if (confirmDownload) {
-      // Simulate download progress
       alert("📥 Download started...\n\nResource pack will be available shortly.\nCheck your downloads folder.");
       
-      // Mark all guides as downloaded
       const allGuideIds = allGuides.map(g => g.id);
       const newDownloads = [...new Set([...downloadedGuides, ...allGuideIds])];
       setDownloadedGuides(newDownloads);
       localStorage.setItem("downloadedGuides", JSON.stringify(newDownloads));
+      awardPoints(50);
     }
+  };
+
+  const handleShareResource = (resource) => {
+    if (navigator.share) {
+      navigator.share({
+        title: resource.title || resource.name,
+        text: `Check out this cybersecurity resource: ${resource.description}`,
+        url: window.location.href,
+      }).then(() => {
+        awardPoints(20);
+        alert("✅ Shared successfully!\n\n+20 points");
+      });
+    } else {
+      navigator.clipboard.writeText(`${resource.title || resource.name}: ${window.location.href}`);
+      alert("✅ Link copied to clipboard!\n\n+20 points");
+      awardPoints(20);
+    }
+  };
+
+  const handleVoiceSearch = () => {
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const recognition = new SpeechRecognition();
+      
+      recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        setSearchQuery(transcript);
+      };
+      
+      recognition.start();
+      alert("🎤 Listening... Speak your search query.");
+    } else {
+      alert("Voice search is not supported in your browser.");
+    }
+  };
+
+  const exportProgress = () => {
+    const progressData = {
+      downloadedGuides,
+      readGuides,
+      checklistProgress: safetyChecklist,
+      achievements: userAchievements,
+      points: userProgress.points,
+      exportedAt: new Date().toISOString()
+    };
+    
+    const dataStr = JSON.stringify(progressData, null, 2);
+    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+    
+    const link = document.createElement('a');
+    link.setAttribute('href', dataUri);
+    link.setAttribute('download', 'cyber-safety-progress.json');
+    link.click();
+    
+    alert("✅ Progress exported successfully!");
+  };
+
+  const importProgress = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.json';
+    
+    input.onchange = (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+      
+      reader.onload = (event) => {
+        try {
+          const progressData = JSON.parse(event.target.result);
+          
+          if (progressData.downloadedGuides) setDownloadedGuides(progressData.downloadedGuides);
+          if (progressData.readGuides) setReadGuides(progressData.readGuides);
+          if (progressData.checklistProgress) setSafetyChecklist(progressData.checklistProgress);
+          if (progressData.achievements) setUserAchievements(progressData.achievements);
+          if (progressData.points) setUserProgress(prev => ({...prev, points: progressData.points}));
+          
+          alert("✅ Progress imported successfully!");
+        } catch (error) {
+          alert("❌ Error importing progress data");
+        }
+      };
+      
+      reader.readAsText(file);
+    };
+    
+    input.click();
   };
 
   return (
@@ -621,6 +989,13 @@ export default function ResourcesPage() {
       >
         <div className="header-container">
           <div className="header-brand">
+            <button 
+              className="back-button"
+              onClick={handleGoBack}
+              aria-label="Go back"
+            >
+              <BackIcon />
+            </button>
             <div className="brand-logo">
               <BookIcon />
             </div>
@@ -638,7 +1013,14 @@ export default function ResourcesPage() {
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
+              {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
+            </button>
+            <button 
+              className="emergency-btn"
+              onClick={() => setShowEmergencyPanel(!showEmergencyPanel)}
+              aria-label="Emergency actions"
+            >
+              🚨 Emergency
             </button>
           </div>
         </div>
@@ -647,9 +1029,79 @@ export default function ResourcesPage() {
           <span className="badge">✅ Verified Content</span>
           <span className="badge">🛡️ Official Sources</span>
           <span className="badge">📚 {allGuides.length}+ Resources</span>
-          <span className="badge">📥 {downloadedGuides.length} Downloaded</span>
+          <span className="badge">⭐ {userProgress.points} Points</span>
+          <button 
+            className="progress-badge"
+            onClick={() => alert(`Your Progress:\n\n📖 Guides Read: ${userProgress.guidesRead}\n🛠️ Tools Completed: ${userProgress.toolsCompleted}\n✅ Checklist: ${userProgress.checklistProgress}/8\n🎯 Total Points: ${userProgress.points}`)}
+          >
+            📊 Progress
+          </button>
         </div>
       </motion.header>
+
+      {/* ================= EMERGENCY PANEL ================= */}
+      <AnimatePresence>
+        {showEmergencyPanel && (
+          <motion.div
+            className="emergency-panel"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+          >
+            <div className="emergency-header">
+              <h3>🚨 Emergency Quick Actions</h3>
+              <button 
+                className="close-emergency"
+                onClick={() => setShowEmergencyPanel(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <div className="emergency-actions">
+              <button 
+                className="emergency-action"
+                onClick={() => window.location.href = 'tel:155260'}
+              >
+                <span>📞</span>
+                <div>
+                  <strong>Emergency Helpline</strong>
+                  <small>Call 155260</small>
+                </div>
+              </button>
+              <button 
+                className="emergency-action"
+                onClick={() => window.open('https://cybercrime.gov.in', '_blank')}
+              >
+                <span>⚡</span>
+                <div>
+                  <strong>Quick Report</strong>
+                  <small>Cybercrime Portal</small>
+                </div>
+              </button>
+              <button 
+                className="emergency-action"
+                onClick={() => alert("Simulated: All accounts locked. Contact support for recovery.")}
+              >
+                <span>🔒</span>
+                <div>
+                  <strong>Lock Accounts</strong>
+                  <small>Immediate protection</small>
+                </div>
+              </button>
+              <button 
+                className="emergency-action"
+                onClick={() => navigate("/report")}
+              >
+                <span>📋</span>
+                <div>
+                  <strong>Report Incident</strong>
+                  <small>Detailed report</small>
+                </div>
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* ================= HERO SECTION ================= */}
       <motion.section
@@ -679,14 +1131,22 @@ export default function ResourcesPage() {
               <span className="stat-label">Tools</span>
             </div>
             <div className="stat">
-              <span className="stat-number">{downloadedGuides.length}</span>
-              <span className="stat-label">Downloads</span>
+              <span className="stat-number">{userProgress.points}</span>
+              <span className="stat-label">Points</span>
             </div>
           </div>
         </div>
         
         <div className="hero-illustration">
           <div className="illustration-icon">🛡️</div>
+          <div className="progress-ring">
+            <div className="ring-progress" style={{ 
+              background: `conic-gradient(#1B9AAA ${(userProgress.checklistProgress/8)*360}deg, #eee 0deg)` 
+            }}>
+              <span>{Math.round((userProgress.checklistProgress/8)*100)}%</span>
+            </div>
+            <small>Checklist Complete</small>
+          </div>
         </div>
       </motion.section>
 
@@ -696,12 +1156,22 @@ export default function ResourcesPage() {
           <div className="search-input-group">
             <SearchIcon />
             <input
+              ref={searchInputRef}
               type="text"
               placeholder="Search resources, guides, or topics..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"
+              aria-label="Search resources"
             />
+            <button 
+              className="voice-search-btn"
+              onClick={handleVoiceSearch}
+              aria-label="Voice search"
+              title="Voice search"
+            >
+              🎤
+            </button>
             {searchQuery && (
               <button 
                 className="clear-search-btn"
@@ -711,6 +1181,10 @@ export default function ResourcesPage() {
                 ✕
               </button>
             )}
+          </div>
+          
+          <div className="search-shortcut">
+            <small>Press <kbd>Ctrl</kbd> + <kbd>/</kbd> to focus search</small>
           </div>
           
           <div className="filter-tabs">
@@ -732,6 +1206,49 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      {/* ================= RECOMMENDED GUIDES ================= */}
+      {recommendedGuides.length > 0 && !searchQuery && selectedCategory === "All" && (
+        <section className="resources-section recommended">
+          <div className="section-header">
+            <h2>Recommended For You</h2>
+            <p className="section-subtitle">
+              Based on your activity and popular downloads
+            </p>
+          </div>
+
+          <div className="recommended-grid">
+            {recommendedGuides.map((guide, i) => (
+              <motion.div
+                key={guide.id}
+                className="recommended-card"
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+              >
+                <div className="recommended-badge">🔥 Recommended</div>
+                <div className="recommended-content">
+                  <h3>{guide.title}</h3>
+                  <p>{guide.description}</p>
+                  <div className="recommended-meta">
+                    <span className="category-tag" style={{ backgroundColor: guide.color }}>
+                      {guide.category}
+                    </span>
+                    <span>{guide.readTime}</span>
+                  </div>
+                  <button 
+                    className="recommended-btn"
+                    onClick={() => handleReadGuide(guide.id)}
+                  >
+                    Start Reading
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ================= RESOURCE CATEGORIES ================= */}
       <section className="resources-section">
         <div className="section-header">
@@ -743,33 +1260,15 @@ export default function ResourcesPage() {
 
         <div className="category-grid">
           {categories.map((cat, i) => (
-            <motion.div
+            <CategoryCard
               key={cat.id}
-              className="category-card"
-              whileHover={{ y: -8, transition: { duration: 0.2 } }}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: i * 0.1 }}
+              cat={cat}
+              index={i}
               onClick={() => {
                 setSelectedCategory(cat.title);
-                // Scroll to guides section
                 document.querySelector('.guides-grid')?.scrollIntoView({ behavior: 'smooth' });
               }}
-            >
-              <div 
-                className="category-icon"
-                style={{ backgroundColor: `${cat.color}20` }}
-              >
-                <span style={{ color: cat.color }}>{cat.icon}</span>
-              </div>
-              <h3>{cat.title}</h3>
-              <p>{cat.desc}</p>
-              <div className="category-meta">
-                <span className="resource-count">{cat.resources} resources</span>
-                <span className="view-link">View all →</span>
-              </div>
-            </motion.div>
+            />
           ))}
         </div>
       </section>
@@ -777,7 +1276,12 @@ export default function ResourcesPage() {
       {/* ================= FEATURED GUIDES ================= */}
       <section className="resources-section alt">
         <div className="section-header">
-          <h2>Featured Safety Guides</h2>
+          <div className="section-header-row">
+            <h2>Featured Safety Guides</h2>
+            <div className="rating-info">
+              <StarIcon /> Most Downloaded & Rated
+            </div>
+          </div>
           <p className="section-subtitle">
             Most downloaded and recommended guides for immediate use
           </p>
@@ -801,7 +1305,26 @@ export default function ResourcesPage() {
                 >
                   {guide.category}
                 </span>
-                <span className="guide-readtime">{guide.readTime}</span>
+                <div className="guide-rating">
+                  {[1, 2, 3, 4, 5].map(star => (
+                    <button
+                      key={star}
+                      className={`star-btn ${star <= (ratings[guide.id]?.userRating || 0) ? 'filled' : ''}`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleRateGuide(guide.id, star);
+                      }}
+                      aria-label={`Rate ${star} stars`}
+                    >
+                      ★
+                    </button>
+                  ))}
+                  {ratings[guide.id] && (
+                    <span className="rating-count">
+                      ({ratings[guide.id].count || 0})
+                    </span>
+                  )}
+                </div>
               </div>
               
               <h3>{guide.title}</h3>
@@ -813,8 +1336,16 @@ export default function ResourcesPage() {
                     📥 {guide.downloads.toLocaleString()} downloads
                     {downloadedGuides.includes(guide.id) && " ✓"}
                   </span>
+                  <span className="readtime">{guide.readTime}</span>
                 </div>
                 <div className="guide-actions">
+                  <button 
+                    className="share-btn"
+                    onClick={() => handleShareResource(guide)}
+                    title="Share this guide"
+                  >
+                    🔗 Share
+                  </button>
                   <button 
                     className="secondary-btn"
                     onClick={() => handleDownloadGuide(guide.id)}
@@ -878,6 +1409,13 @@ export default function ResourcesPage() {
                   </span>
                   <div className="guide-action-buttons">
                     <button 
+                      className="share-btn compact"
+                      onClick={() => handleShareResource(guide)}
+                      title="Share"
+                    >
+                      🔗
+                    </button>
+                    <button 
                       className="download-btn"
                       onClick={() => handleDownloadGuide(guide.id)}
                       title={downloadedGuides.includes(guide.id) ? "Download again" : "Download guide"}
@@ -891,6 +1429,21 @@ export default function ResourcesPage() {
                     >
                       📖
                     </button>
+                    <div className="rating-mini">
+                      {[1, 2, 3, 4, 5].map(star => (
+                        <button
+                          key={star}
+                          className={`star-btn mini ${star <= (ratings[guide.id]?.userRating || 0) ? 'filled' : ''}`}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleRateGuide(guide.id, star);
+                          }}
+                          aria-label={`Rate ${star} stars`}
+                        >
+                          ★
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -964,10 +1517,14 @@ export default function ResourcesPage() {
         <section className="resources-section">
           <div className="active-tool-container">
             <div className="active-tool-header">
-              <h3>🛠️ {activeTool.title}</h3>
+              <div className="tool-title-group">
+                <span className="tool-icon">{activeTool.icon}</span>
+                <h3>{activeTool.title}</h3>
+              </div>
               <button 
                 className="close-tool-btn"
                 onClick={() => setActiveTool(null)}
+                aria-label="Close tool"
               >
                 ✕
               </button>
@@ -994,7 +1551,7 @@ export default function ResourcesPage() {
                   </div>
                   {passwordStrength && (
                     <div className="strength-result">
-                      <strong>Strength:</strong> {passwordStrength}
+                      <strong>Strength:</strong> <span className={`strength-${passwordStrength.toLowerCase().replace(' ', '-')}`}>{passwordStrength}</span>
                     </div>
                   )}
                   <div className="password-tips">
@@ -1012,11 +1569,22 @@ export default function ResourcesPage() {
               
               {activeTool.id === 2 && ( // Phishing Quiz
                 <div className="phishing-quiz">
-                  <h4>Phishing Awareness Quiz</h4>
+                  <div className="quiz-header">
+                    <h4>Phishing Awareness Quiz</h4>
+                    <div className="quiz-score">
+                      Score: {phishingQuiz.score}/{phishingQuestions.length}
+                    </div>
+                  </div>
                   {!phishingQuiz.completed ? (
                     <>
                       <div className="quiz-progress">
                         Question {phishingQuiz.currentQuestion + 1} of {phishingQuestions.length}
+                        <div className="progress-bar">
+                          <div 
+                            className="progress-fill"
+                            style={{ width: `${((phishingQuiz.currentQuestion + 1) / phishingQuestions.length) * 100}%` }}
+                          />
+                        </div>
                       </div>
                       <div className="quiz-question">
                         <p>{phishingQuestions[phishingQuiz.currentQuestion].question}</p>
@@ -1028,6 +1596,7 @@ export default function ResourcesPage() {
                             className="quiz-option"
                             onClick={() => handlePhishingQuiz(idx)}
                           >
+                            <span className="option-letter">{String.fromCharCode(65 + idx)}.</span>
                             {option}
                           </button>
                         ))}
@@ -1035,8 +1604,18 @@ export default function ResourcesPage() {
                     </>
                   ) : (
                     <div className="quiz-completed">
-                      <h5>🎉 Quiz Completed!</h5>
-                      <p>Your Score: {phishingQuiz.score}/{phishingQuestions.length}</p>
+                      <div className="quiz-result">
+                        <h5>🎉 Quiz Completed!</h5>
+                        <p>Your Score: {phishingQuiz.score}/{phishingQuestions.length}</p>
+                        <div className="result-message">
+                          {phishingQuiz.score === phishingQuestions.length 
+                            ? "Perfect! You're a phishing detection expert! 🏆" 
+                            : phishingQuiz.score >= phishingQuestions.length / 2 
+                            ? "Good job! Keep learning to improve your skills! 📚"
+                            : "Keep practicing! Try the quiz again to improve! 🔄"
+                          }
+                        </div>
+                      </div>
                       <button 
                         className="retry-btn"
                         onClick={() => setPhishingQuiz({ currentQuestion: 0, score: 0, completed: false })}
@@ -1050,7 +1629,12 @@ export default function ResourcesPage() {
               
               {activeTool.id === 3 && ( // Safety Checklist
                 <div className="safety-checklist">
-                  <h4>Cyber Safety Checklist</h4>
+                  <div className="checklist-header">
+                    <h4>Cyber Safety Checklist</h4>
+                    <div className="checklist-progress">
+                      {safetyChecklist.filter(item => item.checked).length}/{safetyChecklist.length} completed
+                    </div>
+                  </div>
                   <p>Check off items as you complete them:</p>
                   <div className="checklist-items">
                     {safetyChecklist.map(item => (
@@ -1063,20 +1647,125 @@ export default function ResourcesPage() {
                           {item.checked && <CheckIcon />}
                         </span>
                         <span className="checklist-text">{item.text}</span>
+                        <span className="checklist-points">+5 pts</span>
                       </div>
                     ))}
                   </div>
-                  <button 
-                    className="complete-checklist-btn"
-                    onClick={handleCompleteChecklist}
-                  >
-                    Check Progress
-                  </button>
+                  <div className="checklist-actions">
+                    <button 
+                      className="complete-checklist-btn"
+                      onClick={handleCompleteChecklist}
+                    >
+                      Check Progress
+                    </button>
+                    <button 
+                      className="reset-checklist-btn"
+                      onClick={() => {
+                        if (window.confirm("Reset all checklist items?")) {
+                          const resetChecklist = safetyChecklist.map(item => ({ ...item, checked: false }));
+                          setSafetyChecklist(resetChecklist);
+                          localStorage.setItem("safetyChecklist", JSON.stringify(resetChecklist));
+                        }
+                      }}
+                    >
+                      Reset
+                    </button>
+                  </div>
                 </div>
               )}
               
-              {[4, 5, 6].includes(activeTool.id) && (
+              {activeTool.id === 4 && ( // Password Generator
+                <div className="password-generator-tool">
+                  <h4>Secure Password Generator</h4>
+                  <div className="generated-password">
+                    <input
+                      type="text"
+                      value={generatedPassword}
+                      readOnly
+                      placeholder="Generated password will appear here"
+                      className="password-output"
+                    />
+                    <button 
+                      className="copy-password-btn"
+                      onClick={() => copyToClipboard(generatedPassword)}
+                      disabled={!generatedPassword}
+                    >
+                      Copy
+                    </button>
+                  </div>
+                  
+                  <div className="generator-options">
+                    <div className="option-group">
+                      <label>
+                        <input
+                          type="range"
+                          min="8"
+                          max="32"
+                          value={passwordOptions.length}
+                          onChange={(e) => setPasswordOptions(prev => ({ ...prev, length: parseInt(e.target.value) }))}
+                        />
+                        <span>Length: {passwordOptions.length} characters</span>
+                      </label>
+                    </div>
+                    
+                    <div className="option-checkboxes">
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={passwordOptions.uppercase}
+                          onChange={(e) => setPasswordOptions(prev => ({ ...prev, uppercase: e.target.checked }))}
+                        />
+                        Uppercase (A-Z)
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={passwordOptions.lowercase}
+                          onChange={(e) => setPasswordOptions(prev => ({ ...prev, lowercase: e.target.checked }))}
+                        />
+                        Lowercase (a-z)
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={passwordOptions.numbers}
+                          onChange={(e) => setPasswordOptions(prev => ({ ...prev, numbers: e.target.checked }))}
+                        />
+                        Numbers (0-9)
+                      </label>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={passwordOptions.symbols}
+                          onChange={(e) => setPasswordOptions(prev => ({ ...prev, symbols: e.target.checked }))}
+                        />
+                        Symbols (!@#$%)
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <button 
+                    className="generate-btn"
+                    onClick={generatePassword}
+                  >
+                    Generate Password
+                  </button>
+                  
+                  <div className="password-tips">
+                    <h5>Tips for Password Security:</h5>
+                    <ul>
+                      <li>Use passwords with at least 12 characters</li>
+                      <li>Don't reuse passwords across different sites</li>
+                      <li>Change passwords every 3-6 months</li>
+                      <li>Use a password manager to store passwords securely</li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+              
+              {[5, 6].includes(activeTool.id) && (
                 <div className="tool-info">
+                  <h4>{activeTool.title}</h4>
                   <p>This tool is running in simulation mode.</p>
                   <p>In a full implementation, this would connect to real security services.</p>
                   <button 
@@ -1119,13 +1808,58 @@ export default function ResourcesPage() {
               <h3>{resource.name}</h3>
               <p className="resource-description">{resource.description}</p>
               
-              <button 
-                className="official-link"
-                onClick={() => handleExternalLink(resource.url, resource.name)}
-              >
-                Visit Resource
-                <ExternalLinkIcon />
-              </button>
+              <div className="official-actions">
+                <button 
+                  className="official-link"
+                  onClick={() => handleExternalLink(resource.url, resource.name)}
+                >
+                  Visit Resource
+                  <ExternalLinkIcon />
+                </button>
+                <button 
+                  className="share-resource-btn"
+                  onClick={() => handleShareResource(resource)}
+                  title="Share resource"
+                >
+                  🔗
+                </button>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
+      {/* ================= ACHIEVEMENTS ================= */}
+      <section className="resources-section alt">
+        <div className="section-header">
+          <h2>Your Achievements</h2>
+          <p className="section-subtitle">
+            Track your progress and earn rewards for learning about cybersecurity
+          </p>
+        </div>
+
+        <div className="achievements-grid">
+          {userAchievements.map((achievement, i) => (
+            <motion.div
+              key={achievement.id}
+              className={`achievement-card ${achievement.unlocked ? 'unlocked' : 'locked'}`}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.1 }}
+            >
+              <div className="achievement-icon">
+                {achievement.unlocked ? achievement.icon : "🔒"}
+              </div>
+              <h4>{achievement.name}</h4>
+              <p>{achievement.description}</p>
+              <div className="achievement-status">
+                {achievement.unlocked ? (
+                  <span className="status-unlocked">✅ Unlocked</span>
+                ) : (
+                  <span className="status-locked">🔒 Locked</span>
+                )}
+              </div>
             </motion.div>
           ))}
         </div>
@@ -1144,15 +1878,30 @@ export default function ResourcesPage() {
               <span className="info-item">📚 {allGuides.length}+ Guides</span>
               <span className="info-item">📋 10+ Checklists</span>
               <span className="info-item">🔄 Regular Updates</span>
+              <span className="info-item">⭐ +50 Points</span>
             </div>
           </div>
-          <button 
-            className="download-pack-btn"
-            onClick={handleDownloadAll}
-          >
-            <DownloadIcon />
-            Download Complete Pack (PDF)
-          </button>
+          <div className="download-actions">
+            <button 
+              className="download-pack-btn"
+              onClick={handleDownloadAll}
+            >
+              <DownloadIcon />
+              Download Complete Pack (PDF)
+            </button>
+            <button 
+              className="export-progress-btn"
+              onClick={exportProgress}
+            >
+              📊 Export Progress
+            </button>
+            <button 
+              className="import-progress-btn"
+              onClick={importProgress}
+            >
+              📥 Import Progress
+            </button>
+          </div>
         </div>
       </section>
 
@@ -1183,6 +1932,12 @@ export default function ResourcesPage() {
             >
               📋 Track Report
             </button>
+            <button 
+              className="support-btn"
+              onClick={handleContactSupport}
+            >
+              💬 Contact Support
+            </button>
           </div>
         </div>
       </motion.section>
@@ -1198,6 +1953,16 @@ export default function ResourcesPage() {
             <p className="footer-description">
               Empowering citizens with verified cybersecurity resources and tools
             </p>
+            <div className="footer-progress">
+              <div className="progress-item">
+                <span className="progress-label">Your Points</span>
+                <span className="progress-value">{userProgress.points}</span>
+              </div>
+              <div className="progress-item">
+                <span className="progress-label">Guides Read</span>
+                <span className="progress-value">{userProgress.guidesRead}/{allGuides.length}</span>
+              </div>
+            </div>
           </div>
           
           <div className="footer-links">
@@ -1205,16 +1970,22 @@ export default function ResourcesPage() {
               <h4>Resources</h4>
               <a href="#" onClick={() => setSelectedCategory("All")}>All Guides</a>
               <a href="#" onClick={() => setActiveTool(safetyTools[2])}>Safety Tools</a>
-              <a href="#">Video Tutorials</a>
-              <a href="#">Infographics</a>
+              <a href="#" onClick={() => alert("Video tutorials coming soon!")}>Video Tutorials</a>
+              <a href="#" onClick={() => alert("Infographics coming soon!")}>Infographics</a>
             </div>
             
             <div className="link-column">
               <h4>Support</h4>
               <a href="#" onClick={handleContactSupport}>Help Center</a>
               <a href="#" onClick={handleContactSupport}>Contact Us</a>
-              <a href="#" onClick={() => alert("Feedback submitted! Thank you.")}>Feedback</a>
-              <a href="#">Accessibility</a>
+              <a href="#" onClick={() => {
+                const feedback = prompt("Please share your feedback:");
+                if (feedback) {
+                  alert("Thank you for your feedback! +20 points");
+                  awardPoints(20);
+                }
+              }}>Feedback</a>
+              <a href="#" onClick={() => alert("Accessibility features enabled")}>Accessibility</a>
             </div>
             
             <div className="link-column">
@@ -1223,6 +1994,16 @@ export default function ResourcesPage() {
               <a href="#" onClick={() => handleExternalLink("#", "Terms of Use")}>Terms of Use</a>
               <a href="#" onClick={() => handleExternalLink("#", "Content Policy")}>Content Policy</a>
               <a href="#" onClick={() => handleExternalLink("#", "Disclaimer")}>Disclaimer</a>
+            </div>
+            
+            <div className="link-column">
+              <h4>Quick Actions</h4>
+              <a href="#" onClick={handleGoBack}>← Go Back</a>
+              <a href="#" onClick={toggleTheme}>
+                {theme === "dark" ? "☀️ Switch to Light" : "🌙 Switch to Dark"}
+              </a>
+              <a href="#" onClick={() => navigate("/")}>🏠 Home</a>
+              <a href="#" onClick={() => setShowEmergencyPanel(true)}>🚨 Emergency</a>
             </div>
           </div>
         </div>
@@ -1237,6 +2018,9 @@ export default function ResourcesPage() {
               month: 'short',
               year: 'numeric'
             })}</span>
+            <span className="keyboard-shortcuts">
+              <kbd>Esc</kbd> Close · <kbd>Ctrl</kbd> + <kbd>/</kbd> Search · <kbd>Ctrl</kbd> + <kbd>←</kbd> Back
+            </span>
           </div>
         </div>
       </footer>
