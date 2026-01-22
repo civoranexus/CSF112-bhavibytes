@@ -74,6 +74,7 @@ export default function HomePage() {
             <Link to="/victim" style={styles.navLink}>Report Crime</Link>
             <Link to="/track" style={styles.navLink}>Track Complaint</Link>
             <Link to="/resources" style={styles.navLink}>Resources</Link>
+            <Link to="/contact" style={styles.navLink}>Contact Us</Link> {/* ADDED */}
             <Link to="/police" style={styles.navLink}>Police Login</Link>
             <Link to="/victim" style={styles.primaryBtn}>Report Incident</Link>
           </nav>
@@ -277,6 +278,78 @@ export default function HomePage() {
         </div>
       </motion.section>
 
+      {/* ============ CONTACT SECTION ============ */}
+      <motion.section
+        style={styles.contactSection}
+        initial="hidden"
+        whileInView="visible"
+        variants={stagger}
+      >
+        <motion.h2 style={styles.contactTitle} variants={fadeUp}>
+          Need Help? Contact Our Cybersecurity Experts
+        </motion.h2>
+        
+        <motion.p style={styles.contactSubtitle} variants={fadeUp}>
+          Our dedicated support team is available 24/7 to assist you with any cybersecurity concerns, 
+          incident reporting, or general inquiries. All communications are encrypted and secure.
+        </motion.p>
+
+        <div style={styles.contactGrid}>
+          {/* CONTACT SUPPORT CARD */}
+          <motion.div style={styles.contactCard} variants={fadeUp} whileHover={{ y: -10 }}>
+            <div style={styles.contactIconSupport}>💬</div>
+            <h3 style={styles.contactCardTitle}>24/7 Support</h3>
+            <p style={styles.contactCardDesc}>
+              Get immediate assistance from our cybersecurity experts. 
+              We provide end-to-end encrypted support for all your concerns.
+            </p>
+            <div style={styles.contactFeatures}>
+              <span style={styles.contactFeatureBadge}>Encrypted Chat</span>
+              <span style={styles.contactFeatureBadge}>Phone Support</span>
+              <span style={styles.contactFeatureBadge}>Email Support</span>
+            </div>
+            <div style={styles.contactActions}>
+              <Link to="/contact" style={styles.contactPrimaryBtn}>
+                Contact Support
+              </Link>
+              <Link to="/resources" style={styles.contactSecondaryBtn}>
+                Browse FAQs
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* EMERGENCY CONTACT CARD */}
+          <motion.div style={styles.contactCard} variants={fadeUp} whileHover={{ y: -10 }}>
+            <div style={styles.contactIconEmergency}>🚨</div>
+            <h3 style={styles.contactCardTitle}>Emergency Response</h3>
+            <p style={styles.contactCardDesc}>
+              Critical incident response team available immediately for 
+              cybersecurity emergencies and urgent threat mitigation.
+            </p>
+            <div style={styles.contactFeatures}>
+              <span style={styles.contactFeatureBadge}>Immediate Response</span>
+              <span style={styles.contactFeatureBadge}>Critical Priority</span>
+              <span style={styles.contactFeatureBadge}>Direct Hotline</span>
+            </div>
+            <div style={styles.contactActions}>
+              <div style={styles.emergencyInfo}>
+                <div style={styles.emergencyNumber}>
+                  <strong>Emergency Hotline:</strong>
+                  <span style={styles.hotline}>1930</span>
+                </div>
+                <div style={styles.emergencySms}>
+                  <strong>SMS Alert:</strong>
+                  <span>871 555 9999</span>
+                </div>
+              </div>
+              <Link to="/contact" style={styles.contactEmergencyBtn}>
+                Emergency Contact
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </motion.section>
+
       {/* ============ FEATURES ============ */}
       <motion.section
         style={styles.featuresSection}
@@ -314,9 +387,12 @@ export default function HomePage() {
             <Link to="/anonymous" style={styles.quickReportBtnOutline}>
               Anonymous Report
             </Link>
+            <Link to="/contact" style={styles.quickReportBtnGhost}>
+              Contact Support
+            </Link>
           </div>
           <small style={styles.quickReportNote}>
-            Both options are encrypted and secure
+            All options are encrypted and secure
           </small>
         </div>
       </motion.div>
@@ -340,7 +416,15 @@ export default function HomePage() {
               <Link to="/victim" style={styles.footerLink}>Report Crime</Link>
               <Link to="/track" style={styles.footerLink}>Track Complaint</Link>
               <Link to="/resources" style={styles.footerLink}>Safety Resources</Link>
+              <Link to="/contact" style={styles.footerLink}>Contact Us</Link> {/* ADDED */}
               <Link to="/police" style={styles.footerLink}>Police Login</Link>
+            </div>
+            <div>
+              <h4>Support</h4>
+              <Link to="/contact" style={styles.footerLink}>Help Center</Link>
+              <Link to="/contact" style={styles.footerLink}>Live Chat</Link>
+              <Link to="/contact" style={styles.footerLink}>Emergency</Link>
+              <Link to="/resources" style={styles.footerLink}>FAQs</Link>
             </div>
             <div>
               <h4>Legal</h4>
@@ -356,6 +440,7 @@ export default function HomePage() {
           <div style={styles.footerBadges}>
             <span style={styles.badge}>🔒 SSL Secured</span>
             <span style={styles.badge}>🇮🇳 Made in India</span>
+            <span style={styles.badge}>📞 24/7 Support</span>
           </div>
         </div>
       </footer>
@@ -615,17 +700,6 @@ const styles = {
     textAlign: "center",
     border: "1px solid #E2E8F0",
   },
-  statCardH4: {
-    fontSize: 12,
-    color: "#64748B",
-    marginBottom: 8,
-    fontWeight: 600,
-  },
-  statCardSpan: {
-    fontSize: 24,
-    fontWeight: 700,
-    color: "#0F172A",
-  },
 
   chart: {
     background: "#F8FAFC",
@@ -648,23 +722,10 @@ const styles = {
     paddingTop: 20,
     borderTop: "1px solid #F1F5F9",
   },
-  activityH4: {
-    fontSize: 16,
-    fontWeight: 700,
-    marginBottom: 12,
-    color: "#0F172A",
-  },
   activityList: { 
     paddingLeft: 20, 
     marginTop: 8,
     listStyle: "none",
-  },
-  activityLi: {
-    padding: "8px 0",
-    borderBottom: "1px solid #F1F5F9",
-    display: "flex",
-    alignItems: "center",
-    gap: 8,
   },
 
   statsSection: {
@@ -746,17 +807,6 @@ const styles = {
     border: "1px solid rgba(15,23,42,0.05)",
     textAlign: "left",
   },
-  trustCardH3: {
-    fontSize: 22,
-    fontWeight: 700,
-    marginBottom: 16,
-    color: "#0F172A",
-  },
-  trustCardP: {
-    color: "#64748B",
-    lineHeight: 1.6,
-    fontSize: 16,
-  },
 
   // PORTAL SECTION STYLES
   portalSection: {
@@ -800,10 +850,6 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     transition: "all 0.3s ease",
-  },
-  portalCardHover: {
-    transform: "translateY(-10px)",
-    boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)",
   },
 
   portalIconVictim: {
@@ -883,10 +929,6 @@ const styles = {
     fontSize: 16,
     transition: "all 0.2s",
   },
-  portalPrimaryBtnHover: {
-    transform: "translateY(-2px)",
-    boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)",
-  },
 
   portalSecondaryBtn: {
     padding: "18px 28px",
@@ -900,9 +942,6 @@ const styles = {
     fontSize: 16,
     transition: "all 0.2s",
   },
-  portalSecondaryBtnHover: {
-    background: "rgba(27, 154, 170, 0.05)",
-  },
 
   portalPoliceBtn: {
     padding: "18px 28px",
@@ -915,16 +954,185 @@ const styles = {
     fontSize: 16,
     transition: "all 0.2s",
   },
-  portalPoliceBtnHover: {
-    transform: "translateY(-2px)",
-    boxShadow: "0 10px 25px rgba(15, 23, 42, 0.3)",
-  },
 
   portalNote: {
     color: "#94A3B8",
     textAlign: "center",
     fontSize: 13,
     marginTop: 8,
+  },
+
+  // CONTACT SECTION STYLES
+  contactSection: {
+    padding: "120px 20px",
+    background: "linear-gradient(180deg, rgba(27,154,170,0.02), rgba(27,154,170,0.06))",
+  },
+
+  contactTitle: {
+    fontSize: 40,
+    fontWeight: 800,
+    textAlign: "center",
+    marginBottom: 20,
+    background: "linear-gradient(135deg, #0F172A 0%, #1B9AAA 100%)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+  },
+
+  contactSubtitle: {
+    textAlign: "center",
+    maxWidth: 800,
+    margin: "0 auto 60px",
+    color: "#475569",
+    fontSize: 18,
+    lineHeight: 1.6,
+  },
+
+  contactGrid: {
+    maxWidth: 1000,
+    margin: "0 auto",
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(400px, 1fr))",
+    gap: 40,
+  },
+
+  contactCard: {
+    background: "#FFF",
+    borderRadius: 28,
+    padding: 40,
+    boxShadow: "0 20px 60px rgba(15,23,42,0.08)",
+    border: "1px solid rgba(15,23,42,0.05)",
+    display: "flex",
+    flexDirection: "column",
+    transition: "all 0.3s ease",
+  },
+
+  contactIconSupport: {
+    fontSize: 48,
+    marginBottom: 24,
+    background: "linear-gradient(135deg, #1B9AAA, #14B8A6)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+    boxShadow: "0 10px 30px rgba(27, 154, 170, 0.3)",
+  },
+
+  contactIconEmergency: {
+    fontSize: 48,
+    marginBottom: 24,
+    background: "linear-gradient(135deg, #DC2626, #EF4444)",
+    width: 80,
+    height: 80,
+    borderRadius: "50%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    color: "white",
+    boxShadow: "0 10px 30px rgba(220, 38, 38, 0.3)",
+  },
+
+  contactCardTitle: {
+    fontSize: 28,
+    fontWeight: 800,
+    marginBottom: 16,
+    color: "#0F172A",
+  },
+
+  contactCardDesc: {
+    color: "#64748B",
+    marginBottom: 28,
+    lineHeight: 1.6,
+    fontSize: 16,
+  },
+
+  contactFeatures: {
+    display: "flex",
+    gap: 10,
+    flexWrap: "wrap",
+    marginBottom: 32,
+  },
+
+  contactFeatureBadge: {
+    background: "#F1F5F9",
+    color: "#334155",
+    padding: "8px 16px",
+    borderRadius: 20,
+    fontSize: 13,
+    fontWeight: 600,
+    border: "1px solid #E2E8F0",
+  },
+
+  contactActions: {
+    marginTop: "auto",
+    display: "flex",
+    flexDirection: "column",
+    gap: 20,
+  },
+
+  contactPrimaryBtn: {
+    padding: "18px 28px",
+    background: "linear-gradient(135deg, #1B9AAA, #14B8A6)",
+    borderRadius: 14,
+    fontWeight: 700,
+    color: "#02131F",
+    textDecoration: "none",
+    textAlign: "center",
+    fontSize: 16,
+    transition: "all 0.2s",
+  },
+
+  contactSecondaryBtn: {
+    padding: "18px 28px",
+    border: "2px solid #1B9AAA",
+    borderRadius: 14,
+    color: "#1B9AAA",
+    textDecoration: "none",
+    textAlign: "center",
+    fontWeight: 600,
+    background: "transparent",
+    fontSize: 16,
+    transition: "all 0.2s",
+  },
+
+  contactEmergencyBtn: {
+    padding: "18px 28px",
+    background: "linear-gradient(135deg, #DC2626, #EF4444)",
+    borderRadius: 14,
+    fontWeight: 700,
+    color: "white",
+    textDecoration: "none",
+    textAlign: "center",
+    fontSize: 16,
+    transition: "all 0.2s",
+  },
+
+  emergencyInfo: {
+    background: "#FEF2F2",
+    padding: "20px",
+    borderRadius: 12,
+    border: "1px solid #FECACA",
+  },
+
+  emergencyNumber: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 12,
+  },
+
+  emergencySms: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  hotline: {
+    fontSize: 24,
+    fontWeight: 800,
+    color: "#DC2626",
   },
 
   featuresSection: { 
@@ -955,21 +1163,6 @@ const styles = {
     boxShadow: "0 20px 60px rgba(15,23,42,0.08)",
     border: "1px solid rgba(15,23,42,0.05)",
     transition: "all 0.3s ease",
-  },
-  cardHover: {
-    transform: "translateY(-5px)",
-    boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)",
-  },
-  cardH3: {
-    fontSize: 22,
-    fontWeight: 700,
-    marginBottom: 16,
-    color: "#0F172A",
-  },
-  cardP: {
-    color: "#64748B",
-    lineHeight: 1.6,
-    fontSize: 16,
   },
 
   quickReportPanel: {
@@ -1008,9 +1201,6 @@ const styles = {
     fontSize: 15,
     transition: "all 0.2s",
   },
-  quickReportBtnHover: {
-    transform: "translateY(-2px)",
-  },
 
   quickReportBtnOutline: {
     padding: "14px 24px",
@@ -1024,8 +1214,18 @@ const styles = {
     fontSize: 15,
     transition: "all 0.2s",
   },
-  quickReportBtnOutlineHover: {
-    background: "rgba(27, 154, 170, 0.05)",
+
+  quickReportBtnGhost: {
+    padding: "14px 24px",
+    border: "2px dashed #94A3B8",
+    borderRadius: 12,
+    color: "#334155",
+    textDecoration: "none",
+    fontWeight: 700,
+    fontSize: 15,
+    transition: "all 0.2s",
+    display: "inline-block",
+    background: "transparent",
   },
 
   quickReportNote: {
@@ -1085,27 +1285,11 @@ const styles = {
     flexWrap: "wrap",
   },
 
-  footerLinksDiv: {
-    display: "flex",
-    flexDirection: "column",
-    gap: 12,
-  },
-
-  footerLinksH4: {
-    fontSize: 16,
-    fontWeight: 700,
-    color: "#0F172A",
-    marginBottom: 12,
-  },
-
   footerLink: {
     color: "#64748B",
     textDecoration: "none",
     fontSize: 14,
     transition: "color 0.2s",
-  },
-  footerLinkHover: {
-    color: "#1B9AAA",
   },
 
   footerBottom: {
@@ -1144,55 +1328,112 @@ const addHoverEffects = (styles) => {
     ...styles,
     navLink: {
       ...styles.navLink,
-      ':hover': styles.navLinkHover,
+      ':hover': { color: "#1B9AAA" },
     },
     primaryBtn: {
       ...styles.primaryBtn,
-      ':hover': styles.primaryBtnHover,
+      ':hover': { transform: "translateY(-2px)" },
     },
     primaryBtnLg: {
       ...styles.primaryBtnLg,
-      ':hover': styles.primaryBtnLgHover,
+      ':hover': { 
+        transform: "translateY(-2px)",
+        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)" 
+      },
     },
     secondaryBtnLg: {
       ...styles.secondaryBtnLg,
-      ':hover': styles.secondaryBtnLgHover,
+      ':hover': { 
+        borderColor: "#1B9AAA",
+        color: "#1B9AAA" 
+      },
     },
     ghostBtnLg: {
       ...styles.ghostBtnLg,
-      ':hover': styles.ghostBtnLgHover,
+      ':hover': { 
+        borderColor: "#1B9AAA",
+        color: "#1B9AAA" 
+      },
     },
     portalCard: {
       ...styles.portalCard,
-      ':hover': styles.portalCardHover,
+      ':hover': { 
+        transform: "translateY(-10px)",
+        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)" 
+      },
     },
     portalPrimaryBtn: {
       ...styles.portalPrimaryBtn,
-      ':hover': styles.portalPrimaryBtnHover,
+      ':hover': { 
+        transform: "translateY(-2px)",
+        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)" 
+      },
     },
     portalSecondaryBtn: {
       ...styles.portalSecondaryBtn,
-      ':hover': styles.portalSecondaryBtnHover,
+      ':hover': { 
+        background: "rgba(27, 154, 170, 0.05)" 
+      },
     },
     portalPoliceBtn: {
       ...styles.portalPoliceBtn,
-      ':hover': styles.portalPoliceBtnHover,
+      ':hover': { 
+        transform: "translateY(-2px)",
+        boxShadow: "0 10px 25px rgba(15, 23, 42, 0.3)" 
+      },
+    },
+    contactCard: {
+      ...styles.contactCard,
+      ':hover': { 
+        transform: "translateY(-10px)",
+        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)" 
+      },
+    },
+    contactPrimaryBtn: {
+      ...styles.contactPrimaryBtn,
+      ':hover': { 
+        transform: "translateY(-2px)",
+        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)" 
+      },
+    },
+    contactSecondaryBtn: {
+      ...styles.contactSecondaryBtn,
+      ':hover': { 
+        background: "rgba(27, 154, 170, 0.05)" 
+      },
+    },
+    contactEmergencyBtn: {
+      ...styles.contactEmergencyBtn,
+      ':hover': { 
+        transform: "translateY(-2px)",
+        boxShadow: "0 10px 25px rgba(220, 38, 38, 0.3)" 
+      },
     },
     card: {
       ...styles.card,
-      ':hover': styles.cardHover,
+      ':hover': { 
+        transform: "translateY(-5px)",
+        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)" 
+      },
     },
     quickReportBtn: {
       ...styles.quickReportBtn,
-      ':hover': styles.quickReportBtnHover,
+      ':hover': { transform: "translateY(-2px)" },
     },
     quickReportBtnOutline: {
       ...styles.quickReportBtnOutline,
-      ':hover': styles.quickReportBtnOutlineHover,
+      ':hover': { background: "rgba(27, 154, 170, 0.05)" },
+    },
+    quickReportBtnGhost: {
+      ...styles.quickReportBtnGhost,
+      ':hover': { 
+        borderColor: "#1B9AAA",
+        color: "#1B9AAA" 
+      },
     },
     footerLink: {
       ...styles.footerLink,
-      ':hover': styles.footerLinkHover,
+      ':hover': { color: "#1B9AAA" },
     },
   };
 };
