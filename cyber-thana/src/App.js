@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// Context Providers
+// Context
 import { AuthProvider } from "./context/AuthContext";
 
 // Public Pages
@@ -9,70 +9,25 @@ import HomePage from "./pages/HomePage";
 import ReportPage from "./pages/ReportPage";
 import TrackPage from "./pages/TrackPage";
 import ResourcesPage from "./pages/ResourcesPage";
-import ContactPage from "./pages/ContactPage"; // ADD THIS IMPORT
-import AnonymousReport from "./pages/AnonymousReport";
+import ContactPage from "./pages/ContactPage";
 
-// Portal Layouts
+// Portals (Layouts with <Outlet />)
 import VictimPortal from "./pages/VictimPortal";
 import PolicePortal from "./pages/PolicePortal";
 
-// Auth Components
+// Victim Components
 import VictimLogin from "./components/victim/VictimLogin";
+import VictimDashboard from "./components/victim/VictimDashboard";
+import AnonymousReport from "./components/victim/AnonymousReport";
+
+// Police Components
 import PoliceLogin from "./components/police/PoliceLogin";
-
-// Placeholder components
-const VictimDashboard = () => (
-  <div className="dashboard-container">
-    <h3>Welcome to Victim Dashboard</h3>
-    <p>This is your secure portal to manage cybercrime reports.</p>
-    <div className="dashboard-stats">
-      <div className="stat-card">
-        <h4>Active Complaints</h4>
-        <span className="stat-value">0</span>
-      </div>
-      <div className="stat-card">
-        <h4>Resolved Cases</h4>
-        <span className="stat-value">0</span>
-      </div>
-    </div>
-  </div>
-);
-
-const FileComplaint = () => (
-  <div className="complaint-form">
-    <h3>File a New Complaint</h3>
-    <p>This feature is under development.</p>
-  </div>
-);
-
-const MyComplaints = () => (
-  <div className="my-complaints">
-    <h3>My Complaints</h3>
-    <p>No complaints filed yet.</p>
-  </div>
-);
-
-const SafetyTips = () => (
-  <div className="safety-tips">
-    <h3>Cyber Safety Tips</h3>
-    <ul>
-      <li>Never share OTPs with anyone</li>
-      <li>Use strong, unique passwords</li>
-      <li>Enable two-factor authentication</li>
-    </ul>
-  </div>
-);
-
-// Police components
-const PoliceDashboard = () => <div>Police Dashboard - Coming Soon</div>;
-const CaseManagement = () => <div>Case Management - Coming Soon</div>;
-const PoliceAnalytics = () => <div>Analytics - Coming Soon</div>;
-const PoliceUserManagement = () => <div>User Management - Coming Soon</div>;
-const PoliceSystemLogs = () => <div>System Logs - Coming Soon</div>;
+import PoliceDashboard from "./components/police/PoliceDashboard";
+import CaseManagement from "./components/police/CaseManagement";
 
 // 404 Page
 const NotFound = () => (
-  <div style={{ textAlign: 'center', padding: '50px' }}>
+  <div style={{ textAlign: "center", padding: "50px" }}>
     <h2>404 - Page Not Found</h2>
     <p>The page you're looking for doesn't exist.</p>
   </div>
@@ -83,37 +38,32 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          {/* Public Routes - STANDALONE ROUTES */}
+          {/* ============ PUBLIC ROUTES ============ */}
           <Route path="/" element={<HomePage />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/track" element={<TrackPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/contact" element={<ContactPage />} /> {/* ADD THIS ROUTE */}
-          <Route path="/anonymous" element={<AnonymousReport />} /> {/* STANDALONE - NOT NESTED */}
-          
-          {/* Victim Portal Routes - NESTED under /victim */}
+          <Route path="/contact" element={<ContactPage />} />
+
+          {/* Standalone Anonymous Report */}
+          <Route path="/anonymous" element={<AnonymousReport />} />
+
+          {/* ============ VICTIM PORTAL ============ */}
           <Route path="/victim" element={<VictimPortal />}>
-            <Route index element={<Navigate to="login" />} />
+            <Route index element={<Navigate to="login" replace />} />
             <Route path="login" element={<VictimLogin />} />
             <Route path="dashboard" element={<VictimDashboard />} />
-            <Route path="file-complaint" element={<FileComplaint />} />
-            <Route path="my-complaints" element={<MyComplaints />} />
-            <Route path="safety-tips" element={<SafetyTips />} />
           </Route>
-          
-          {/* Police Portal Routes - NESTED under /police */}
+
+          {/* ============ POLICE PORTAL ============ */}
           <Route path="/police" element={<PolicePortal />}>
-            <Route index element={<Navigate to="login" />} />
+            <Route index element={<Navigate to="login" replace />} />
             <Route path="login" element={<PoliceLogin />} />
             <Route path="dashboard" element={<PoliceDashboard />} />
             <Route path="cases" element={<CaseManagement />} />
-            <Route path="analytics" element={<PoliceAnalytics />} />
-            <Route path="users" element={<PoliceUserManagement />} />
-            <Route path="logs" element={<PoliceSystemLogs />} />
-            {/* NO /anonymous HERE - It's a standalone route */}
           </Route>
-          
-          {/* 404 Route */}
+
+          {/* ============ FALLBACK ============ */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
