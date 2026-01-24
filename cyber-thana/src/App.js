@@ -18,6 +18,7 @@ import PolicePortal from "./pages/PolicePortal";
 // Victim Components
 import VictimLogin from "./components/victim/VictimLogin";
 import VictimDashboard from "./components/victim/VictimDashboard";
+import MyComplaints from "./components/victim/MyComplaints";
 import AnonymousReport from "./components/victim/AnonymousReport";
 
 // Police Components
@@ -38,7 +39,7 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
-          {/* ============ PUBLIC ROUTES ============ */}
+          {/* ================= PUBLIC ROUTES ================= */}
           <Route path="/" element={<HomePage />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/track" element={<TrackPage />} />
@@ -48,14 +49,15 @@ function App() {
           {/* Standalone Anonymous Report */}
           <Route path="/anonymous" element={<AnonymousReport />} />
 
-          {/* ============ VICTIM PORTAL ============ */}
+          {/* ================= VICTIM PORTAL ================= */}
           <Route path="/victim" element={<VictimPortal />}>
             <Route index element={<Navigate to="login" replace />} />
             <Route path="login" element={<VictimLogin />} />
             <Route path="dashboard" element={<VictimDashboard />} />
+            <Route path="my-complaints" element={<MyComplaints />} />
           </Route>
 
-          {/* ============ POLICE PORTAL ============ */}
+          {/* ================= POLICE PORTAL ================= */}
           <Route path="/police" element={<PolicePortal />}>
             <Route index element={<Navigate to="login" replace />} />
             <Route path="login" element={<PoliceLogin />} />
@@ -63,7 +65,7 @@ function App() {
             <Route path="cases" element={<CaseManagement />} />
           </Route>
 
-          {/* ============ FALLBACK ============ */}
+          {/* ================= FALLBACK ================= */}
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
