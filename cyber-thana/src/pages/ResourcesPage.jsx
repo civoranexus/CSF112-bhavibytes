@@ -1971,7 +1971,7 @@ export default function ResourcesPage() {
               <a href="#" onClick={() => setSelectedCategory("All")}>All Guides</a>
               <a href="#" onClick={() => setActiveTool(safetyTools[2])}>Safety Tools</a>
               <a href="#" onClick={() => alert("Video tutorials coming soon!")}>Video Tutorials</a>
-              <a href="#" onClick={() => alert("Infographics coming soon!")}>Infographics</a>
+              <a href="#" onClick={() => navigate("/resources/infographics")}>Infographics</a>
             </div>
             
             <div className="link-column">

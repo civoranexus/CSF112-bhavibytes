@@ -1,0 +1,514 @@
+/* Infographics.css */
+.infographics-page {
+    min-height: 100vh;
+    background: #f8fafc;
+    color: #0f172a;
+    font-family: 'Inter', system-ui, sans-serif;
+}
+
+.infographics-header {
+    background: linear-gradient(135deg, #1b9aaa, #14b8a6);
+    color: white;
+    padding: 4rem 2rem 2rem;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.back-btn {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: background 0.3s;
+}
+
+.back-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.infographics-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.header-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 800px;
+}
+
+/* Stats Banner */
+.stats-banner {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #1b9aaa;
+    display: block;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    color: #64748b;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* Search and Filter */
+.search-filter-section {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.search-container {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+}
+
+.search-input-group {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #1b9aaa;
+}
+
+.search-btn {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(135deg, #1b9aaa, #14b8a6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.category-filters {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.category-filter {
+    padding: 0.5rem 1rem;
+    border: 2px solid #e2e8f0;
+    background: white;
+    border-radius: 20px;
+    color: #64748b;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-filter:hover {
+    border-color: #1b9aaa;
+    color: #1b9aaa;
+}
+
+.category-filter.active {
+    background: linear-gradient(135deg, #1b9aaa, #14b8a6);
+    border-color: transparent;
+    color: white;
+}
+
+.filter-count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.1rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.8rem;
+}
+
+/* Main Content */
+.infographics-main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.container {
+    width: 100%;
+}
+
+.infographics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.infographic-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.infographic-card:hover {
+    box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.infographic-preview {
+    padding: 2rem;
+    text-align: center;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.preview-content {
+    max-width: 300px;
+}
+
+.preview-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.preview-category {
+    background: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-top: 0.5rem;
+}
+
+.infographic-content {
+    padding: 1.5rem;
+}
+
+.infographic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.infographic-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    flex: 1;
+}
+
+.download-count {
+    font-size: 0.9rem;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.infographic-description {
+    color: #64748b;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.infographic-meta {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.meta-label {
+    font-weight: 600;
+    color: #475569;
+}
+
+.meta-value {
+    color: #64748b;
+}
+
+.tags-container {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.tag {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.infographic-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.view-btn,
+.download-btn {
+    flex: 1;
+    padding: 0.75rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.view-btn {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.download-btn {
+    background: linear-gradient(135deg, #1b9aaa, #14b8a6);
+    color: white;
+}
+
+.view-btn:hover,
+.download-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-results h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #475569;
+}
+
+.no-results p {
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.reset-btn {
+    padding: 0.75rem 1.5rem;
+    background: #f1f5f9;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.reset-btn:hover {
+    background: #e2e8f0;
+}
+
+/* Bulk Download */
+.bulk-download-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+}
+
+.bulk-download-card {
+    background: linear-gradient(135deg, #1b9aaa, #14b8a6);
+    border-radius: 20px;
+    padding: 3rem;
+    color: white;
+    text-align: center;
+}
+
+.bulk-download-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.bulk-download-content p {
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+.bulk-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.bulk-download-btn {
+    background: white;
+    color: #1b9aaa;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bulk-download-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+}
+
+/* Footer */
+.infographics-footer {
+    background: #f1f5f9;
+    padding: 2rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.footer-brand h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.25rem;
+    color: #0f172a;
+}
+
+.footer-brand p {
+    color: #64748b;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.footer-links a {
+    color: #64748b;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.footer-links a:hover {
+    color: #1b9aaa;
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e2e8f0;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .infographics-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .infographics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+    }
+
+    .footer-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .infographic-actions {
+        flex-direction: column;
+    }
+
+    .bulk-download-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .bulk-info {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+}

@@ -1,32 +1,33 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
-// Context
+// ================= CONTEXT =================
 import { AuthProvider } from "./context/AuthContext";
 
-// Public Pages
+// ================= PUBLIC PAGES =================
 import HomePage from "./pages/HomePage";
 import ReportPage from "./pages/ReportPage";
 import TrackPage from "./pages/TrackPage";
 import ResourcesPage from "./pages/ResourcesPage";
 import ContactPage from "./pages/ContactPage";
 
-// Portals (Layouts with <Outlet />)
+// ================= PORTALS (Layouts) =================
 import VictimPortal from "./pages/VictimPortal";
 import PolicePortal from "./pages/PolicePortal";
 
-// Victim Components
+// ================= VICTIM COMPONENTS =================
 import VictimLogin from "./components/victim/VictimLogin";
 import VictimDashboard from "./components/victim/VictimDashboard";
 import MyComplaints from "./components/victim/MyComplaints";
+import Infographics from "./components/victim/Infographics";
 import AnonymousReport from "./components/victim/AnonymousReport";
 
-// Police Components
+// ================= POLICE COMPONENTS =================
 import PoliceLogin from "./components/police/PoliceLogin";
 import PoliceDashboard from "./components/police/PoliceDashboard";
 import CaseManagement from "./components/police/CaseManagement";
 
-// 404 Page
+// ================= 404 PAGE =================
 const NotFound = () => (
   <div style={{ textAlign: "center", padding: "50px" }}>
     <h2>404 - Page Not Found</h2>
@@ -39,14 +40,16 @@ function App() {
     <AuthProvider>
       <Router>
         <Routes>
+
           {/* ================= PUBLIC ROUTES ================= */}
           <Route path="/" element={<HomePage />} />
           <Route path="/report" element={<ReportPage />} />
           <Route path="/track" element={<TrackPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
+          <Route path="/resources/infographics" element={<Infographics />} />
           <Route path="/contact" element={<ContactPage />} />
 
-          {/* Standalone Anonymous Report */}
+          {/* Standalone Anonymous Reporting */}
           <Route path="/anonymous" element={<AnonymousReport />} />
 
           {/* ================= VICTIM PORTAL ================= */}
@@ -67,6 +70,7 @@ function App() {
 
           {/* ================= FALLBACK ================= */}
           <Route path="*" element={<NotFound />} />
+
         </Routes>
       </Router>
     </AuthProvider>
