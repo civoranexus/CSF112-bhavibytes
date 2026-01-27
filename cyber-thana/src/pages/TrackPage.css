@@ -452,6 +452,11 @@ p {
     background: rgba(14, 165, 233, 0.05);
 }
 
+.toggle-btn:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
 .sample-list {
     overflow: hidden;
 }
@@ -469,6 +474,11 @@ p {
 
 .sample-item:hover {
     background: rgba(14, 165, 233, 0.1);
+}
+
+.sample-item:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
 }
 
 .sample-item:not(:last-child) {
@@ -560,6 +570,8 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    /* Extra visual definition without changing theme colors */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1);
 }
 
 .overview-grid {
@@ -813,6 +825,8 @@ p {
     text-transform: uppercase;
     letter-spacing: 0.5px;
     white-space: nowrap;
+    /* Extra visual definition without changing theme colors */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 .completed-note {
@@ -832,6 +846,8 @@ p {
     font-size: 0.75rem;
     font-weight: 600;
     white-space: nowrap;
+    /* Extra visual definition without changing theme colors */
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
 .completed-date {
@@ -1129,6 +1145,11 @@ p {
     text-decoration: underline;
 }
 
+.info-link:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
 .notification-settings {
     display: flex;
     justify-content: space-between;
@@ -1165,6 +1186,11 @@ p {
     border-color: var(--primary-blue);
     color: var(--primary-blue);
     background: rgba(14, 165, 233, 0.05);
+}
+
+.setting-btn:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
 }
 
 .emergency-contacts {
@@ -1238,6 +1264,11 @@ p {
     color: var(--primary-blue);
 }
 
+.resources-list a:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 2px;
+}
+
 /* ================= SUPPORT BANNER ================= */
 .support-banner {
     display: flex;
@@ -1304,6 +1335,11 @@ p {
 .banner-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.banner-btn:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 2px;
 }
 
 /* ================= FOOTER ================= */

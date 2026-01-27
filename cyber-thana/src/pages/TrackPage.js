@@ -211,10 +211,15 @@ export default function TrackPage() {
           
           <div className="header-actions">
             {hasNotifications && (
-              <div className="notification-badge" onClick={() => setHasNotifications(false)}>
-                <span className="notification-icon">🔔</span>
+              <button
+                type="button"
+                className="notification-badge"
+                onClick={() => setHasNotifications(false)}
+                aria-label="View new notification"
+              >
+                <span className="notification-icon" aria-hidden="true">🔔</span>
                 <span className="notification-count">1</span>
-              </div>
+              </button>
             )}
             
             <button 
@@ -325,7 +330,8 @@ export default function TrackPage() {
                   exit={{ opacity: 0, height: 0 }}
                 >
                   {SAMPLE_CASES.map((caseItem) => (
-                    <div 
+                    <button
+                      type="button"
                       key={caseItem.id}
                       className="sample-item"
                       onClick={() => handleSampleTrack(caseItem.id)}
@@ -333,7 +339,7 @@ export default function TrackPage() {
                       <span className="sample-id">{caseItem.id}</span>
                       <span className="sample-type">{caseItem.type}</span>
                       <span className="sample-date">{caseItem.date}</span>
-                    </div>
+                    </button>
                   ))}
                 </motion.div>
               )}
@@ -361,8 +367,15 @@ export default function TrackPage() {
               {/* CASE OVERVIEW */}
               <div className="case-overview">
                 <div className="overview-header">
-                  <h3>Case Overview</h3>
-                  <span className="case-status-tag" style={{ backgroundColor: getStatusColor(currentCase.statusIndex) }}>
+                  <h3 id="case-overview-heading">Case Overview</h3>
+                  <span
+                    className="case-status-tag"
+                    style={{ backgroundColor: getStatusColor(currentCase.statusIndex) }}
+                    role="status"
+                    aria-live="polite"
+                    aria-atomic="true"
+                    aria-labelledby="case-overview-heading"
+                  >
                     {STATUS_STEPS[currentCase.statusIndex]?.name || "Unknown"}
                   </span>
                 </div>
@@ -445,7 +458,14 @@ export default function TrackPage() {
                         
                         {index === currentCase.statusIndex && (
                           <div className="current-status-note">
-                            <span className="current-badge">Current Status</span>
+                            <span
+                              className="current-badge"
+                              role="status"
+                              aria-live="polite"
+                              aria-atomic="true"
+                            >
+                              Current status: {STATUS_STEPS[currentCase.statusIndex]?.name || "Unknown"}
+                            </span>
                           </div>
                         )}
                         
