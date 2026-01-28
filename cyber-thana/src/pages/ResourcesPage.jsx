@@ -6,121 +6,121 @@ import "./ResourcesPage.css";
 // Icons
 const ShieldIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const DownloadIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const ExternalLinkIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const BookIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const SearchIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2"/>
-    <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="11" cy="11" r="8" stroke="currentColor" strokeWidth="2" />
+    <path d="m21 21-4.35-4.35" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const CheckIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const BackIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const StarIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const TrophyIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17a2 2 0 0 0 4 0v-2.34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <rect x="8" y="2" width="8" height="10" rx="4" stroke="currentColor" strokeWidth="2"/>
+    <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6m12 5h1.5a2.5 2.5 0 0 0 0-5H18M4 22h16M10 14.66V17a2 2 0 0 0 4 0v-2.34" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <rect x="8" y="2" width="8" height="10" rx="4" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const categories = [
-  { 
+  {
     id: 1,
-    icon: "🛡️", 
-    title: "Cyber Safety Guides", 
+    icon: "🛡️",
+    title: "Cyber Safety Guides",
     desc: "Best practices to stay secure online",
     resources: 12,
     color: "#1B9AAA"
   },
-  { 
+  {
     id: 2,
-    icon: "🎣", 
-    title: "Phishing Awareness", 
+    icon: "🎣",
+    title: "Phishing Awareness",
     desc: "Identify and avoid online scams",
     resources: 8,
     color: "#142C52"
   },
-  { 
+  {
     id: 3,
-    icon: "🔐", 
-    title: "Data Protection", 
+    icon: "🔐",
+    title: "Data Protection",
     desc: "Protect personal and organizational data",
     resources: 15,
     color: "#02394A"
   },
-  { 
+  {
     id: 4,
-    icon: "📱", 
-    title: "Social Media Safety", 
+    icon: "📱",
+    title: "Social Media Safety",
     desc: "Stay safe across social platforms",
     resources: 10,
     color: "#16808D"
   },
-  { 
+  {
     id: 5,
-    icon: "💳", 
-    title: "Financial Fraud", 
+    icon: "💳",
+    title: "Financial Fraud",
     desc: "Prevent online payment frauds",
     resources: 9,
     color: "#0E2140"
   },
-  { 
+  {
     id: 6,
-    icon: "🧠", 
-    title: "Cyber Hygiene", 
+    icon: "🧠",
+    title: "Cyber Hygiene",
     desc: "Daily habits for digital safety",
     resources: 14,
     color: "#147783"
   },
-  { 
+  {
     id: 7,
-    icon: "🏠", 
-    title: "Home Network Security", 
+    icon: "🏠",
+    title: "Home Network Security",
     desc: "Secure your home Wi-Fi and devices",
     resources: 7,
     color: "#4C97A8"
   },
-  { 
+  {
     id: 8,
-    icon: "👨‍💼", 
-    title: "Business Security", 
+    icon: "👨‍💼",
+    title: "Business Security",
     desc: "Cybersecurity for small businesses",
     resources: 11,
     color: "#07426"
@@ -354,45 +354,61 @@ const achievements = [
 // Use debounce hook
 const useDebounce = (value, delay) => {
   const [debouncedValue, setDebouncedValue] = useState(value);
-  
+
   useEffect(() => {
     const handler = setTimeout(() => {
       setDebouncedValue(value);
     }, delay);
-    
+
     return () => {
       clearTimeout(handler);
     };
   }, [value, delay]);
-  
+
   return debouncedValue;
 };
 
 // Memoized Category Card Component
-const CategoryCard = React.memo(({ cat, onClick, index }) => (
-  <motion.div
-    className="category-card"
-    whileHover={{ y: -8, transition: { duration: 0.2 } }}
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    transition={{ delay: index * 0.1 }}
-    onClick={onClick}
-  >
-    <div 
-      className="category-icon"
-      style={{ backgroundColor: `${cat.color}20` }}
+const CategoryCard = React.memo(({ cat, onClick, index }) => {
+  // Define bento grid spans based on index
+  const getBentoStyles = (idx) => {
+    switch (idx) {
+      case 0: return { gridColumn: "span 2", gridRow: "span 1" };
+      case 1: return { gridColumn: "span 1", gridRow: "span 2" };
+      case 5: return { gridColumn: "span 2", gridRow: "span 1" };
+      default: return {};
+    }
+  };
+
+  return (
+    <motion.div
+      className="category-card"
+      style={getBentoStyles(index)}
+      whileHover={{ y: -10, scale: 1.02 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.05, type: "spring", stiffness: 100 }}
+      onClick={onClick}
     >
-      <span style={{ color: cat.color }}>{cat.icon}</span>
-    </div>
-    <h3>{cat.title}</h3>
-    <p>{cat.desc}</p>
-    <div className="category-meta">
-      <span className="resource-count">{cat.resources} resources</span>
-      <span className="view-link">View all →</span>
-    </div>
-  </motion.div>
-));
+      <div
+        className="category-icon"
+        style={{
+          backgroundColor: `${cat.color}20`,
+          boxShadow: `0 8px 16px ${cat.color}30`
+        }}
+      >
+        <span style={{ color: cat.color, fontSize: "2rem" }}>{cat.icon}</span>
+      </div>
+      <h3 style={{ fontSize: "1.5rem", fontWeight: 800, marginBottom: "0.5rem" }}>{cat.title}</h3>
+      <p style={{ fontSize: "1rem", opacity: 0.8, marginBottom: "1.5rem" }}>{cat.desc}</p>
+      <div className="category-meta" style={{ marginTop: "auto" }}>
+        <span className="resource-count" style={{ fontWeight: 600 }}>{cat.resources} resources</span>
+        <span className="view-link" style={{ color: cat.color }}>View all →</span>
+      </div>
+    </motion.div>
+  );
+});
 
 export default function ResourcesPage() {
   const navigate = useNavigate();
@@ -455,37 +471,37 @@ export default function ResourcesPage() {
       setTheme(defaultTheme);
       document.body.className = defaultTheme;
     }
-    
+
     // Downloaded guides
     const savedDownloads = localStorage.getItem("downloadedGuides");
     if (savedDownloads) {
       setDownloadedGuides(JSON.parse(savedDownloads));
     }
-    
+
     // Read guides
     const savedRead = localStorage.getItem("readGuides");
     if (savedRead) {
       setReadGuides(JSON.parse(savedRead));
     }
-    
+
     // Safety checklist
     const savedChecklist = localStorage.getItem("safetyChecklist");
     if (savedChecklist) {
       setSafetyChecklist(JSON.parse(savedChecklist));
     }
-    
+
     // User progress
     const savedProgress = localStorage.getItem("userProgress");
     if (savedProgress) {
       setUserProgress(JSON.parse(savedProgress));
     }
-    
+
     // Achievements
     const savedAchievements = localStorage.getItem("achievements");
     if (savedAchievements) {
       setUserAchievements(JSON.parse(savedAchievements));
     }
-    
+
     // Ratings
     const savedRatings = localStorage.getItem("guideRatings");
     if (savedRatings) {
@@ -501,19 +517,19 @@ export default function ResourcesPage() {
         e.preventDefault();
         searchInputRef.current?.focus();
       }
-      
+
       // Escape to close active tool or emergency panel
       if (e.key === 'Escape') {
         if (activeTool) setActiveTool(null);
         if (showEmergencyPanel) setShowEmergencyPanel(false);
       }
-      
+
       // Backspace with Ctrl to go back
       if ((e.ctrlKey || e.metaKey) && e.key === 'Backspace') {
         handleGoBack();
       }
     };
-    
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [activeTool, showEmergencyPanel]);
@@ -527,7 +543,7 @@ export default function ResourcesPage() {
       totalScore: phishingQuiz.score + (readGuides.length * 10),
       points: userProgress.points
     };
-    
+
     setUserProgress(newProgress);
     localStorage.setItem("userProgress", JSON.stringify(newProgress));
   }, [readGuides, downloadedGuides, safetyChecklist, phishingQuiz.score]);
@@ -535,21 +551,21 @@ export default function ResourcesPage() {
   // Check and award achievements
   useEffect(() => {
     const updatedAchievements = [...userAchievements];
-    
+
     // First Download achievement
     if (downloadedGuides.length >= 1 && !updatedAchievements[0].unlocked) {
       updatedAchievements[0].unlocked = true;
       awardPoints(50);
       showAchievementNotification(updatedAchievements[0]);
     }
-    
+
     // Resource Collector achievement
     if (downloadedGuides.length >= 5 && !updatedAchievements[3].unlocked) {
       updatedAchievements[3].unlocked = true;
       awardPoints(100);
       showAchievementNotification(updatedAchievements[3]);
     }
-    
+
     // Safety Expert achievement
     const allChecked = safetyChecklist.every(item => item.checked);
     if (allChecked && !updatedAchievements[1].unlocked) {
@@ -557,7 +573,7 @@ export default function ResourcesPage() {
       awardPoints(150);
       showAchievementNotification(updatedAchievements[1]);
     }
-    
+
     setUserAchievements(updatedAchievements);
     localStorage.setItem("achievements", JSON.stringify(updatedAchievements));
   }, [downloadedGuides.length, safetyChecklist]);
@@ -595,7 +611,7 @@ export default function ResourcesPage() {
       localStorage.setItem("downloadedGuides", JSON.stringify(newDownloads));
       awardPoints(10);
     }
-    
+
     const guide = allGuides.find(g => g.id === guideId);
     alert(`✅ Guide "${guide?.title}" downloaded successfully!\n\n+10 points`);
   };
@@ -607,7 +623,7 @@ export default function ResourcesPage() {
       localStorage.setItem("readGuides", JSON.stringify(newRead));
       awardPoints(5);
     }
-    
+
     const guide = allGuides.find(g => g.id === guideId);
     alert(`📖 Opening guide: ${guide?.title}\n\n${guide?.content}\n\n${!readGuides.includes(guideId) ? '+5 points' : ''}`);
   };
@@ -636,13 +652,13 @@ export default function ResourcesPage() {
   };
 
   const filteredGuides = allGuides.filter(guide => {
-    const matchesSearch = debouncedSearch === "" || 
+    const matchesSearch = debouncedSearch === "" ||
       guide.title.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
       guide.description.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
       guide.category.toLowerCase().includes(debouncedSearch.toLowerCase());
-    
+
     const matchesCategory = selectedCategory === "All" || guide.category === selectedCategory;
-    
+
     return matchesSearch && matchesCategory;
   });
 
@@ -650,8 +666,8 @@ export default function ResourcesPage() {
 
   // Get recommended guides
   const recommendedGuides = allGuides
-    .filter(guide => 
-      !readGuides.includes(guide.id) && 
+    .filter(guide =>
+      !readGuides.includes(guide.id) &&
       !downloadedGuides.includes(guide.id)
     )
     .sort((a, b) => b.downloads - a.downloads)
@@ -665,7 +681,7 @@ export default function ResourcesPage() {
     if (/[A-Z]/.test(password)) strength++;
     if (/[0-9]/.test(password)) strength++;
     if (/[^A-Za-z0-9]/.test(password)) strength++;
-    
+
     const strengthLevels = ["Very Weak", "Weak", "Fair", "Strong", "Very Strong"];
     return strengthLevels[Math.min(strength, 4)];
   };
@@ -678,7 +694,7 @@ export default function ResourcesPage() {
     const strength = checkPasswordStrength(passwordInput);
     setPasswordStrength(strength);
     awardPoints(5);
-    
+
     let meterHTML = `🔐 Password Strength: ${strength}\n\n`;
     meterHTML += "📋 Recommendations:\n";
     if (passwordInput.length < 8) meterHTML += "• Use at least 8 characters\n";
@@ -686,7 +702,7 @@ export default function ResourcesPage() {
     if (!/[A-Z]/.test(passwordInput)) meterHTML += "• Add uppercase letters\n";
     if (!/[0-9]/.test(passwordInput)) meterHTML += "• Add numbers\n";
     if (!/[^A-Za-z0-9]/.test(passwordInput)) meterHTML += "• Add special characters\n";
-    
+
     alert(meterHTML + "\n+5 points");
   };
 
@@ -696,24 +712,24 @@ export default function ResourcesPage() {
     const lowercase = "abcdefghijklmnopqrstuvwxyz";
     const numbers = "0123456789";
     const symbols = "!@#$%^&*()_+-=[]{}|;:,.<>?";
-    
+
     let charset = "";
     if (passwordOptions.lowercase) charset += lowercase;
     if (passwordOptions.uppercase) charset += uppercase;
     if (passwordOptions.numbers) charset += numbers;
     if (passwordOptions.symbols) charset += symbols;
-    
+
     if (!charset) {
       alert("⚠️ Please select at least one character type");
       return;
     }
-    
+
     let password = "";
     for (let i = 0; i < passwordOptions.length; i++) {
       const randomIndex = Math.floor(Math.random() * charset.length);
       password += charset[randomIndex];
     }
-    
+
     setGeneratedPassword(password);
     awardPoints(5);
   };
@@ -763,19 +779,19 @@ export default function ResourcesPage() {
 
   const handlePhishingQuiz = (answerIndex) => {
     const isCorrect = answerIndex === phishingQuestions[phishingQuiz.currentQuestion].correctAnswer;
-    
+
     const newScore = isCorrect ? phishingQuiz.score + 1 : phishingQuiz.score;
     const nextQuestion = phishingQuiz.currentQuestion + 1;
     const isCompleted = nextQuestion >= phishingQuestions.length;
-    
+
     setPhishingQuiz({
       currentQuestion: isCompleted ? 0 : nextQuestion,
       score: newScore,
       completed: isCompleted
     });
-    
+
     if (isCorrect) awardPoints(10);
-    
+
     if (isCompleted) {
       if (newScore === phishingQuestions.length && !userAchievements[2].unlocked) {
         const updatedAchievements = [...userAchievements];
@@ -784,7 +800,7 @@ export default function ResourcesPage() {
         localStorage.setItem("achievements", JSON.stringify(updatedAchievements));
         awardPoints(100);
       }
-      
+
       alert(`🎉 Quiz completed!\n\nYour Score: ${newScore}/${phishingQuestions.length}\n\nThank you for learning about phishing awareness!\n\n+${newScore * 10} points`);
       setPhishingQuiz({ currentQuestion: 0, score: 0, completed: false });
     } else {
@@ -793,12 +809,12 @@ export default function ResourcesPage() {
   };
 
   const handleChecklistToggle = (id) => {
-    const newChecklist = safetyChecklist.map(item => 
+    const newChecklist = safetyChecklist.map(item =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setSafetyChecklist(newChecklist);
     localStorage.setItem("safetyChecklist", JSON.stringify(newChecklist));
-    
+
     if (!safetyChecklist.find(item => item.id === id)?.checked) {
       awardPoints(5);
     }
@@ -807,11 +823,11 @@ export default function ResourcesPage() {
   const handleCompleteChecklist = () => {
     const checkedCount = safetyChecklist.filter(item => item.checked).length;
     const total = safetyChecklist.length;
-    
+
     if (checkedCount === total) {
       alert("🎉 Excellent! You've completed all safety checklist items!\n\nYour digital security is top-notch!\n\n+50 points");
     } else {
-      alert(`📋 Safety Checklist Progress: ${checkedCount}/${total} completed\n\nKeep going to improve your digital security!\n\nCurrent progress: ${Math.round((checkedCount/total)*100)}%`);
+      alert(`📋 Safety Checklist Progress: ${checkedCount}/${total} completed\n\nKeep going to improve your digital security!\n\nCurrent progress: ${Math.round((checkedCount / total) * 100)}%`);
     }
   };
 
@@ -831,7 +847,7 @@ export default function ResourcesPage() {
 
   const handleToolClick = (tool) => {
     setActiveTool(tool);
-    
+
     switch (tool.toolType) {
       case "checker":
         if (tool.id === 1) { // Password checker
@@ -844,7 +860,7 @@ export default function ResourcesPage() {
           const email = prompt("Enter email to check for breaches (simulated):");
           if (email) {
             const isBreached = Math.random() > 0.7;
-            alert(isBreached 
+            alert(isBreached
               ? `⚠️ Alert: Email "${email}" found in simulated data breach.\n\nRecommendation: Change your password and enable 2FA.\n\n+10 points for checking`
               : `✅ Good news! Email "${email}" not found in simulated breaches.\n\nKeep following security best practices.\n\n+10 points for checking`
             );
@@ -852,26 +868,26 @@ export default function ResourcesPage() {
           }
         }
         break;
-        
+
       case "quiz":
         setPhishingQuiz({ currentQuestion: 0, score: 0, completed: false });
         alert("🎯 Starting Phishing Awareness Quiz!\n\nYou'll be shown common scam scenarios. Choose the safest response.\n\nEarn 10 points per correct answer!");
         break;
-        
+
       case "checklist":
         alert("📋 Opening Safety Checklist\n\nCheck off items as you complete them to track your security progress.\n\nEarn 5 points per completed item!");
         break;
-        
+
       case "generator":
         alert("⚡ Password Generator\n\nGenerate strong, secure passwords with customizable options.\n\nEarn 5 points per generated password!");
         break;
-        
+
       case "scanner":
         const networkStatus = Math.random() > 0.3 ? "secure" : "needs attention";
-        alert(`📡 Network Security Scan Results:\n\nStatus: ${networkStatus.toUpperCase()}\n\n${networkStatus === "secure" 
+        alert(`📡 Network Security Scan Results:\n\nStatus: ${networkStatus.toUpperCase()}\n\n${networkStatus === "secure"
           ? "✅ Your simulated network appears secure.\nContinue regular security updates."
           : "⚠️ Your simulated network may have vulnerabilities.\nConsider updating router firmware and changing Wi-Fi password."
-        }\n\n+15 points for scanning`);
+          }\n\n+15 points for scanning`);
         awardPoints(15);
         break;
     }
@@ -881,10 +897,10 @@ export default function ResourcesPage() {
     const confirmDownload = window.confirm(
       "📥 Download Complete Resource Pack?\n\nThis includes all guides, checklists, and templates (25+ MB)."
     );
-    
+
     if (confirmDownload) {
       alert("📥 Download started...\n\nResource pack will be available shortly.\nCheck your downloads folder.");
-      
+
       const allGuideIds = allGuides.map(g => g.id);
       const newDownloads = [...new Set([...downloadedGuides, ...allGuideIds])];
       setDownloadedGuides(newDownloads);
@@ -914,12 +930,12 @@ export default function ResourcesPage() {
     if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
       const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
       const recognition = new SpeechRecognition();
-      
+
       recognition.onresult = (event) => {
         const transcript = event.results[0][0].transcript;
         setSearchQuery(transcript);
       };
-      
+
       recognition.start();
       alert("🎤 Listening... Speak your search query.");
     } else {
@@ -936,15 +952,15 @@ export default function ResourcesPage() {
       points: userProgress.points,
       exportedAt: new Date().toISOString()
     };
-    
+
     const dataStr = JSON.stringify(progressData, null, 2);
-    const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-    
+    const dataUri = 'data:application/json;charset=utf-8,' + encodeURIComponent(dataStr);
+
     const link = document.createElement('a');
     link.setAttribute('href', dataUri);
     link.setAttribute('download', 'cyber-safety-progress.json');
     link.click();
-    
+
     alert("✅ Progress exported successfully!");
   };
 
@@ -952,30 +968,30 @@ export default function ResourcesPage() {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = '.json';
-    
+
     input.onchange = (e) => {
       const file = e.target.files[0];
       const reader = new FileReader();
-      
+
       reader.onload = (event) => {
         try {
           const progressData = JSON.parse(event.target.result);
-          
+
           if (progressData.downloadedGuides) setDownloadedGuides(progressData.downloadedGuides);
           if (progressData.readGuides) setReadGuides(progressData.readGuides);
           if (progressData.checklistProgress) setSafetyChecklist(progressData.checklistProgress);
           if (progressData.achievements) setUserAchievements(progressData.achievements);
-          if (progressData.points) setUserProgress(prev => ({...prev, points: progressData.points}));
-          
+          if (progressData.points) setUserProgress(prev => ({ ...prev, points: progressData.points }));
+
           alert("✅ Progress imported successfully!");
         } catch (error) {
           alert("❌ Error importing progress data");
         }
       };
-      
+
       reader.readAsText(file);
     };
-    
+
     input.click();
   };
 
@@ -989,7 +1005,7 @@ export default function ResourcesPage() {
       >
         <div className="header-container">
           <div className="header-brand">
-            <button 
+            <button
               className="back-button"
               onClick={handleGoBack}
               aria-label="Go back"
@@ -1006,16 +1022,16 @@ export default function ResourcesPage() {
               </p>
             </div>
           </div>
-          
+
           <div className="header-actions">
-            <button 
+            <button
               className="theme-toggle subtle-btn"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
               {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
             </button>
-            <button 
+            <button
               className="emergency-btn"
               onClick={() => setShowEmergencyPanel(!showEmergencyPanel)}
               aria-label="Emergency actions"
@@ -1030,7 +1046,7 @@ export default function ResourcesPage() {
           <span className="badge">🛡️ Official Sources</span>
           <span className="badge">📚 {allGuides.length}+ Resources</span>
           <span className="badge">⭐ {userProgress.points} Points</span>
-          <button 
+          <button
             className="progress-badge"
             onClick={() => alert(`Your Progress:\n\n📖 Guides Read: ${userProgress.guidesRead}\n🛠️ Tools Completed: ${userProgress.toolsCompleted}\n✅ Checklist: ${userProgress.checklistProgress}/8\n🎯 Total Points: ${userProgress.points}`)}
           >
@@ -1050,7 +1066,7 @@ export default function ResourcesPage() {
           >
             <div className="emergency-header">
               <h3>🚨 Emergency Quick Actions</h3>
-              <button 
+              <button
                 className="close-emergency"
                 onClick={() => setShowEmergencyPanel(false)}
               >
@@ -1058,7 +1074,7 @@ export default function ResourcesPage() {
               </button>
             </div>
             <div className="emergency-actions">
-              <button 
+              <button
                 className="emergency-action"
                 onClick={() => window.location.href = 'tel:155260'}
               >
@@ -1068,7 +1084,7 @@ export default function ResourcesPage() {
                   <small>Call 155260</small>
                 </div>
               </button>
-              <button 
+              <button
                 className="emergency-action"
                 onClick={() => window.open('https://cybercrime.gov.in', '_blank')}
               >
@@ -1078,7 +1094,7 @@ export default function ResourcesPage() {
                   <small>Cybercrime Portal</small>
                 </div>
               </button>
-              <button 
+              <button
                 className="emergency-action"
                 onClick={() => alert("Simulated: All accounts locked. Contact support for recovery.")}
               >
@@ -1088,7 +1104,7 @@ export default function ResourcesPage() {
                   <small>Immediate protection</small>
                 </div>
               </button>
-              <button 
+              <button
                 className="emergency-action"
                 onClick={() => navigate("/report")}
               >
@@ -1113,10 +1129,10 @@ export default function ResourcesPage() {
         <div className="hero-content">
           <h1>Stay Informed. Stay Protected.</h1>
           <p className="hero-description">
-            Access verified cyber safety resources, official guidance, and interactive tools 
+            Access verified cyber safety resources, official guidance, and interactive tools
             to help citizens prevent and respond to cyber threats effectively.
           </p>
-          
+
           <div className="hero-stats">
             <div className="stat">
               <span className="stat-number">{allGuides.length}+</span>
@@ -1136,14 +1152,14 @@ export default function ResourcesPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="hero-illustration">
           <div className="illustration-icon">🛡️</div>
           <div className="progress-ring">
-            <div className="ring-progress" style={{ 
-              background: `conic-gradient(#1B9AAA ${(userProgress.checklistProgress/8)*360}deg, #eee 0deg)` 
+            <div className="ring-progress" style={{
+              background: `conic-gradient(#1B9AAA ${(userProgress.checklistProgress / 8) * 360}deg, #eee 0deg)`
             }}>
-              <span>{Math.round((userProgress.checklistProgress/8)*100)}%</span>
+              <span>{Math.round((userProgress.checklistProgress / 8) * 100)}%</span>
             </div>
             <small>Checklist Complete</small>
           </div>
@@ -1164,7 +1180,7 @@ export default function ResourcesPage() {
               className="search-input"
               aria-label="Search resources"
             />
-            <button 
+            <button
               className="voice-search-btn"
               onClick={handleVoiceSearch}
               aria-label="Voice search"
@@ -1173,7 +1189,7 @@ export default function ResourcesPage() {
               🎤
             </button>
             {searchQuery && (
-              <button 
+              <button
                 className="clear-search-btn"
                 onClick={() => setSearchQuery("")}
                 aria-label="Clear search"
@@ -1182,11 +1198,11 @@ export default function ResourcesPage() {
               </button>
             )}
           </div>
-          
+
           <div className="search-shortcut">
             <small>Press <kbd>Ctrl</kbd> + <kbd>/</kbd> to focus search</small>
           </div>
-          
+
           <div className="filter-tabs">
             {categoriesList.map(category => (
               <button
@@ -1236,7 +1252,7 @@ export default function ResourcesPage() {
                     </span>
                     <span>{guide.readTime}</span>
                   </div>
-                  <button 
+                  <button
                     className="recommended-btn"
                     onClick={() => handleReadGuide(guide.id)}
                   >
@@ -1299,7 +1315,7 @@ export default function ResourcesPage() {
               style={{ borderLeftColor: guide.color }}
             >
               <div className="guide-header">
-                <span 
+                <span
                   className="guide-category"
                   style={{ backgroundColor: guide.color }}
                 >
@@ -1326,10 +1342,10 @@ export default function ResourcesPage() {
                   )}
                 </div>
               </div>
-              
+
               <h3>{guide.title}</h3>
               <p className="guide-description">{guide.description}</p>
-              
+
               <div className="guide-footer">
                 <div className="guide-meta">
                   <span className="download-count">
@@ -1339,21 +1355,21 @@ export default function ResourcesPage() {
                   <span className="readtime">{guide.readTime}</span>
                 </div>
                 <div className="guide-actions">
-                  <button 
+                  <button
                     className="share-btn"
                     onClick={() => handleShareResource(guide)}
                     title="Share this guide"
                   >
                     🔗 Share
                   </button>
-                  <button 
+                  <button
                     className="secondary-btn"
                     onClick={() => handleDownloadGuide(guide.id)}
                   >
-                    <DownloadIcon /> 
+                    <DownloadIcon />
                     {downloadedGuides.includes(guide.id) ? "Download Again" : "Download PDF"}
                   </button>
-                  <button 
+                  <button
                     className="primary-btn"
                     onClick={() => handleReadGuide(guide.id)}
                   >
@@ -1390,7 +1406,7 @@ export default function ResourcesPage() {
                 transition={{ delay: i * 0.05 }}
               >
                 <div className="guide-header">
-                  <span 
+                  <span
                     className="guide-category"
                     style={{ backgroundColor: guide.color }}
                   >
@@ -1398,31 +1414,31 @@ export default function ResourcesPage() {
                   </span>
                   <span className="guide-readtime">{guide.readTime}</span>
                 </div>
-                
+
                 <h4>{guide.title}</h4>
                 <p className="guide-description">{guide.description}</p>
-                
+
                 <div className="guide-footer">
                   <span className="download-count">
                     📥 {guide.downloads.toLocaleString()} downloads
                     {downloadedGuides.includes(guide.id) && " ✓"}
                   </span>
                   <div className="guide-action-buttons">
-                    <button 
+                    <button
                       className="share-btn compact"
                       onClick={() => handleShareResource(guide)}
                       title="Share"
                     >
                       🔗
                     </button>
-                    <button 
+                    <button
                       className="download-btn"
                       onClick={() => handleDownloadGuide(guide.id)}
                       title={downloadedGuides.includes(guide.id) ? "Download again" : "Download guide"}
                     >
                       <DownloadIcon />
                     </button>
-                    <button 
+                    <button
                       className="read-btn"
                       onClick={() => handleReadGuide(guide.id)}
                       title={readGuides.includes(guide.id) ? "Read again" : "Read guide"}
@@ -1480,7 +1496,7 @@ export default function ResourcesPage() {
                       <span className="interactive-badge">Interactive</span>
                     )}
                   </div>
-                  
+
                   <div className="tool-list-info">
                     <h3 className="tool-list-title">{tool.title}</h3>
                     <p className="tool-list-description">{tool.description}</p>
@@ -1489,15 +1505,15 @@ export default function ResourcesPage() {
                       <span className="tool-status">Ready to use</span>
                     </div>
                   </div>
-                  
+
                   <div className="tool-list-actions">
-                    <button 
+                    <button
                       className="try-tool-btn"
                       onClick={() => handleToolClick(tool)}
                     >
                       Try Tool
                     </button>
-                    <button 
+                    <button
                       className="info-tool-btn"
                       onClick={() => alert(`About ${tool.title}:\n\n${tool.description}\n\nThis tool helps you practice identifying ${tool.toolType === 'quiz' ? 'scam scenarios' : 'security vulnerabilities'}.`)}
                       title="More info"
@@ -1521,7 +1537,7 @@ export default function ResourcesPage() {
                 <span className="tool-icon">{activeTool.icon}</span>
                 <h3>{activeTool.title}</h3>
               </div>
-              <button 
+              <button
                 className="close-tool-btn"
                 onClick={() => setActiveTool(null)}
                 aria-label="Close tool"
@@ -1529,7 +1545,7 @@ export default function ResourcesPage() {
                 ✕
               </button>
             </div>
-            
+
             <div className="active-tool-content">
               {activeTool.id === 1 && ( // Password Checker
                 <div className="password-checker">
@@ -1542,7 +1558,7 @@ export default function ResourcesPage() {
                       onChange={(e) => setPasswordInput(e.target.value)}
                       className="password-input"
                     />
-                    <button 
+                    <button
                       className="check-btn"
                       onClick={handlePasswordCheck}
                     >
@@ -1566,7 +1582,7 @@ export default function ResourcesPage() {
                   </div>
                 </div>
               )}
-              
+
               {activeTool.id === 2 && ( // Phishing Quiz
                 <div className="phishing-quiz">
                   <div className="quiz-header">
@@ -1580,7 +1596,7 @@ export default function ResourcesPage() {
                       <div className="quiz-progress">
                         Question {phishingQuiz.currentQuestion + 1} of {phishingQuestions.length}
                         <div className="progress-bar">
-                          <div 
+                          <div
                             className="progress-fill"
                             style={{ width: `${((phishingQuiz.currentQuestion + 1) / phishingQuestions.length) * 100}%` }}
                           />
@@ -1608,15 +1624,15 @@ export default function ResourcesPage() {
                         <h5>🎉 Quiz Completed!</h5>
                         <p>Your Score: {phishingQuiz.score}/{phishingQuestions.length}</p>
                         <div className="result-message">
-                          {phishingQuiz.score === phishingQuestions.length 
-                            ? "Perfect! You're a phishing detection expert! 🏆" 
-                            : phishingQuiz.score >= phishingQuestions.length / 2 
-                            ? "Good job! Keep learning to improve your skills! 📚"
-                            : "Keep practicing! Try the quiz again to improve! 🔄"
+                          {phishingQuiz.score === phishingQuestions.length
+                            ? "Perfect! You're a phishing detection expert! 🏆"
+                            : phishingQuiz.score >= phishingQuestions.length / 2
+                              ? "Good job! Keep learning to improve your skills! 📚"
+                              : "Keep practicing! Try the quiz again to improve! 🔄"
                           }
                         </div>
                       </div>
-                      <button 
+                      <button
                         className="retry-btn"
                         onClick={() => setPhishingQuiz({ currentQuestion: 0, score: 0, completed: false })}
                       >
@@ -1626,7 +1642,7 @@ export default function ResourcesPage() {
                   )}
                 </div>
               )}
-              
+
               {activeTool.id === 3 && ( // Safety Checklist
                 <div className="safety-checklist">
                   <div className="checklist-header">
@@ -1638,7 +1654,7 @@ export default function ResourcesPage() {
                   <p>Check off items as you complete them:</p>
                   <div className="checklist-items">
                     {safetyChecklist.map(item => (
-                      <div 
+                      <div
                         key={item.id}
                         className={`checklist-item ${item.checked ? 'checked' : ''}`}
                         onClick={() => handleChecklistToggle(item.id)}
@@ -1652,13 +1668,13 @@ export default function ResourcesPage() {
                     ))}
                   </div>
                   <div className="checklist-actions">
-                    <button 
+                    <button
                       className="complete-checklist-btn"
                       onClick={handleCompleteChecklist}
                     >
                       Check Progress
                     </button>
-                    <button 
+                    <button
                       className="reset-checklist-btn"
                       onClick={() => {
                         if (window.confirm("Reset all checklist items?")) {
@@ -1673,7 +1689,7 @@ export default function ResourcesPage() {
                   </div>
                 </div>
               )}
-              
+
               {activeTool.id === 4 && ( // Password Generator
                 <div className="password-generator-tool">
                   <h4>Secure Password Generator</h4>
@@ -1685,7 +1701,7 @@ export default function ResourcesPage() {
                       placeholder="Generated password will appear here"
                       className="password-output"
                     />
-                    <button 
+                    <button
                       className="copy-password-btn"
                       onClick={() => copyToClipboard(generatedPassword)}
                       disabled={!generatedPassword}
@@ -1693,7 +1709,7 @@ export default function ResourcesPage() {
                       Copy
                     </button>
                   </div>
-                  
+
                   <div className="generator-options">
                     <div className="option-group">
                       <label>
@@ -1707,7 +1723,7 @@ export default function ResourcesPage() {
                         <span>Length: {passwordOptions.length} characters</span>
                       </label>
                     </div>
-                    
+
                     <div className="option-checkboxes">
                       <label>
                         <input
@@ -1743,14 +1759,14 @@ export default function ResourcesPage() {
                       </label>
                     </div>
                   </div>
-                  
-                  <button 
+
+                  <button
                     className="generate-btn"
                     onClick={generatePassword}
                   >
                     Generate Password
                   </button>
-                  
+
                   <div className="password-tips">
                     <h5>Tips for Password Security:</h5>
                     <ul>
@@ -1762,13 +1778,13 @@ export default function ResourcesPage() {
                   </div>
                 </div>
               )}
-              
+
               {[5, 6].includes(activeTool.id) && (
                 <div className="tool-info">
                   <h4>{activeTool.title}</h4>
                   <p>This tool is running in simulation mode.</p>
                   <p>In a full implementation, this would connect to real security services.</p>
-                  <button 
+                  <button
                     className="tool-action-btn"
                     onClick={() => handleToolClick(activeTool)}
                   >
@@ -1804,19 +1820,19 @@ export default function ResourcesPage() {
                 <span className="resource-category">{resource.category}</span>
                 <ShieldIcon />
               </div>
-              
+
               <h3>{resource.name}</h3>
               <p className="resource-description">{resource.description}</p>
-              
+
               <div className="official-actions">
-                <button 
+                <button
                   className="official-link"
                   onClick={() => handleExternalLink(resource.url, resource.name)}
                 >
                   Visit Resource
                   <ExternalLinkIcon />
                 </button>
-                <button 
+                <button
                   className="share-resource-btn"
                   onClick={() => handleShareResource(resource)}
                   title="Share resource"
@@ -1882,20 +1898,20 @@ export default function ResourcesPage() {
             </div>
           </div>
           <div className="download-actions">
-            <button 
+            <button
               className="download-pack-btn"
               onClick={handleDownloadAll}
             >
               <DownloadIcon />
               Download Complete Pack (PDF)
             </button>
-            <button 
+            <button
               className="export-progress-btn"
               onClick={exportProgress}
             >
               📊 Export Progress
             </button>
-            <button 
+            <button
               className="import-progress-btn"
               onClick={importProgress}
             >
@@ -1920,19 +1936,19 @@ export default function ResourcesPage() {
             </p>
           </div>
           <div className="cta-actions">
-            <button 
+            <button
               className="primary-btn cta-primary"
               onClick={handleReportIncident}
             >
               🚨 Report Incident
             </button>
-            <button 
+            <button
               className="secondary-btn cta-secondary"
               onClick={handleTrackReport}
             >
               📋 Track Report
             </button>
-            <button 
+            <button
               className="support-btn"
               onClick={handleContactSupport}
             >
@@ -1964,7 +1980,7 @@ export default function ResourcesPage() {
               </div>
             </div>
           </div>
-          
+
           <div className="footer-links">
             <div className="link-column">
               <h4>Resources</h4>
@@ -1973,7 +1989,7 @@ export default function ResourcesPage() {
               <a href="#" onClick={() => alert("Video tutorials coming soon!")}>Video Tutorials</a>
               <a href="#" onClick={() => navigate("/resources/infographics")}>Infographics</a>
             </div>
-            
+
             <div className="link-column">
               <h4>Support</h4>
               <a href="#" onClick={handleContactSupport}>Help Center</a>
@@ -1987,7 +2003,7 @@ export default function ResourcesPage() {
               }}>Feedback</a>
               <a href="#" onClick={() => alert("Accessibility features enabled")}>Accessibility</a>
             </div>
-            
+
             <div className="link-column">
               <h4>Legal</h4>
               <a href="#" onClick={() => handleExternalLink("#", "Privacy Policy")}>Privacy Policy</a>
@@ -1995,7 +2011,7 @@ export default function ResourcesPage() {
               <a href="#" onClick={() => handleExternalLink("#", "Content Policy")}>Content Policy</a>
               <a href="#" onClick={() => handleExternalLink("#", "Disclaimer")}>Disclaimer</a>
             </div>
-            
+
             <div className="link-column">
               <h4>Quick Actions</h4>
               <a href="#" onClick={handleGoBack}>← Go Back</a>
@@ -2007,13 +2023,13 @@ export default function ResourcesPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <div className="footer-copy">
             © {new Date().getFullYear()} Civora Nexus · Cyber Safety Resources Portal · All rights reserved
           </div>
           <div className="footer-update">
-            <span className="update-badge">🔄 Last updated: {new Date().toLocaleDateString('en-IN', { 
+            <span className="update-badge">🔄 Last updated: {new Date().toLocaleDateString('en-IN', {
               day: 'numeric',
               month: 'short',
               year: 'numeric'

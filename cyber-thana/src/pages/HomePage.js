@@ -45,7 +45,7 @@ export default function HomePage() {
             <div style={styles.emergencyText}>
               <strong>Emergency Assistance:</strong> Call National Cyber Crime Helpline: <strong>1930</strong> or SMS to <strong>871 555 9999</strong>
             </div>
-            <button 
+            <button
               onClick={() => setShowEmergency(false)}
               style={styles.closeBtn}
             >
@@ -206,9 +206,33 @@ export default function HomePage() {
 
         <div style={styles.trustGrid}>
           {trustPoints.map((t, i) => (
-            <motion.div key={i} style={styles.trustCard} variants={fadeUp}>
-              <h3>{t.title}</h3>
-              <p>{t.desc}</p>
+            <motion.div
+              key={i}
+              style={{
+                ...styles.trustCard,
+                gridColumn: i === 0 ? "span 2" : i === 1 ? "span 1" : "span 1",
+                gridRow: i === 1 ? "span 2" : "span 1",
+                background: i === 0
+                  ? "linear-gradient(135deg, rgba(27,154,170,0.08) 0%, rgba(255,255,255,0.7) 100%)"
+                  : "rgba(255,255,255,0.7)"
+              }}
+              variants={fadeUp}
+            >
+              <div style={{ fontSize: 32, marginBottom: 16 }}>{t.icon}</div>
+              <h3 style={{ fontSize: 22, fontWeight: 800, marginBottom: 12, color: "#0F172A" }}>{t.title}</h3>
+              <p style={{ color: "#64748B", lineHeight: 1.6 }}>{t.desc}</p>
+              {i === 0 && (
+                <div style={{
+                  position: "absolute",
+                  bottom: -20,
+                  right: -20,
+                  fontSize: 120,
+                  opacity: 0.03,
+                  transform: "rotate(-15deg)"
+                }}>
+                  🛡️
+                </div>
+              )}
             </motion.div>
           ))}
         </div>
@@ -224,7 +248,7 @@ export default function HomePage() {
         <motion.h2 style={styles.portalTitle} variants={fadeUp}>
           Access Secure Portals
         </motion.h2>
-        
+
         <motion.p style={styles.portalSubtitle} variants={fadeUp}>
           Choose your portal based on your role. All access is secured with end-to-end encryption.
         </motion.p>
@@ -288,9 +312,9 @@ export default function HomePage() {
         <motion.h2 style={styles.contactTitle} variants={fadeUp}>
           Need Help? Contact Our Cybersecurity Experts
         </motion.h2>
-        
+
         <motion.p style={styles.contactSubtitle} variants={fadeUp}>
-          Our dedicated support team is available 24/7 to assist you with any cybersecurity concerns, 
+          Our dedicated support team is available 24/7 to assist you with any cybersecurity concerns,
           incident reporting, or general inquiries. All communications are encrypted and secure.
         </motion.p>
 
@@ -300,7 +324,7 @@ export default function HomePage() {
             <div style={styles.contactIconSupport}>💬</div>
             <h3 style={styles.contactCardTitle}>24/7 Support</h3>
             <p style={styles.contactCardDesc}>
-              Get immediate assistance from our cybersecurity experts. 
+              Get immediate assistance from our cybersecurity experts.
               We provide end-to-end encrypted support for all your concerns.
             </p>
             <div style={styles.contactFeatures}>
@@ -323,7 +347,7 @@ export default function HomePage() {
             <div style={styles.contactIconEmergency}>🚨</div>
             <h3 style={styles.contactCardTitle}>Emergency Response</h3>
             <p style={styles.contactCardDesc}>
-              Critical incident response team available immediately for 
+              Critical incident response team available immediately for
               cybersecurity emergencies and urgent threat mitigation.
             </p>
             <div style={styles.contactFeatures}>
@@ -363,9 +387,21 @@ export default function HomePage() {
 
         <div style={styles.grid}>
           {features.map((f, i) => (
-            <motion.div key={i} style={styles.card} variants={fadeUp}>
-              <h3>{f.title}</h3>
-              <p>{f.desc}</p>
+            <motion.div
+              key={i}
+              style={{
+                ...styles.card,
+                gridColumn: i === 0 ? "span 1" : i === 1 ? "span 2" : "span 1",
+                gridRow: i === 0 ? "span 2" : "span 1",
+                background: i === 1
+                  ? "linear-gradient(135deg, rgba(20,184,166,0.08) 0%, rgba(255,255,255,0.7) 100%)"
+                  : "rgba(255,255,255,0.7)"
+              }}
+              variants={fadeUp}
+            >
+              <div style={{ fontSize: 32, marginBottom: 16 }}>{f.icon}</div>
+              <h3 style={{ fontSize: 20, fontWeight: 800, marginBottom: 12, color: "#0F172A" }}>{f.title}</h3>
+              <p style={{ color: "#64748B", lineHeight: 1.5 }}>{f.desc}</p>
             </motion.div>
           ))}
         </div>
@@ -409,7 +445,7 @@ export default function HomePage() {
               <p style={styles.footerLogoSub}>Powered by Civora Nexus</p>
             </div>
           </div>
-          
+
           <div style={styles.footerLinks}>
             <div>
               <h4>Quick Links</h4>
@@ -434,7 +470,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        
+
         <div style={styles.footerBottom}>
           <div>© {new Date().getFullYear()} Civora Nexus. All rights reserved.</div>
           <div style={styles.footerBadges}>
@@ -452,27 +488,47 @@ export default function HomePage() {
 const trustPoints = [
   {
     title: "End-to-End Encryption",
-    desc: "All reports are encrypted in transit and at rest.",
+    desc: "All reports and evidence are encrypted at source using AES-256 standards, ensuring zero-knowledge privacy for citizen data.",
+    icon: "🔐",
   },
   {
-    title: "Authorized Access Only",
-    desc: "Accessible only to verified cyber officials.",
+    title: "Authorized Access",
+    desc: "Restricted exclusively to sworn cyber cell officials with multi-factor biometric authentication requirements.",
+    icon: "👮",
   },
   {
-    title: "Transparent Case Tracking",
-    desc: "Clear milestones and real-time updates.",
+    title: "Live Case Tracking",
+    desc: "Transparent milestone updates throughout the investigation lifecycle.",
+    icon: "📈",
   },
   {
-    title: "Audit-Ready Architecture",
-    desc: "Supports compliance and evidence integrity.",
+    title: "Audit Integrity",
+    desc: "Chain-of-custody tracking for all digital evidence submitted.",
+    icon: "🏛️",
   },
 ];
 
 const features = [
-  { title: "Secure Incident Reporting", desc: "Confidential encrypted workflow." },
-  { title: "Live Case Tracking", desc: "Real-time progress updates." },
-  { title: "Verified Safety Resources", desc: "Government-approved guidance." },
-  { title: "Citizen-First Design", desc: "Inclusive and accessible UI." },
+  {
+    title: "Secure Incident Reporting",
+    desc: "Industry-standard confidential workflow for reporting financial, social, and infrastructure-based cyber attacks.",
+    icon: "⚡"
+  },
+  {
+    title: "Advanced Dashboard Analytics",
+    desc: "Live visual tracking of resolution times, hotspot maps, and emerging threat intelligence provided to all stakeholders.",
+    icon: "📊"
+  },
+  {
+    title: "Safety Library",
+    desc: "Government-approved guidance for digital wellness.",
+    icon: "📚"
+  },
+  {
+    title: "Citizen Support",
+    desc: "Inclusive and accessible UI with 24/7 helpdesk.",
+    icon: "🤝"
+  },
 ];
 
 /* ================= STYLES ================= */
@@ -554,9 +610,9 @@ const styles = {
   logoText: { fontWeight: 800, fontSize: 20, color: "#0F172A" },
 
   nav: { display: "flex", gap: 22, alignItems: "center" },
-  navLink: { 
-    textDecoration: "none", 
-    fontWeight: 500, 
+  navLink: {
+    textDecoration: "none",
+    fontWeight: 500,
     color: "#0F172A",
     fontSize: 15,
     transition: "color 0.2s",
@@ -589,8 +645,8 @@ const styles = {
     alignItems: "center",
   },
 
-  heroTitle: { 
-    fontSize: "3.5rem", 
+  heroTitle: {
+    fontSize: "3.5rem",
     fontWeight: 800,
     lineHeight: 1.1,
     background: "linear-gradient(135deg, #0F172A 0%, #1B9AAA 100%)",
@@ -598,9 +654,9 @@ const styles = {
     WebkitTextFillColor: "transparent",
     marginBottom: 24,
   },
-  heroDesc: { 
-    color: "#475569", 
-    maxWidth: 520, 
+  heroDesc: {
+    color: "#475569",
+    maxWidth: 520,
     marginBottom: 40,
     fontSize: 18,
     lineHeight: 1.6,
@@ -716,14 +772,14 @@ const styles = {
     marginBottom: 12,
   },
 
-  activity: { 
-    fontSize: 14, 
+  activity: {
+    fontSize: 14,
     color: "#334155",
     paddingTop: 20,
     borderTop: "1px solid #F1F5F9",
   },
-  activityList: { 
-    paddingLeft: 20, 
+  activityList: {
+    paddingLeft: 20,
     marginTop: 8,
     listStyle: "none",
   },
@@ -775,9 +831,9 @@ const styles = {
     background: "linear-gradient(180deg, rgba(27,154,170,0.06), transparent)",
   },
 
-  trustTitle: { 
-    fontSize: 40, 
-    fontWeight: 800, 
+  trustTitle: {
+    fontSize: 40,
+    fontWeight: 800,
     marginBottom: 20,
     background: "linear-gradient(135deg, #0F172A 0%, #1B9AAA 100%)",
     WebkitBackgroundClip: "text",
@@ -795,17 +851,24 @@ const styles = {
     maxWidth: 1200,
     margin: "0 auto",
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(260px,1fr))",
-    gap: 32,
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gridAutoRows: "minmax(280px, auto)",
+    gap: 24,
   },
 
   trustCard: {
-    background: "#FFF",
-    padding: 40,
-    borderRadius: 24,
-    boxShadow: "0 20px 60px rgba(15,23,42,0.08)",
+    background: "rgba(255, 255, 255, 0.7)",
+    backdropFilter: "blur(12px)",
+    padding: 32,
+    borderRadius: 30,
+    boxShadow: "0 10px 15px -3px rgba(15,23,42,0.1), 0 4px 6px -2px rgba(15,23,42,0.05), inset 0 0 0 1px rgba(255,255,255,0.4)",
     border: "1px solid rgba(15,23,42,0.05)",
     textAlign: "left",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    position: "relative",
+    overflow: "hidden",
   },
 
   // PORTAL SECTION STYLES
@@ -1135,14 +1198,14 @@ const styles = {
     color: "#DC2626",
   },
 
-  featuresSection: { 
-    padding: "120px 20px", 
-    maxWidth: 1200, 
-    margin: "0 auto" 
+  featuresSection: {
+    padding: "120px 20px",
+    maxWidth: 1200,
+    margin: "0 auto"
   },
-  sectionTitle: { 
-    textAlign: "center", 
-    fontSize: 40, 
+  sectionTitle: {
+    textAlign: "center",
+    fontSize: 40,
     marginBottom: 70,
     background: "linear-gradient(135deg, #0F172A 0%, #1B9AAA 100%)",
     WebkitBackgroundClip: "text",
@@ -1152,28 +1215,34 @@ const styles = {
 
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))",
-    gap: 32,
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gridAutoRows: "minmax(240px, auto)",
+    gap: 24,
   },
 
   card: {
-    background: "#FFF",
-    padding: 40,
-    borderRadius: 24,
-    boxShadow: "0 20px 60px rgba(15,23,42,0.08)",
+    background: "rgba(255, 255, 255, 0.7)",
+    backdropFilter: "blur(12px)",
+    padding: 32,
+    borderRadius: 30,
+    boxShadow: "0 10px 15px -3px rgba(15,23,42,0.1), 0 4px 6px -2px rgba(15,23,42,0.05), inset 0 0 0 1px rgba(255,255,255,0.4)",
     border: "1px solid rgba(15,23,42,0.05)",
     transition: "all 0.3s ease",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 
   quickReportPanel: {
     position: "fixed",
     bottom: 32,
     right: 32,
-    background: "#FFF",
-    borderRadius: 20,
+    background: "rgba(255, 255, 255, 0.8)",
+    backdropFilter: "blur(20px)",
+    borderRadius: 24,
     padding: 24,
-    boxShadow: "0 20px 60px rgba(15,23,42,0.25)",
-    border: "1px solid rgba(15,23,42,0.1)",
+    boxShadow: "0 20px 60px rgba(15,23,42,0.15), inset 0 0 0 1px rgba(255, 255, 255, 0.5)",
+    border: "1px solid rgba(15,23,42,0.08)",
     zIndex: 999,
     maxWidth: 360,
   },
@@ -1336,84 +1405,84 @@ const addHoverEffects = (styles) => {
     },
     primaryBtnLg: {
       ...styles.primaryBtnLg,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-2px)",
-        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)" 
+        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)"
       },
     },
     secondaryBtnLg: {
       ...styles.secondaryBtnLg,
-      ':hover': { 
+      ':hover': {
         borderColor: "#1B9AAA",
-        color: "#1B9AAA" 
+        color: "#1B9AAA"
       },
     },
     ghostBtnLg: {
       ...styles.ghostBtnLg,
-      ':hover': { 
+      ':hover': {
         borderColor: "#1B9AAA",
-        color: "#1B9AAA" 
+        color: "#1B9AAA"
       },
     },
     portalCard: {
       ...styles.portalCard,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-10px)",
-        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)" 
+        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)"
       },
     },
     portalPrimaryBtn: {
       ...styles.portalPrimaryBtn,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-2px)",
-        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)" 
+        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)"
       },
     },
     portalSecondaryBtn: {
       ...styles.portalSecondaryBtn,
-      ':hover': { 
-        background: "rgba(27, 154, 170, 0.05)" 
+      ':hover': {
+        background: "rgba(27, 154, 170, 0.05)"
       },
     },
     portalPoliceBtn: {
       ...styles.portalPoliceBtn,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-2px)",
-        boxShadow: "0 10px 25px rgba(15, 23, 42, 0.3)" 
+        boxShadow: "0 10px 25px rgba(15, 23, 42, 0.3)"
       },
     },
     contactCard: {
       ...styles.contactCard,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-10px)",
-        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)" 
+        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)"
       },
     },
     contactPrimaryBtn: {
       ...styles.contactPrimaryBtn,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-2px)",
-        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)" 
+        boxShadow: "0 10px 25px rgba(27, 154, 170, 0.3)"
       },
     },
     contactSecondaryBtn: {
       ...styles.contactSecondaryBtn,
-      ':hover': { 
-        background: "rgba(27, 154, 170, 0.05)" 
+      ':hover': {
+        background: "rgba(27, 154, 170, 0.05)"
       },
     },
     contactEmergencyBtn: {
       ...styles.contactEmergencyBtn,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-2px)",
-        boxShadow: "0 10px 25px rgba(220, 38, 38, 0.3)" 
+        boxShadow: "0 10px 25px rgba(220, 38, 38, 0.3)"
       },
     },
     card: {
       ...styles.card,
-      ':hover': { 
+      ':hover': {
         transform: "translateY(-5px)",
-        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)" 
+        boxShadow: "0 30px 80px rgba(27, 154, 170, 0.15)"
       },
     },
     quickReportBtn: {
@@ -1426,9 +1495,9 @@ const addHoverEffects = (styles) => {
     },
     quickReportBtnGhost: {
       ...styles.quickReportBtnGhost,
-      ':hover': { 
+      ':hover': {
         borderColor: "#1B9AAA",
-        color: "#1B9AAA" 
+        color: "#1B9AAA"
       },
     },
     footerLink: {
