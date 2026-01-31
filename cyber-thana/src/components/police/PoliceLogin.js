@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./PoliceLogin.css";
 
 const PoliceLogin = () => {
@@ -7,18 +8,27 @@ const PoliceLogin = () => {
   const [password, setPassword] = useState("");
   const [department, setDepartment] = useState("cyber_cell");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { policeLogin, isLoading, clearError } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate login
-    setTimeout(() => {
-      setIsLoading(false);
+    setError("");
+
+    try {
+      await policeLogin({ badgeId, password, department });
       navigate("/police/dashboard");
-    }, 1500);
+    } catch (error) {
+      setError(error.message || "Login failed. Please try again.");
+    }
+  };
+
+  const handleInputChange = () => {
+    if (error) {
+      clearError();
+      setError("");
+    }
   };
 
   return (
@@ -33,7 +43,13 @@ const PoliceLogin = () => {
               ⚠️ All activities are logged and monitored
             </div>
           </div>
-          
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="police-login-form">
             <div className="police-form-group">
               <label htmlFor="badgeId">Official Badge ID</label>
@@ -41,13 +57,16 @@ const PoliceLogin = () => {
                 type="text"
                 id="badgeId"
                 value={badgeId}
-                onChange={(e) => setBadgeId(e.target.value)}
+                onChange={(e) => {
+                  setBadgeId(e.target.value.toUpperCase());
+                  handleInputChange();
+                }}
                 placeholder="Enter your badge ID"
                 required
                 className="police-form-input"
               />
             </div>
-            
+
             <div className="police-form-group">
               <label htmlFor="password">Password</label>
               <div className="police-password-input">
@@ -55,7 +74,10 @@ const PoliceLogin = () => {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    handleInputChange();
+                  }}
                   placeholder="Enter your secure password"
                   required
                   className="police-form-input"
@@ -69,13 +91,16 @@ const PoliceLogin = () => {
                 </button>
               </div>
             </div>
-            
+
             <div className="police-form-group">
               <label htmlFor="department">Department</label>
               <select
                 id="department"
                 value={department}
-                onChange={(e) => setDepartment(e.target.value)}
+                onChange={(e) => {
+                  setDepartment(e.target.value);
+                  handleInputChange();
+                }}
                 className="police-form-select"
               >
                 <option value="cyber_cell">Cyber Crime Cell</option>
@@ -84,7 +109,7 @@ const PoliceLogin = () => {
                 <option value="support">Support Staff</option>
               </select>
             </div>
-            
+
             <div className="two-factor">
               <label htmlFor="otp">Two-Factor Code</label>
               <input
@@ -95,11 +120,11 @@ const PoliceLogin = () => {
                 className="otp-input"
               />
             </div>
-            
+
             <button type="submit" className="police-login-button" disabled={isLoading}>
               {isLoading ? "Verifying..." : "Access Secure Portal"}
             </button>
-            
+
             <div className="access-info">
               <div className="access-level">
                 <span className="level-badge restricted">RESTRICTED</span>
@@ -107,7 +132,7 @@ const PoliceLogin = () => {
               </div>
               <p className="session-timer">Session expires in: <span>14:59</span></p>
             </div>
-            
+
             <div className="audit-notice">
               By logging in, you consent to activity monitoring and auditing as per official protocols.
             </div>

@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
+import { caseAPI } from "../../services/api";
 import "./CaseManagement.css";
 
 const STATUS_STEPS = [
@@ -17,39 +18,92 @@ const INCIDENT_TYPES = [
   "Ransomware / Malware",
 ];
 
-const MOCK_CASES = [
-  { id: "CTN-2026-847392", type: "Phishing / Social Engineering", statusIndex: 2, date: "14 Jan 2026", reporterMode: "Registered", assignedOfficer: "OFC-002" },
-  { id: "CTN-2026-562891", type: "Financial Fraud", statusIndex: 3, date: "12 Jan 2026", reporterMode: "Anonymous", assignedOfficer: "OFC-001" },
-  { id: "CTN-2026-934215", type: "Data Breach", statusIndex: 4, date: "10 Jan 2026", reporterMode: "Registered", assignedOfficer: "OFC-003" },
-  { id: "CTN-2026-123456", type: "Account Compromise", statusIndex: 4, date: "08 Jan 2026", reporterMode: "Registered", assignedOfficer: "—" },
-  { id: "CTN-2026-445221", type: "Ransomware / Malware", statusIndex: 1, date: "16 Jan 2026", reporterMode: "Anonymous", assignedOfficer: "—" },
-  { id: "CTN-2026-778901", type: "Phishing / Social Engineering", statusIndex: 5, date: "05 Jan 2026", reporterMode: "Registered", assignedOfficer: "OFC-002" },
-];
-
 export default function CaseManagement() {
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
   const [typeFilter, setTypeFilter] = useState("");
   const [selectedCase, setSelectedCase] = useState(null);
+  const [cases, setCases] = useState([]);
+  const [stats, setStats] = useState({ total: 0, open: 0, inProgress: 0, resolved: 0 });
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
-  const filteredCases = useMemo(() => {
-    return MOCK_CASES.filter((c) => {
-      const matchSearch = !search || c.id.toLowerCase().includes(search.toLowerCase()) || c.type.toLowerCase().includes(search.toLowerCase());
-      const matchStatus = !statusFilter || c.statusIndex === Number(statusFilter);
-      const matchType = !typeFilter || c.type === typeFilter;
-      return matchSearch && matchStatus && matchType;
-    });
+  // Fetch cases from API
+  const fetchCases = async () => {
+    try {
+      setLoading(true);
+      const params = {
+        search: search || undefined,
+        status: statusFilter || undefined,
+        incidentType: typeFilter || undefined,
+      };
+
+      const response = await caseAPI.getCases(params);
+      setCases(response.data.cases);
+      setStats(response.data.stats);
+    } catch (error) {
+      setError(error.message || "Failed to fetch cases");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Initial fetch and when filters change
+  useEffect(() => {
+    fetchCases();
   }, [search, statusFilter, typeFilter]);
 
-  const stats = useMemo(() => {
-    const total = MOCK_CASES.length;
-    const open = MOCK_CASES.filter((c) => c.statusIndex <= 2).length;
-    const inProgress = MOCK_CASES.filter((c) => c.statusIndex === 3 || c.statusIndex === 4).length;
-    const resolved = MOCK_CASES.filter((c) => c.statusIndex === 5).length;
-    return { total, open, inProgress, resolved };
-  }, []);
+  // Filter cases client-side (as backup)
+  const filteredCases = useMemo(() => {
+    return cases.filter((c) => {
+      const matchSearch = !search ||
+        c.caseId.toLowerCase().includes(search.toLowerCase()) ||
+        c.incidentType.toLowerCase().includes(search.toLowerCase());
+      const matchStatus = !statusFilter || c.status === statusFilter;
+      const matchType = !typeFilter || c.incidentType === typeFilter;
+      return matchSearch && matchStatus && matchType;
+    });
+  }, [cases, search, statusFilter, typeFilter]);
 
-  const getStatusInfo = (statusIndex) => STATUS_STEPS.find((s) => s.id === statusIndex + 1) || STATUS_STEPS[0];
+  const getStatusInfo = (status) => {
+    return STATUS_STEPS.find((s) => s.name === status) || STATUS_STEPS[0];
+  };
+
+  const handleUpdateStatus = async (caseId, newStatus) => {
+    try {
+      await caseAPI.updateCaseStatus(caseId, { status: newStatus });
+      await fetchCases(); // Refresh cases
+      setSelectedCase(null);
+    } catch (error) {
+      setError(error.message || "Failed to update case status");
+    }
+  };
+
+  const handleAssignCase = async (caseId, officerId) => {
+    try {
+      await caseAPI.assignCase(caseId, { officerId });
+      await fetchCases(); // Refresh cases
+    } catch (error) {
+      setError(error.message || "Failed to assign case");
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="case-management">
+        <div className="loading">Loading cases...</div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="case-management">
+        <div className="error-message">{error}</div>
+        <button onClick={fetchCases} className="retry-button">Retry</button>
+      </div>
+    );
+  }
 
   return (
     <div className="case-management" role="main" aria-label="Case Management">
@@ -101,8 +155,8 @@ export default function CaseManagement() {
             aria-label="Filter by status"
           >
             <option value="">All</option>
-            {STATUS_STEPS.map((s, i) => (
-              <option key={s.id} value={i}>{s.name}</option>
+            {STATUS_STEPS.map((s) => (
+              <option key={s.id} value={s.name}>{s.name}</option>
             ))}
           </select>
           <label className="filter-label" htmlFor="type-filter">Type</label>
@@ -144,39 +198,44 @@ export default function CaseManagement() {
                 </tr>
               ) : (
                 filteredCases.map((c) => {
-                  const statusInfo = getStatusInfo(c.statusIndex);
+                  const statusInfo = getStatusInfo(c.status);
                   return (
-                    <tr key={c.id}>
+                    <tr key={c._id}>
                       <td>
-                        <code className="case-id-cell">{c.id}</code>
+                        <code className="case-id-cell">{c.caseId}</code>
                       </td>
-                      <td>{c.type}</td>
+                      <td>{c.incidentType}</td>
                       <td>
                         <span
                           className="case-status-badge"
                           style={{ backgroundColor: statusInfo.color }}
                           role="status"
                         >
-                          {statusInfo.name}
+                          {c.status}
                         </span>
                       </td>
-                      <td>{c.date}</td>
-                      <td>{c.reporterMode}</td>
-                      <td>{c.assignedOfficer}</td>
+                      <td>{new Date(c.createdAt).toLocaleDateString()}</td>
+                      <td>{c.reporterType}</td>
+                      <td>
+                        {c.assignedOfficer ?
+                          `${c.assignedOfficer.badgeId} - ${c.assignedOfficer.firstName} ${c.assignedOfficer.lastName}` :
+                          "—"}
+                      </td>
                       <td>
                         <div className="case-actions">
                           <button
                             type="button"
                             className="btn-case btn-view"
                             onClick={() => setSelectedCase(c)}
-                            aria-label={`View case ${c.id}`}
+                            aria-label={`View case ${c.caseId}`}
                           >
                             View
                           </button>
                           <button
                             type="button"
                             className="btn-case btn-update"
-                            aria-label={`Update status for case ${c.id}`}
+                            onClick={() => handleUpdateStatus(c._id, "Under Verification")}
+                            aria-label={`Update status for case ${c.caseId}`}
                           >
                             Update
                           </button>
@@ -191,7 +250,7 @@ export default function CaseManagement() {
         </div>
         {filteredCases.length > 0 && (
           <p className="table-count" role="status">
-            Showing {filteredCases.length} of {MOCK_CASES.length} cases
+            Showing {filteredCases.length} of {cases.length} cases
           </p>
         )}
       </section>
@@ -206,7 +265,7 @@ export default function CaseManagement() {
         >
           <div className="case-modal" onClick={(e) => e.stopPropagation()}>
             <div className="case-modal-header">
-              <h2 id="case-modal-title">Case {selectedCase.id}</h2>
+              <h2 id="case-modal-title">Case {selectedCase.caseId}</h2>
               <button
                 type="button"
                 className="case-modal-close"
@@ -220,39 +279,51 @@ export default function CaseManagement() {
               <dl className="case-detail-list">
                 <div className="case-detail-row">
                   <dt>Case ID</dt>
-                  <dd><code>{selectedCase.id}</code></dd>
+                  <dd><code>{selectedCase.caseId}</code></dd>
                 </div>
                 <div className="case-detail-row">
                   <dt>Incident Type</dt>
-                  <dd>{selectedCase.type}</dd>
+                  <dd>{selectedCase.incidentType}</dd>
                 </div>
                 <div className="case-detail-row">
                   <dt>Status</dt>
                   <dd>
                     <span
                       className="case-status-badge"
-                      style={{ backgroundColor: getStatusInfo(selectedCase.statusIndex).color }}
+                      style={{ backgroundColor: getStatusInfo(selectedCase.status).color }}
                     >
-                      {getStatusInfo(selectedCase.statusIndex).name}
+                      {selectedCase.status}
                     </span>
                   </dd>
                 </div>
                 <div className="case-detail-row">
                   <dt>Submitted</dt>
-                  <dd>{selectedCase.date}</dd>
+                  <dd>{new Date(selectedCase.createdAt).toLocaleDateString()}</dd>
                 </div>
                 <div className="case-detail-row">
                   <dt>Reporter Mode</dt>
-                  <dd>{selectedCase.reporterMode}</dd>
+                  <dd>{selectedCase.reporterType}</dd>
                 </div>
                 <div className="case-detail-row">
                   <dt>Assigned To</dt>
-                  <dd>{selectedCase.assignedOfficer}</dd>
+                  <dd>
+                    {selectedCase.assignedOfficer ?
+                      `${selectedCase.assignedOfficer.badgeId} - ${selectedCase.assignedOfficer.firstName} ${selectedCase.assignedOfficer.lastName}` :
+                      "—"}
+                  </dd>
+                </div>
+                <div className="case-detail-row">
+                  <dt>Description</dt>
+                  <dd>{selectedCase.incidentDetails?.description || "No description available"}</dd>
                 </div>
               </dl>
             </div>
             <div className="case-modal-footer">
-              <button type="button" className="btn-case btn-update" onClick={() => setSelectedCase(null)}>
+              <button
+                type="button"
+                className="btn-case btn-update"
+                onClick={() => handleUpdateStatus(selectedCase._id, "Investigation in Progress")}
+              >
                 Update Status
               </button>
               <button type="button" className="btn-case btn-secondary" onClick={() => setSelectedCase(null)}>

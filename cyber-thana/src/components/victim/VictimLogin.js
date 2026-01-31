@@ -1,23 +1,33 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import "./VictimLogin.css";
 
 const VictimLogin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { victimLogin, isLoading, clearError } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
-    
-    // Simulate login
-    setTimeout(() => {
-      setIsLoading(false);
+    setError("");
+
+    try {
+      await victimLogin({ email, password });
       navigate("/victim/dashboard");
-    }, 1500);
+    } catch (error) {
+      setError(error.message || "Login failed. Please try again.");
+    }
+  };
+
+  const handleInputChange = () => {
+    if (error) {
+      clearError();
+      setError("");
+    }
   };
 
   return (
@@ -29,7 +39,13 @@ const VictimLogin = () => {
             <h2>Victim Portal Login</h2>
             <p className="login-subtitle">Secure access to report and track cybercrime incidents</p>
           </div>
-          
+
+          {error && (
+            <div className="error-message">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit} className="login-form">
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
@@ -37,13 +53,16 @@ const VictimLogin = () => {
                 type="email"
                 id="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  handleInputChange();
+                }}
                 placeholder="Enter your email"
                 required
                 className="form-input"
               />
             </div>
-            
+
             <div className="form-group">
               <label htmlFor="password">Password</label>
               <div className="password-input">
@@ -51,7 +70,10 @@ const VictimLogin = () => {
                   type={showPassword ? "text" : "password"}
                   id="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    handleInputChange();
+                  }}
                   placeholder="Enter your password"
                   required
                   className="form-input"
@@ -65,7 +87,7 @@ const VictimLogin = () => {
                 </button>
               </div>
             </div>
-            
+
             <div className="form-options">
               <label className="remember-me">
                 <input type="checkbox" />
@@ -73,19 +95,23 @@ const VictimLogin = () => {
               </label>
               <a href="#forgot" className="forgot-link">Forgot Password?</a>
             </div>
-            
+
             <button type="submit" className="login-button" disabled={isLoading}>
               {isLoading ? "Logging in..." : "Secure Login"}
             </button>
-            
+
             <div className="login-divider">
               <span>or</span>
             </div>
-            
-            <button type="button" className="secondary-button">
+
+            <button
+              type="button"
+              className="secondary-button"
+              onClick={() => navigate("/anonymous")}
+            >
               Report Anonymously
             </button>
-            
+
             <div className="login-links">
               <p>
                 Don't have an account? <a href="#register" className="link">Register here</a>
@@ -95,7 +121,7 @@ const VictimLogin = () => {
               </p>
             </div>
           </form>
-          
+
           <div className="security-info">
             <div className="security-badge">
               <span>🔒</span> 256-bit encryption
