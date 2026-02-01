@@ -26,6 +26,7 @@ import AnonymousReport from "./components/victim/AnonymousReport";
 import PoliceLogin from "./components/police/PoliceLogin";
 import PoliceDashboard from "./components/police/PoliceDashboard";
 import CaseManagement from "./components/police/CaseManagement";
+import PoliceAnalytics from "./components/police/PoliceAnalytics";
 
 // ================= 404 PAGE =================
 const NotFound = () => (
@@ -66,6 +67,7 @@ function App() {
             <Route path="login" element={<PoliceLogin />} />
             <Route path="dashboard" element={<PoliceDashboard />} />
             <Route path="cases" element={<CaseManagement />} />
+            <Route path="analytics" element={<PoliceAnalytics />} />
           </Route>
 
           {/* ================= FALLBACK ================= */}
