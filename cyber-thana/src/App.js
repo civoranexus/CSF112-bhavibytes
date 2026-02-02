@@ -4,6 +4,12 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 // ================= CONTEXT =================
 import { AuthProvider } from "./context/AuthContext";
 
+// ================= COMPONENTS =================
+import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./components/Login";
+import LogoutButton from "./components/LogoutButton";
+import Dashboard from "./components/Dashboard";
+
 // ================= PUBLIC PAGES =================
 import HomePage from "./pages/HomePage";
 import ReportPage from "./pages/ReportPage";
@@ -49,25 +55,71 @@ function App() {
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/resources/infographics" element={<Infographics />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/login" element={<Login />} />
 
           {/* Standalone Anonymous Reporting */}
           <Route path="/anonymous" element={<AnonymousReport />} />
+
+          {/* ================= PROTECTED ROUTES ================= */}
+          <Route path="/dashboard" element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } />
+
+          <Route path="/admin" element={
+            <ProtectedRoute>
+              <div>
+                <h1>Admin Panel</h1>
+                <LogoutButton />
+              </div>
+            </ProtectedRoute>
+          } />
+
+          <Route path="/reports" element={
+            <ProtectedRoute>
+              <div>
+                <h1>Reports</h1>
+                <LogoutButton />
+              </div>
+            </ProtectedRoute>
+          } />
 
           {/* ================= VICTIM PORTAL ================= */}
           <Route path="/victim" element={<VictimPortal />}>
             <Route index element={<Navigate to="login" replace />} />
             <Route path="login" element={<VictimLogin />} />
-            <Route path="dashboard" element={<VictimDashboard />} />
-            <Route path="my-complaints" element={<MyComplaints />} />
+            <Route path="dashboard" element={
+              <ProtectedRoute>
+                <VictimDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="my-complaints" element={
+              <ProtectedRoute>
+                <MyComplaints />
+              </ProtectedRoute>
+            } />
           </Route>
 
           {/* ================= POLICE PORTAL ================= */}
           <Route path="/police" element={<PolicePortal />}>
             <Route index element={<Navigate to="login" replace />} />
             <Route path="login" element={<PoliceLogin />} />
-            <Route path="dashboard" element={<PoliceDashboard />} />
-            <Route path="cases" element={<CaseManagement />} />
-            <Route path="analytics" element={<PoliceAnalytics />} />
+            <Route path="dashboard" element={
+              <ProtectedRoute>
+                <PoliceDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="cases" element={
+              <ProtectedRoute>
+                <CaseManagement />
+              </ProtectedRoute>
+            } />
+            <Route path="analytics" element={
+              <ProtectedRoute>
+                <PoliceAnalytics />
+              </ProtectedRoute>
+            } />
           </Route>
 
           {/* ================= FALLBACK ================= */}

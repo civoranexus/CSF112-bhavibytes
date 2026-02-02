@@ -1,0 +1,33 @@
+.logout-btn {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.logout-btn:hover {
+  background: #c82333;
+  transform: translateY(-1px);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+}
+
+/* For navbar integration */
+.navbar .logout-btn {
+  margin-left: auto;
+  background: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+}
+
+.navbar .logout-btn:hover {
+  background: #dc3545;
+  color: white;
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./VictimLogin.css";
@@ -9,26 +9,33 @@ const VictimLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { victimLogin, isLoading, clearError } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      await victimLogin({ email, password });
+      // Demo authentication - no real validation needed
+      login();
       navigate("/victim/dashboard");
     } catch (error) {
-      setError(error.message || "Login failed. Please try again.");
+      setError("Login failed. Please try again.");
     }
   };
 
   const handleInputChange = () => {
     if (error) {
-      clearError();
       setError("");
     }
   };
+
+  // If already authenticated, redirect to dashboard
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/victim/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="victim-login-page">
@@ -96,8 +103,8 @@ const VictimLogin = () => {
               <a href="#forgot" className="forgot-link">Forgot Password?</a>
             </div>
 
-            <button type="submit" className="login-button" disabled={isLoading}>
-              {isLoading ? "Logging in..." : "Secure Login"}
+            <button type="submit" className="login-button">
+              Secure Login
             </button>
 
             <div className="login-divider">

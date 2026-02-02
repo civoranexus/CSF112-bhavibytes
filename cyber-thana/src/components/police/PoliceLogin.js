@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import "./PoliceLogin.css";
@@ -10,26 +10,33 @@ const PoliceLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const { policeLogin, isLoading, clearError } = useAuth();
+  const { login, isAuthenticated } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      await policeLogin({ badgeId, password, department });
+      // Demo authentication - no real validation needed
+      login();
       navigate("/police/dashboard");
     } catch (error) {
-      setError(error.message || "Login failed. Please try again.");
+      setError("Login failed. Please try again.");
     }
   };
 
   const handleInputChange = () => {
     if (error) {
-      clearError();
       setError("");
     }
   };
+
+  // If already authenticated, redirect to dashboard
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate("/police/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
 
   return (
     <div className="police-login-page">
@@ -121,8 +128,8 @@ const PoliceLogin = () => {
               />
             </div>
 
-            <button type="submit" className="police-login-button" disabled={isLoading}>
-              {isLoading ? "Verifying..." : "Access Secure Portal"}
+            <button type="submit" className="police-login-button">
+              Access Secure Portal
             </button>
 
             <div className="access-info">
