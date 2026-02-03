@@ -73,27 +73,27 @@ const INCIDENT_TYPES = {
 // Icon components
 const ShieldIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
 const SunIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="5"/>
-    <line x1="12" y1="1" x2="12" y2="3"/>
-    <line x1="12" y1="21" x2="12" y2="23"/>
-    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-    <line x1="1" y1="12" x2="3" y2="12"/>
-    <line x1="21" y1="12" x2="23" y2="12"/>
-    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    <circle cx="12" cy="12" r="5" />
+    <line x1="12" y1="1" x2="12" y2="3" />
+    <line x1="12" y1="21" x2="12" y2="23" />
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+    <line x1="1" y1="12" x2="3" y2="12" />
+    <line x1="21" y1="12" x2="23" y2="12" />
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
   </svg>
 );
 
 const MoonIcon = () => (
   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
   </svg>
 );
 
@@ -120,8 +120,6 @@ export default function TrackPage() {
     document.body.className = newTheme;
   };
 
-  const currentStatusIndex = 2; // simulated backend response
-
   const handleTrack = () => {
     if (!trackingId.trim()) {
       alert("Please enter a valid Tracking ID");
@@ -129,17 +127,17 @@ export default function TrackPage() {
     }
 
     setIsLoading(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       const foundCase = SAMPLE_CASES.find(caseItem => caseItem.id === trackingId) || {
         id: trackingId,
         type: "Phishing / Social Engineering",
         date: "14 Jan 2026",
-        statusIndex: 2,
+        statusIndex: 3, // changed from 2 to 3
         anonymous: Math.random() > 0.5
       };
-      
+
       setCurrentCase(foundCase);
       setShowStatus(true);
       setIsLoading(false);
@@ -176,15 +174,15 @@ export default function TrackPage() {
       "Check your registered email for verification updates",
       "Keep your tracking ID safe for future reference"
     ];
-    
+
     if (statusIndex >= 2) {
       steps.push("You may be contacted by investigators if additional information is needed");
     }
-    
+
     if (statusIndex >= 3) {
       steps.push("Monitor official communication channels for updates");
     }
-    
+
     return steps;
   };
 
@@ -208,7 +206,7 @@ export default function TrackPage() {
               </p>
             </div>
           </div>
-          
+
           <div className="header-actions">
             {hasNotifications && (
               <button
@@ -221,8 +219,8 @@ export default function TrackPage() {
                 <span className="notification-count">1</span>
               </button>
             )}
-            
-            <button 
+
+            <button
               className="theme-toggle subtle-btn"
               onClick={toggleTheme}
               aria-label="Toggle theme"
@@ -280,17 +278,17 @@ export default function TrackPage() {
                 </button>
               )}
             </div>
-            
+
             <div className="track-actions">
-              <button 
-                className="secondary-btn" 
+              <button
+                className="secondary-btn"
                 onClick={handleClear}
                 disabled={!trackingId && !showStatus}
               >
                 Clear
               </button>
-              <button 
-                className="primary-btn" 
+              <button
+                className="primary-btn"
                 onClick={handleTrack}
                 disabled={!trackingId.trim() || isLoading}
               >
@@ -312,7 +310,7 @@ export default function TrackPage() {
           <div className="sample-cases">
             <div className="sample-header">
               <h4>Sample Tracking IDs (Demo)</h4>
-              <button 
+              <button
                 className="toggle-btn"
                 onClick={() => setShowRecentCases(!showRecentCases)}
                 aria-expanded={showRecentCases}
@@ -320,10 +318,10 @@ export default function TrackPage() {
                 {showRecentCases ? "Hide" : "Show"}
               </button>
             </div>
-            
+
             <AnimatePresence>
               {showRecentCases && (
-                <motion.div 
+                <motion.div
                   className="sample-list"
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
@@ -348,7 +346,7 @@ export default function TrackPage() {
 
           <div className="track-guidance">
             <p className="guidance-text">
-              <strong>Note:</strong> Tracking ID is case-sensitive. 
+              <strong>Note:</strong> Tracking ID is case-sensitive.
               If you've lost your ID, contact support with your registered email.
             </p>
           </div>
@@ -379,14 +377,14 @@ export default function TrackPage() {
                     {STATUS_STEPS[currentCase.statusIndex]?.name || "Unknown"}
                   </span>
                 </div>
-                
+
                 <div className="overview-grid">
                   <div className="overview-item">
                     <span className="overview-label">Tracking ID</span>
                     <div className="overview-value id-value-container">
                       <span className="id-value">{currentCase.id}</span>
-                      <button 
-                        className="copy-btn" 
+                      <button
+                        className="copy-btn"
                         onClick={() => navigator.clipboard.writeText(currentCase.id)}
                         aria-label="Copy tracking ID"
                       >
@@ -394,7 +392,7 @@ export default function TrackPage() {
                       </button>
                     </div>
                   </div>
-                  
+
                   <div className="overview-item">
                     <span className="overview-label">Incident Type</span>
                     <div className="overview-value type-value-container">
@@ -405,12 +403,12 @@ export default function TrackPage() {
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="overview-item">
                     <span className="overview-label">Submitted On</span>
                     <span className="overview-value date-value">{currentCase.date}</span>
                   </div>
-                  
+
                   <div className="overview-item">
                     <span className="overview-label">Reporting Mode</span>
                     <span className={`overview-value mode-value ${currentCase.anonymous ? 'anonymous' : 'registered'}`}>
@@ -428,34 +426,34 @@ export default function TrackPage() {
                     Step {currentCase.statusIndex + 1} of {STATUS_STEPS.length}
                   </span>
                 </div>
-                
+
                 <div className="timeline-container">
                   <div className="timeline-line">
-                    <div 
+                    <div
                       className="timeline-progress"
                       style={{ width: `${(currentCase.statusIndex / (STATUS_STEPS.length - 1)) * 100}%` }}
                     />
                   </div>
-                  
+
                   {STATUS_STEPS.map((step, index) => (
                     <div
                       key={step.id}
                       className={`timeline-step ${index <= currentCase.statusIndex ? "active" : ""} ${index === currentCase.statusIndex ? "current" : ""}`}
                     >
-                      <div 
+                      <div
                         className="timeline-dot"
-                        style={{ 
+                        style={{
                           backgroundColor: index <= currentCase.statusIndex ? step.color : "#cbd5e1",
                           borderColor: step.color
                         }}
                       >
                         <span className="step-icon">{step.icon}</span>
                       </div>
-                      
+
                       <div className="step-content">
                         <h4 className="step-title">{step.name}</h4>
                         <p className="step-description">{step.description}</p>
-                        
+
                         {index === currentCase.statusIndex && (
                           <div className="current-status-note">
                             <span
@@ -468,7 +466,7 @@ export default function TrackPage() {
                             </span>
                           </div>
                         )}
-                        
+
                         {index < currentCase.statusIndex && (
                           <div className="completed-note">
                             <span className="completed-badge">✓ Completed</span>
@@ -490,7 +488,7 @@ export default function TrackPage() {
                   <p className="status-description">
                     {getStatusDescription(currentCase.statusIndex)}
                   </p>
-                  
+
                   <div className="status-meta">
                     <div className="meta-item">
                       <span className="meta-label">Last Updated</span>
@@ -506,7 +504,7 @@ export default function TrackPage() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="next-steps-card">
                   <h3>Next Steps & Expectations</h3>
                   <ul className="steps-list">
@@ -517,7 +515,7 @@ export default function TrackPage() {
                       </li>
                     ))}
                   </ul>
-                  
+
                   <div className="response-time">
                     <span className="time-icon">⏱️</span>
                     <div className="time-content">
@@ -552,7 +550,7 @@ export default function TrackPage() {
             <h2>Need Help or Additional Information?</h2>
             <p>Important guidelines and support channels for your reference</p>
           </div>
-          
+
           <div className="info-grid">
             <div className="info-card privacy">
               <div className="info-icon">🔒</div>
@@ -562,10 +560,10 @@ export default function TrackPage() {
                   Only status-level updates are shown. Investigation details, evidence,
                   and officer information remain confidential to ensure case integrity.
                 </p>
-                <a href="#" className="info-link">Learn about our privacy policy →</a>
+                <a href="/privacy" className="info-link">Learn about our privacy policy →</a>
               </div>
             </div>
-            
+
             <div className="info-card notifications">
               <div className="info-icon">📩</div>
               <h4>Notifications & Updates</h4>
@@ -580,7 +578,7 @@ export default function TrackPage() {
                 </div>
               </div>
             </div>
-            
+
             <div className="info-card emergency">
               <div className="info-icon">🚨</div>
               <h4>Emergency Support</h4>
@@ -601,16 +599,16 @@ export default function TrackPage() {
                 </div>
               </div>
             </div>
-            
+
             <div className="info-card resources">
               <div className="info-icon">📚</div>
               <h4>Additional Resources</h4>
               <div className="info-card-content">
                 <ul className="resources-list">
-                  <li><a href="#">Frequently Asked Questions</a></li>
-                  <li><a href="#">Cyber Safety Guidelines</a></li>
-                  <li><a href="#">Report Additional Evidence</a></li>
-                  <li><a href="#">Contact Investigation Team</a></li>
+                  <li><a href="/faq">Frequently Asked Questions</a></li>
+                  <li><a href="/resources">Cyber Safety Guidelines</a></li>
+                  <li><a href="/victim">Report Additional Evidence</a></li>
+                  <li><a href="/contact">Contact Investigation Team</a></li>
                 </ul>
               </div>
             </div>
@@ -646,7 +644,7 @@ export default function TrackPage() {
               <span className="trust-badge">GDPR Compliant</span>
             </div>
           </div>
-          
+
           <div className="footer-column">
             <h4>Quick Links</h4>
             <a href="/report">Report New Incident</a>
@@ -654,35 +652,37 @@ export default function TrackPage() {
             <a href="/guidelines">Safety Guidelines</a>
             <a href="/faq">Help & FAQ</a>
           </div>
-          
+
           <div className="footer-column">
             <h4>Legal</h4>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-            <a href="#">Cookie Policy</a>
-            <a href="#">Accessibility</a>
+            <a href="/privacy">Privacy Policy</a>
+            <a href="/terms">Terms of Service</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/accessibility">Accessibility</a>
           </div>
-          
+
           <div className="footer-column">
             <h4>Contact</h4>
             <div className="footer-contact">
-              <p>📞 +91-XXX-XXXX-XXX</p>
+              <p> +91-XXX-XXXX-XXX</p>
+              <p> support@civorane.us</p>
+              <p> Cyber Security Authority</p>
               <p>📧 support@civorane.us</p>
               <p>📍 Cyber Security Authority</p>
             </div>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <div className="footer-copy">
-            © {new Date().getFullYear()} Civora Nexus · Citizen Cyber Incident Portal · All rights reserved
+            {new Date().getFullYear()} Civora Nexus · Citizen Cyber Incident Portal · All rights reserved
           </div>
           <div className="footer-links">
-            <a href="#">Status</a>
+            <a href="/status">Status</a>
             <span className="divider">·</span>
-            <a href="#">Sitemap</a>
+            <a href="/sitemap">Sitemap</a>
             <span className="divider">·</span>
-            <a href="#">Report Vulnerability</a>
+            <a href="/vulnerability">Report Vulnerability</a>
           </div>
         </div>
       </footer>

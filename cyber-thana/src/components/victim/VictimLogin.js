@@ -42,9 +42,8 @@ const VictimLogin = () => {
       <div className="login-container">
         <div className="login-box">
           <div className="login-header">
-            <div className="login-icon">🛡️</div>
-            <h2>Victim Portal Login</h2>
-            <p className="login-subtitle">Secure access to report and track cybercrime incidents</p>
+            <h1>Victim Portal</h1>
+            <p>Secure access to report and track cybercrime incidents</p>
           </div>
 
           {error && (
@@ -64,7 +63,7 @@ const VictimLogin = () => {
                   setEmail(e.target.value);
                   handleInputChange();
                 }}
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
                 required
                 className="form-input"
               />
@@ -100,7 +99,7 @@ const VictimLogin = () => {
                 <input type="checkbox" />
                 <span>Remember me</span>
               </label>
-              <a href="#forgot" className="forgot-link">Forgot Password?</a>
+              <a href="/forgot" className="forgot-link">Forgot Password?</a>
             </div>
 
             <button type="submit" className="login-button">
@@ -111,32 +110,30 @@ const VictimLogin = () => {
               <span>or</span>
             </div>
 
-            <button
-              type="button"
-              className="secondary-button"
-              onClick={() => navigate("/anonymous")}
-            >
-              Report Anonymously
-            </button>
+            <div className="alternative-options">
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => navigate("/anonymous")}
+              >
+                Report Anonymously
+              </button>
 
-            <div className="login-links">
+              <button
+                type="button"
+                className="secondary-button"
+                onClick={() => navigate("/track")}
+              >
+                Track Complaint
+              </button>
+            </div>
+
+            <div className="register-prompt">
               <p>
-                Don't have an account? <a href="#register" className="link">Register here</a>
-              </p>
-              <p>
-                Just want to track? <a href="/track" className="link">Track complaint</a>
+                New to Cyber Thana? <a href="/register" className="register-link">Create an account</a>
               </p>
             </div>
           </form>
-
-          <div className="security-info">
-            <div className="security-badge">
-              <span>🔒</span> 256-bit encryption
-            </div>
-            <div className="security-badge">
-              <span>🛡️</span> ISO 27001 certified
-            </div>
-          </div>
         </div>
       </div>
     </div>

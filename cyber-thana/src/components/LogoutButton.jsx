@@ -11,12 +11,13 @@ const LogoutButton = () => {
   };
 
   return (
-    <button 
+    <button
       onClick={handleLogout}
       className="logout-btn"
       title="Logout from demo session"
     >
-      Logout
+      <span className="logout-icon">🚪</span>
+      <span className="logout-text">Logout</span>
     </button>
   );
 };

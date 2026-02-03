@@ -1,33 +1,62 @@
 .logout-btn {
-  background: #dc3545;
+  background: linear-gradient(135deg, #DC2626, #EF4444);
   color: white;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 10px 20px;
   font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 6px;
+  font-weight: 700;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Inter, system-ui, sans-serif";
 }
 
 .logout-btn:hover {
-  background: #c82333;
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, #B91C1C, #DC2626);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(220, 38, 38, 0.3);
 }
 
 .logout-btn:active {
   transform: translateY(0);
 }
 
-/* For navbar integration */
-.navbar .logout-btn {
-  margin-left: auto;
-  background: transparent;
-  border: 1px solid #dc3545;
-  color: #dc3545;
+.logout-icon {
+  font-size: 16px;
 }
 
-.navbar .logout-btn:hover {
-  background: #dc3545;
+.logout-text {
+  font-weight: 700;
+}
+
+/* For dashboard integration */
+.dashboard-header .logout-btn {
+  background: transparent;
+  border: 2px solid #DC2626;
+  color: #DC2626;
+  padding: 8px 16px;
+}
+
+.dashboard-header .logout-btn:hover {
+  background: #DC2626;
   color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .logout-btn {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+  }
+
+  .logout-text {
+    display: none;
+  }
+
+  .logout-icon {
+    font-size: 18px;
+  }
 }
