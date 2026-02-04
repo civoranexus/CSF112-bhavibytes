@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 // ================= CONTEXT =================
-import { AuthProvider } from "./context/AuthContext";
+import AuthProvider from "./context/AuthContext";
 
 // ================= COMPONENTS =================
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -14,7 +14,7 @@ import Dashboard from "./components/Dashboard";
 import HomePage from "./pages/HomePage";
 import ReportPage from "./pages/ReportPage";
 import TrackPage from "./pages/TrackPage";
-import ResourcesPage from "./pages/ResourcesPage";
+import ResourcesPage from "./pages/ResourcesPage.jsx";
 import ContactPage from "./pages/ContactPage";
 
 // ================= PORTALS (Layouts) =================
@@ -25,7 +25,7 @@ import PolicePortal from "./pages/PolicePortal";
 import VictimLogin from "./components/victim/VictimLogin";
 import VictimDashboard from "./components/victim/VictimDashboard";
 import MyComplaints from "./components/victim/MyComplaints";
-import Infographics from "./components/victim/Infographics";
+import InfographicsPage from "./components/victim/Infographics";
 import AnonymousReport from "./components/victim/AnonymousReport";
 
 // ================= POLICE COMPONENTS =================
@@ -53,7 +53,7 @@ function App() {
           <Route path="/report" element={<ReportPage />} />
           <Route path="/track" element={<TrackPage />} />
           <Route path="/resources" element={<ResourcesPage />} />
-          <Route path="/resources/infographics" element={<Infographics />} />
+          <Route path="/resources/infographics" element={<InfographicsPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/login" element={<Login />} />
 

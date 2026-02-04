@@ -6,97 +6,97 @@ import "./ContactPage.css";
 // Icons
 const MailIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="2"/>
-    <path d="m22 6-10 7L2 6" stroke="currentColor" strokeWidth="2"/>
+    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="2" />
+    <path d="m22 6-10 7L2 6" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const PhoneIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="2"/>
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const LocationIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2"/>
-    <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2"/>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" stroke="currentColor" strokeWidth="2" />
+    <circle cx="12" cy="10" r="3" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const ClockIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-    <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2"/>
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const ShieldIcon = () => (
   <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2"/>
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const SendIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="2"/>
+    <path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const CalendarIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2"/>
-    <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2"/>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" stroke="currentColor" strokeWidth="2" />
+    <path d="M16 2v4M8 2v4M3 10h18" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const BackIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2"/>
+    <path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const CheckIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2"/>
+    <path d="M20 6L9 17l-5-5" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const ExternalLinkIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" strokeWidth="2"/>
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const TicketIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2Z" stroke="currentColor" strokeWidth="2"/>
-    <path d="M9 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z" stroke="currentColor" strokeWidth="2"/>
+    <path d="M2 9a3 3 0 0 1 0 6v2a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-2a3 3 0 0 1 0-6V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v2Z" stroke="currentColor" strokeWidth="2" />
+    <path d="M9 12a3 3 0 1 1 6 0 3 3 0 0 1-6 0Z" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const HelpIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" stroke="currentColor" strokeWidth="2"/>
+    <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2" />
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const ChatIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="currentColor" strokeWidth="2"/>
+    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const TeamIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2"/>
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8ZM23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
 const DownloadIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="2"/>
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" strokeWidth="2" />
   </svg>
 );
 
@@ -196,11 +196,9 @@ export default function ContactPage() {
   const navigate = useNavigate();
   const [theme, setTheme] = useState("dark");
   const [formData, setFormData] = useState({
-    fullName: "",
+    name: "",
     email: "",
-    phone: "",
-    company: "",
-    inquiryType: "General Inquiry",
+    subject: "",
     message: "",
     priority: "Normal",
     attachment: null,
@@ -226,6 +224,11 @@ export default function ContactPage() {
     const savedTheme = localStorage.getItem("contactTheme") || "dark";
     setTheme(savedTheme);
     document.body.className = savedTheme;
+  }, []);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
   const toggleTheme = () => {
@@ -278,7 +281,7 @@ export default function ContactPage() {
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitted(true);
-      
+
       // Reset form after submission
       setFormData({
         fullName: "",
@@ -299,12 +302,12 @@ export default function ContactPage() {
 
   const handleScheduleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Generate meeting ID
     const meetingId = `MTG-${Date.now().toString().slice(-8)}`;
-    
+
     alert(`✅ Meeting scheduled successfully!\n\nMeeting ID: ${meetingId}\nDate: ${scheduleData.date}\nTime: ${scheduleData.time}\nDuration: ${scheduleData.date} minutes\n\nCalendar invite has been sent to your email.`);
-    
+
     setShowScheduleModal(false);
     setScheduleData({
       date: "",
@@ -372,7 +375,7 @@ export default function ContactPage() {
       >
         <div className="header-container">
           <div className="header-brand">
-            <button 
+            <button
               className="back-button"
               onClick={handleGoBack}
               aria-label="Go back"
@@ -389,16 +392,16 @@ export default function ContactPage() {
               </p>
             </div>
           </div>
-          
+
           <div className="header-actions">
-            <button 
+            <button
               className="theme-toggle subtle-btn"
               onClick={toggleTheme}
               aria-label="Toggle theme"
             >
               {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
             </button>
-            <button 
+            <button
               className="emergency-btn"
               onClick={() => setShowEmergencyContacts(true)}
               aria-label="Emergency contacts"
@@ -428,7 +431,7 @@ export default function ContactPage() {
             exit={{ opacity: 0 }}
             onClick={() => setShowEmergencyContacts(false)}
           >
-            <motion.div 
+            <motion.div
               className="emergency-content"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
@@ -437,14 +440,14 @@ export default function ContactPage() {
             >
               <div className="emergency-header">
                 <h3>🚨 Emergency Contacts</h3>
-                <button 
+                <button
                   className="close-btn"
                   onClick={() => setShowEmergencyContacts(false)}
                 >
                   ✕
                 </button>
               </div>
-              
+
               <div className="emergency-list">
                 {emergencyContacts.map(contact => (
                   <div key={contact.id} className="emergency-contact">
@@ -454,7 +457,7 @@ export default function ContactPage() {
                       <div className="contact-number">{contact.number}</div>
                     </div>
                     <div className="contact-actions">
-                      <button 
+                      <button
                         className="call-btn"
                         onClick={() => handleCallNow(contact.number, contact.name)}
                       >
@@ -464,10 +467,10 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-              
+
               <div className="emergency-footer">
                 <p>⏰ Available 24/7 for critical incidents</p>
-                <button 
+                <button
                   className="secondary-btn"
                   onClick={() => setShowEmergencyContacts(false)}
                 >
@@ -489,7 +492,7 @@ export default function ContactPage() {
             exit={{ opacity: 0 }}
             onClick={() => setShowScheduleModal(false)}
           >
-            <motion.div 
+            <motion.div
               className="schedule-content"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
@@ -498,14 +501,14 @@ export default function ContactPage() {
             >
               <div className="schedule-header">
                 <h3><CalendarIcon /> Schedule a Call</h3>
-                <button 
+                <button
                   className="close-btn"
                   onClick={() => setShowScheduleModal(false)}
                 >
                   ✕
                 </button>
               </div>
-              
+
               <form onSubmit={handleScheduleSubmit} className="schedule-form">
                 <div className="form-grid">
                   <div className="form-group">
@@ -519,7 +522,7 @@ export default function ContactPage() {
                       min={new Date().toISOString().split('T')[0]}
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Time</label>
                     <input
@@ -530,7 +533,7 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Duration</label>
                     <select
@@ -544,7 +547,7 @@ export default function ContactPage() {
                       <option value="60">60 minutes</option>
                     </select>
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Attendees</label>
                     <select
@@ -560,7 +563,7 @@ export default function ContactPage() {
                     </select>
                   </div>
                 </div>
-                
+
                 <div className="form-group">
                   <label>Purpose</label>
                   <select
@@ -576,7 +579,7 @@ export default function ContactPage() {
                     <option value="Product Demo">Product Demo</option>
                   </select>
                 </div>
-                
+
                 <div className="form-group">
                   <label>Additional Notes</label>
                   <textarea
@@ -584,16 +587,16 @@ export default function ContactPage() {
                     placeholder="Any specific topics you'd like to discuss..."
                   />
                 </div>
-                
+
                 <div className="form-actions">
-                  <button 
+                  <button
                     type="button"
                     className="secondary-btn"
                     onClick={() => setShowScheduleModal(false)}
                   >
                     Cancel
                   </button>
-                  <button 
+                  <button
                     type="submit"
                     className="primary-btn"
                   >
@@ -616,10 +619,10 @@ export default function ContactPage() {
         <div className="hero-content">
           <h1>Secure Communication Portal</h1>
           <p className="hero-description">
-            Get in touch with our cybersecurity experts. All communications are encrypted 
+            Get in touch with our cybersecurity experts. All communications are encrypted
             and protected to ensure your data remains confidential.
           </p>
-          
+
           <div className="hero-stats">
             <div className="stat">
               <span className="stat-number">24/7</span>
@@ -639,7 +642,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="hero-illustration">
           <div className="illustration-icon">🔒</div>
           <div className="security-badge">
@@ -667,7 +670,7 @@ export default function ContactPage() {
                   <div>
                     <strong>Email</strong>
                     <p>contact@civora-nexus.com</p>
-                    <button 
+                    <button
                       className="text-btn"
                       onClick={() => handleEmailNow("contact@civora-nexus.com", "General Contact")}
                     >
@@ -675,13 +678,13 @@ export default function ContactPage() {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="contact-info-item">
                   <PhoneIcon />
                   <div>
                     <strong>Phone</strong>
                     <p>+91 98765 43210</p>
-                    <button 
+                    <button
                       className="text-btn"
                       onClick={() => handleCallNow("+919876543210", "Support")}
                     >
@@ -689,7 +692,7 @@ export default function ContactPage() {
                     </button>
                   </div>
                 </div>
-                
+
                 <div className="contact-info-item">
                   <LocationIcon />
                   <div>
@@ -697,7 +700,7 @@ export default function ContactPage() {
                     <p>Cyber Tower, Sector 67<br />Gurugram, Haryana 122001</p>
                   </div>
                 </div>
-                
+
                 <div className="contact-info-item">
                   <ClockIcon />
                   <div>
@@ -711,28 +714,28 @@ export default function ContactPage() {
             <div className="sidebar-section">
               <h3>🛠️ Quick Actions</h3>
               <div className="quick-actions">
-                <button 
+                <button
                   className="quick-action-btn"
                   onClick={() => setShowScheduleModal(true)}
                 >
                   <CalendarIcon />
                   Schedule a Call
                 </button>
-                <button 
+                <button
                   className="quick-action-btn"
                   onClick={handleCreateSupportTicket}
                 >
                   <TicketIcon />
                   Create Support Ticket
                 </button>
-                <button 
+                <button
                   className="quick-action-btn"
                   onClick={handleLiveChat}
                 >
                   <ChatIcon />
                   Live Chat Support
                 </button>
-                <button 
+                <button
                   className="quick-action-btn"
                   onClick={() => navigate("/resources")}
                 >
@@ -745,21 +748,21 @@ export default function ContactPage() {
             <div className="sidebar-section">
               <h3>📄 Resources</h3>
               <div className="resource-links">
-                <button 
+                <button
                   className="resource-link"
                   onClick={() => handleDownloadTemplate('incident')}
                 >
                   <DownloadIcon />
                   Incident Report Template
                 </button>
-                <button 
+                <button
                   className="resource-link"
                   onClick={() => handleDownloadTemplate('support')}
                 >
                   <DownloadIcon />
                   Support Request Template
                 </button>
-                <button 
+                <button
                   className="resource-link"
                   onClick={handleDownloadResources}
                 >
@@ -786,7 +789,7 @@ export default function ContactPage() {
             </div>
 
             {submitted ? (
-              <motion.div 
+              <motion.div
                 className="success-message"
                 initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
@@ -795,7 +798,7 @@ export default function ContactPage() {
                 <h3>Message Sent Successfully!</h3>
                 <p>Your ticket number: <strong>{ticketNumber}</strong></p>
                 <p>We'll get back to you within <strong>{calculateResponseTime(formData.inquiryType)}</strong>.</p>
-                <button 
+                <button
                   className="primary-btn"
                   onClick={() => setSubmitted(false)}
                 >
@@ -819,7 +822,7 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label htmlFor="email">
                       Email Address <span className="required">*</span>
@@ -834,7 +837,7 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label htmlFor="phone">
                       Phone Number <span className="required">*</span>
@@ -849,7 +852,7 @@ export default function ContactPage() {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label htmlFor="company">
                       Company/Organization
@@ -938,7 +941,7 @@ export default function ContactPage() {
                 </div>
 
                 <div className="form-actions">
-                  <button 
+                  <button
                     type="button"
                     className="secondary-btn"
                     onClick={() => setFormData({
@@ -955,7 +958,7 @@ export default function ContactPage() {
                   >
                     Clear Form
                   </button>
-                  <button 
+                  <button
                     type="submit"
                     className="primary-btn"
                     disabled={isSubmitting}
@@ -973,10 +976,10 @@ export default function ContactPage() {
                     )}
                   </button>
                 </div>
-                
+
                 <div className="form-footer">
                   <p className="security-notice">
-                    🔒 All communications are encrypted and secure. 
+                    🔒 All communications are encrypted and secure.
                     We never share your information with third parties.
                   </p>
                 </div>
@@ -1006,7 +1009,7 @@ export default function ContactPage() {
               whileHover={{ y: -5 }}
               onClick={() => setSelectedTeam(team)}
             >
-              <div 
+              <div
                 className="team-icon"
                 style={{ backgroundColor: `${team.color}20` }}
               >
@@ -1019,7 +1022,7 @@ export default function ContactPage() {
                 <span className="contact-info">{team.contact}</span>
               </div>
               <div className="team-actions">
-                <button 
+                <button
                   className="email-btn"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -1028,7 +1031,7 @@ export default function ContactPage() {
                 >
                   📧 Email
                 </button>
-                <button 
+                <button
                   className="select-btn"
                   onClick={(e) => {
                     e.stopPropagation();
@@ -1101,19 +1104,19 @@ export default function ContactPage() {
             </p>
           </div>
           <div className="cta-actions">
-            <button 
+            <button
               className="primary-btn cta-primary"
               onClick={() => setShowEmergencyContacts(true)}
             >
               🚨 Emergency Contacts
             </button>
-            <button 
+            <button
               className="secondary-btn"
               onClick={handleLiveChat}
             >
               💬 Live Chat
             </button>
-            <button 
+            <button
               className="outline-btn"
               onClick={() => navigate("/resources")}
             >
@@ -1140,7 +1143,7 @@ export default function ContactPage() {
               <span className="cert-badge">GDPR</span>
             </div>
           </div>
-          
+
           <div className="footer-links">
             <div className="link-column">
               <h4>Quick Links</h4>
@@ -1151,7 +1154,7 @@ export default function ContactPage() {
                 {theme === "dark" ? "☀️ Light Mode" : "🌙 Dark Mode"}
               </a>
             </div>
-            
+
             <div className="link-column">
               <h4>Support</h4>
               <a href="#" onClick={() => setShowScheduleModal(true)}>Schedule Call</a>
@@ -1159,7 +1162,7 @@ export default function ContactPage() {
               <a href="#" onClick={() => setShowEmergencyContacts(true)}>Emergency</a>
               <a href="#" onClick={() => window.open('https://status.civora-nexus.com', '_blank')}>System Status</a>
             </div>
-            
+
             <div className="link-column">
               <h4>Legal</h4>
               <a href="#" onClick={() => window.open('#privacy', '_blank')}>Privacy Policy</a>
@@ -1167,7 +1170,7 @@ export default function ContactPage() {
               <a href="#" onClick={() => window.open('#security', '_blank')}>Security Policy</a>
               <a href="#" onClick={() => window.open('#compliance', '_blank')}>Compliance</a>
             </div>
-            
+
             <div className="link-column">
               <h4>Connect</h4>
               <a href="#" onClick={() => window.open('https://linkedin.com/company/civora-nexus', '_blank')}>LinkedIn</a>
@@ -1177,7 +1180,7 @@ export default function ContactPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="footer-bottom">
           <div className="footer-copy">
             © {new Date().getFullYear()} Cívora Nexus Pvt Ltd. All rights reserved.
