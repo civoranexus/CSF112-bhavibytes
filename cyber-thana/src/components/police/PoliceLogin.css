@@ -1,0 +1,301 @@
+.police-login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    padding: 20px;
+}
+
+.police-login-container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.police-login-box {
+    background: #1e293b;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 1px solid #334155;
+    position: relative;
+    overflow: hidden;
+}
+
+.police-login-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa, #3b82f6);
+    background-size: 200% 100%;
+    animation: gradientFlow 3s linear infinite;
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.police-login-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.police-login-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.police-login-header h2 {
+    color: white;
+    margin: 0 0 8px 0;
+    font-size: 28px;
+}
+
+.police-login-subtitle {
+    color: #94a3b8;
+    margin: 0 0 15px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.access-warning {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    border-radius: 20px;
+    color: #f87171;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.police-login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.police-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.police-form-group label {
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.police-form-input {
+    padding: 14px 16px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s;
+    background: #374151;
+    color: white;
+}
+
+.police-form-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background: #475569;
+}
+
+.police-form-input::placeholder {
+    color: #6b7280;
+}
+
+.police-password-input {
+    position: relative;
+}
+
+.police-password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    color: #9ca3af;
+}
+
+.police-form-select {
+    padding: 14px 16px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.2s;
+    background: #374151;
+    color: white;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239CA3AF'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+}
+
+.police-form-select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+    background: #475569;
+}
+
+.two-factor {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.two-factor label {
+    color: #cbd5e1;
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.otp-input {
+    padding: 14px 16px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    font-size: 20px;
+    letter-spacing: 8px;
+    text-align: center;
+    background: #374151;
+    color: white;
+    font-family: monospace;
+}
+
+.otp-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.police-login-button {
+    padding: 16px;
+    background: linear-gradient(135deg, #1e40af, #3b82f6);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.police-login-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+}
+
+.police-login-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.access-info {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.access-level {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.level-badge {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.level-badge.restricted {
+    background: rgba(220, 38, 38, 0.1);
+    color: #f87171;
+    border: 1px solid rgba(220, 38, 38, 0.3);
+}
+
+.level-badge.classified {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.session-timer {
+    color: #9ca3af;
+    font-size: 13px;
+    margin: 0;
+}
+
+.session-timer span {
+    color: #fbbf24;
+    font-weight: 600;
+    font-family: monospace;
+}
+
+.audit-notice {
+    text-align: center;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.5;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+/* Mobile responsive */
+@media (max-width: 480px) {
+    .police-login-box {
+        padding: 30px 20px;
+    }
+
+    .police-login-header h2 {
+        font-size: 24px;
+    }
+
+    .access-level {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .otp-input {
+        font-size: 18px;
+        letter-spacing: 6px;
+        padding: 12px;
+    }
+}

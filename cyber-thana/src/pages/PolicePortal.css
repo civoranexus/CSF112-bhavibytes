@@ -1,0 +1,1105 @@
+/* ====================
+   RESET & BASE STYLES
+==================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ====================
+   POLICE PORTAL CONTAINER
+==================== */
+.police-portal {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #0f172a;
+    color: #f1f5f9;
+    position: relative;
+}
+
+/* ====================
+   HEADER - DARK THEME
+==================== */
+.police-header {
+    height: 70px;
+    background: #1e293b;
+    color: #f1f5f9;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
+    border-bottom: 1px solid #334155;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.police-header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Menu Button */
+.police-menu-btn {
+    font-size: 24px;
+    background: none;
+    border: none;
+    color: #cbd5e1;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.police-menu-btn:hover {
+    background: #334155;
+    color: #60a5fa;
+}
+
+/* Logo */
+.police-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.police-logo h1 {
+    font-size: 22px;
+    font-weight: 800;
+    color: #f1f5f9;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+.police-subtitle {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 500;
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* User Info */
+.police-user-info {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: 14px;
+}
+
+.police-badge {
+    background: rgba(59, 130, 246, 0.2);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #60a5fa;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.public-site-link {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border: 2px solid #60a5fa;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-size: 14px;
+}
+
+.public-site-link:hover {
+    background: #60a5fa;
+    color: #0f172a;
+}
+
+/* ====================
+   WARNING BANNER
+==================== */
+.warning-banner {
+    background: linear-gradient(90deg, #dc2626, #b91c1c, #dc2626);
+    background-size: 200% 100%;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* ====================
+   SIDEBAR
+==================== */
+.police-sidebar {
+    position: fixed;
+    top: 70px;
+    left: -280px;
+    width: 280px;
+    height: calc(100vh - 70px - 40px);
+    background: #1e293b;
+    padding: 0;
+    transition: left 0.3s ease;
+    z-index: 99;
+    border-right: 1px solid #334155;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.police-sidebar.open {
+    left: 0;
+}
+
+/* Sidebar Header */
+.police-sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #334155;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.police-sidebar-header h3 {
+    margin: 0;
+    color: #94a3b8;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* Navigation Links */
+.police-sidebar-nav {
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.police-nav-link {
+    padding: 14px 20px;
+    text-decoration: none;
+    color: #cbd5e1;
+    font-weight: 500;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+    border-radius: 6px;
+}
+
+.police-nav-link:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: #60a5fa;
+}
+
+.police-nav-link.active {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+    color: #60a5fa;
+    border-left: 3px solid #60a5fa;
+    font-weight: 600;
+}
+
+/* Sidebar Footer */
+.police-sidebar-footer {
+    padding: 20px;
+    border-top: 1px solid #334155;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.audit-info {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.session-time {
+    margin: 0 0 8px 0;
+    color: #cbd5e1;
+}
+
+.access-level {
+    margin: 0;
+    color: #10b981;
+    font-weight: 600;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* ====================
+   MAIN CONTENT
+==================== */
+.police-main {
+    padding: 30px 24px;
+    margin-top: 40px;
+    flex: 1;
+    background: #0f172a;
+    min-height: calc(100vh - 110px - 300px);
+}
+
+/* Dashboard Content */
+.police-main .dashboard {
+    background: #1e293b;
+    border-radius: 12px;
+    padding: 30px;
+    border: 1px solid #334155;
+    color: #e2e8f0;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.police-main .dashboard h2 {
+    color: #f1f5f9;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: 2px solid #334155;
+    padding-bottom: 12px;
+}
+
+.police-main .dashboard p {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+/* ====================
+   FOOTER - POLICE THEME
+==================== */
+.police-footer {
+    background: #030712;
+    color: #e2e8f0;
+    padding: 60px 24px 30px;
+    margin-top: auto;
+    border-top: 1px solid #1e293b;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.police-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #1e40af, #3b82f6);
+    background-size: 200% 100%;
+    animation: footerGradient 3s linear infinite;
+}
+
+@keyframes footerGradient {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 40px;
+}
+
+/* Footer Sections */
+.footer-section h4 {
+    font-size: 16px;
+    color: #f1f5f9;
+    margin-bottom: 20px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 3px;
+    background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    border-radius: 2px;
+}
+
+/* Contact Info */
+.contact-info {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    padding: 16px;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 10px;
+    border: 1px solid #334155;
+    transition: all 0.3s;
+    align-items: center;
+}
+
+.contact-info:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
+}
+
+.contact-info span {
+    font-size: 22px;
+    color: #60a5fa;
+    background: rgba(59, 130, 246, 0.1);
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.contact-info div p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #cbd5e1;
+}
+
+.contact-info .bold {
+    font-weight: 700;
+    color: #f1f5f9;
+    font-size: 15px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* Quick Links */
+.quick-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.quick-link {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 8px;
+    text-decoration: none;
+    color: #cbd5e1;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid #334155;
+}
+
+.quick-link:hover {
+    background: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.quick-link span {
+    font-size: 16px;
+}
+
+/* ====================
+   QUICK ACCESS COLUMN - DARK THEME
+==================== */
+.footer-section.dark-section {
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-section.dark-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #dc2626, #ef4444, #dc2626);
+    background-size: 200% 100%;
+    animation: gradientFlow 3s linear infinite;
+}
+
+.footer-section.dark-section h4 {
+    color: #f1f5f9;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.footer-section.dark-section h4::after {
+    background: linear-gradient(90deg, #ef4444, #f87171);
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+}
+
+.footer-section.dark-section a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #cbd5e1;
+    text-decoration: none;
+    margin-bottom: 14px;
+    font-size: 14px;
+    transition: all 0.3s;
+    padding: 12px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border-left: 3px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-section.dark-section a::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: block;
+    opacity: 0.7;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+/* Specific colors for each link dot */
+.footer-section.dark-section a:nth-child(2)::before {
+    /* Dashboard */
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.footer-section.dark-section a:nth-child(3)::before {
+    /* Active Cases */
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.footer-section.dark-section a:nth-child(4)::before {
+    /* Crime Analytics */
+    background: linear-gradient(135deg, #10b981, #34d399);
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+
+.footer-section.dark-section a:nth-child(5)::before {
+    /* Officer Management */
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    box-shadow: 0 0 8px rgba(139, 92, 246, 0.4);
+}
+
+.footer-section.dark-section a:nth-child(6)::before {
+    /* Audit Logs */
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+    box-shadow: 0 0 8px rgba(236, 72, 153, 0.4);
+}
+
+.footer-section.dark-section a:last-child::before {
+    /* Emergency Protocol */
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    animation: pulse 2s infinite;
+}
+
+.footer-section.dark-section a:hover {
+    color: #ffffff;
+    background: rgba(239, 68, 68, 0.15);
+    border-left: 3px solid #ef4444;
+    transform: translateX(8px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.footer-section.dark-section a:hover::before {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Emergency Protocol Special Styling */
+.footer-section.dark-section a:last-child {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(185, 28, 28, 0.1));
+    border: 1px solid rgba(220, 38, 38, 0.3);
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer-section.dark-section a:last-child::after {
+    content: '🚨';
+    position: absolute;
+    right: 16px;
+    opacity: 0.5;
+    font-size: 16px;
+    animation: flash 1s ease-in-out infinite;
+}
+
+@keyframes flash {
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
+}
+
+.footer-section.dark-section a:last-child:hover {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(185, 28, 28, 0.2));
+    border-color: rgba(220, 38, 38, 0.5);
+    transform: translateX(8px) scale(1.02);
+    box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+}
+
+/* ====================
+   SECURITY & COMPLIANCE COLUMN
+==================== */
+.security-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.security-badges span {
+    font-size: 11px;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8), rgba(15, 23, 42, 0.8));
+    padding: 8px 14px;
+    border-radius: 20px;
+    color: #60a5fa;
+    border: 1px solid #334155;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: uppercase;
+}
+
+.security-badges span:nth-child(4),
+.security-badges span:nth-child(5),
+.security-badges span:nth-child(6) {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.2), rgba(185, 28, 28, 0.2));
+    color: #f87171;
+    border-color: rgba(220, 38, 38, 0.3);
+}
+
+.security-note {
+    font-size: 13px;
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-top: 12px;
+    padding: 12px;
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 8px;
+    border-left: 3px solid #ef4444;
+}
+
+.audit-section {
+    margin-top: 20px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.audit-section p {
+    margin: 0;
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+.audit-section p:first-child {
+    color: #94a3b8;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.audit-id {
+    font-family: 'Courier New', monospace;
+    color: #10b981;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* ====================
+   FOOTER BOTTOM
+==================== */
+.footer-bottom {
+    border-top: 1px solid #1e293b;
+    margin-top: 40px;
+    padding-top: 24px;
+    max-width: 1200px;
+    margin-inline: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.copyright {
+    color: #94a3b8;
+    margin: 0;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.copyright span {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.legal-links {
+    display: flex;
+    gap: 24px;
+    position: relative;
+}
+
+.legal-links::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 16px;
+    background: #334155;
+}
+
+.legal-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    position: relative;
+    padding: 4px 0;
+    transition: all 0.2s;
+}
+
+.legal-links a:hover {
+    color: #60a5fa;
+}
+
+.legal-links a:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 12px;
+    background: #334155;
+}
+
+.session-status {
+    font-family: 'SF Mono', 'Monaco', 'Courier New', monospace;
+    color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ====================
+   RESPONSIVE DESIGN
+==================== */
+
+/* Desktop with Sidebar */
+@media (min-width: 1024px) {
+    .police-sidebar {
+        left: 0;
+        position: fixed;
+        top: 110px;
+        height: calc(100vh - 110px);
+    }
+
+    .police-menu-btn {
+        display: none;
+    }
+
+    .police-main {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+        margin-top: 110px;
+    }
+
+    .police-footer {
+        margin-left: 280px;
+        width: calc(100% - 280px);
+    }
+}
+
+/* Tablet */
+@media (max-width: 1023px) {
+
+    .police-sidebar.open~.police-main::before,
+    .police-sidebar.open~.police-footer::before {
+        content: '';
+        position: fixed;
+        top: 110px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 98;
+    }
+
+    .police-main {
+        margin-top: 110px;
+        min-height: calc(100vh - 110px - 350px);
+    }
+}
+
+/* Tablet Footer */
+@media (max-width: 768px) {
+    .police-header {
+        padding: 0 16px;
+        height: 60px;
+    }
+
+    .police-menu-btn {
+        font-size: 20px;
+        width: 36px;
+        height: 36px;
+    }
+
+    .police-logo h1 {
+        font-size: 18px;
+    }
+
+    .police-user-info {
+        gap: 10px;
+    }
+
+    .police-badge {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+
+    .public-site-link {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    .warning-banner {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    .police-main {
+        padding: 20px 16px;
+        min-height: calc(100vh - 100px - 350px);
+    }
+
+    /* Footer Responsive */
+    .police-footer {
+        padding: 40px 20px 24px;
+    }
+
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .footer-section.dark-section {
+        order: 1;
+    }
+
+    .footer-section:first-child {
+        order: 2;
+    }
+
+    .footer-section:last-child {
+        order: 3;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .legal-links {
+        order: 2;
+    }
+
+    .legal-links::before {
+        display: none;
+    }
+
+    .copyright {
+        order: 1;
+        justify-content: center;
+    }
+
+    .session-status {
+        order: 3;
+    }
+
+    .quick-links {
+        justify-content: center;
+    }
+
+    .police-sidebar {
+        width: 260px;
+        left: -260px;
+        top: 100px;
+        height: calc(100vh - 100px);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .police-header {
+        padding: 0 12px;
+    }
+
+    .police-logo h1 {
+        font-size: 16px;
+    }
+
+    .police-subtitle {
+        font-size: 10px;
+    }
+
+    .police-user-info a {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+
+    .police-main {
+        padding: 16px;
+        min-height: calc(100vh - 100px - 400px);
+    }
+
+    /* Mobile Footer */
+    .police-footer {
+        padding: 32px 16px 20px;
+    }
+
+    .contact-info {
+        padding: 14px;
+    }
+
+    .contact-info span {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+    }
+
+    .footer-section.dark-section {
+        padding: 20px;
+    }
+
+    .footer-section.dark-section a {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    .security-badges {
+        justify-content: center;
+    }
+
+    .legal-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 16px;
+    }
+
+    .legal-links a:not(:last-child)::after {
+        display: none;
+    }
+
+    .quick-link {
+        padding: 8px 12px;
+        font-size: 11px;
+    }
+}
+
+/* ====================
+   ANIMATIONS & EFFECTS
+==================== */
+.police-nav-link,
+.public-site-link,
+.footer-section a,
+.legal-links a,
+.quick-link {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.police-sidebar {
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus States for Accessibility */
+.police-menu-btn:focus,
+.police-nav-link:focus,
+.public-site-link:focus,
+.footer-section a:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Scrollbar Styling */
+.police-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.police-sidebar::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+
+.police-sidebar::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 3px;
+}
+
+.police-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+
+/* Exit button in header */
+.exit-police-btn {
+    background: transparent;
+    border: 1px solid #dc2626;
+    color: #fecaca;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.exit-police-btn:hover {
+    background: #dc2626;
+    color: white;
+}
+
+/* Overlay */
+.exit-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Light confirmation box */
+.exit-modal {
+    background: #f8fafc;
+    color: #0f172a;
+    padding: 32px;
+    border-radius: 18px;
+    max-width: 440px;
+    width: 92%;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    border: 1px solid #e2e8f0;
+}
+
+.exit-modal h3 {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+    color: #020617;
+}
+
+.exit-modal p {
+    color: #334155;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.exit-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    margin-top: 22px;
+}
+
+.btn.secondary {
+    background: #e2e8f0;
+    color: #020617;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn.secondary:hover {
+    background: #cbd5f5;
+}
+
+.btn.danger {
+    background: #dc2626;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn.danger:hover {
+    background: #b91c1c;
+}
+
+.exit-note {
+    font-size: 0.8rem;
+    color: #475569;
+    margin-top: 16px;
+}
