@@ -1,70 +1,138 @@
-# Getting Started with Create React App
+# Cyber Thana - Cybercrime Reporting System
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A comprehensive web application for reporting, tracking, and managing cybercrime incidents with secure victim and police portals.
 
-## Available Scripts
+## 🌟 Live Demo
+**URL:** [https://cyber-thana.web.app](https://cyber-thana.web.app)
 
-In the project directory, you can run:
+## 🚀 Features
 
-### `npm start`
+### 🛡️ Victim Portal
+- **Secure Login** with authentication
+- **Anonymous Reporting** for privacy protection
+- **Complaint Filing** with detailed forms
+- **Real-time Tracking** of submitted complaints
+- **Dashboard** with case management
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 👮 Police Portal
+- **Officer Authentication** with role-based access
+- **Case Management** system
+- **Analytics Dashboard** for insights
+- **Evidence Management** tools
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🌐 Public Features
+- **Homepage** with emergency information
+- **Anonymous Reporting** portal
+- **Complaint Tracking** system
+- **Contact & Support** center
+- **Educational Resources**
 
-### `npm test`
+## 🛠️ Technology Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Frontend
+- **React.js** 19.2.3 - Modern UI framework
+- **React Router** 6.30.3 - Client-side routing
+- **Framer Motion** 12.24.10 - Animations
+- **Lucide React** 0.562.0 - Icons
 
 ### Deployment
+- **Firebase Hosting** - Production hosting
+- **Global CDN** - Fast content delivery
+- **SSL Certificate** - Secure connection
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📱 Responsive Design
+- **Mobile-First** approach
+- **Tablet & Desktop** optimized
+- **Touch-Friendly** interface
+- **Cross-Browser** compatible
 
-### `npm run build` fails to minify
+## 🔐 Security Features
+- **Role-Based Authentication**
+- **Secure Session Management**
+- **Input Validation**
+- **XSS Protection**
+- **HTTPS Encryption**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🎨 UI/UX Highlights
+- **Modern Glassmorphism** design
+- **Smooth Animations** and transitions
+- **Intuitive Navigation**
+- **Accessibility** compliant
+- **Professional Color Scheme**
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 14+ installed
+- npm or yarn package manager
+
+### Installation
+```bash
+# Clone the repository
+git clone https://github.com/your-username/cyber-thana.git
+cd cyber-thana
+
+# Install dependencies
+npm install
+
+# Start development server
+npm start
+```
+
+### Available Scripts
+```bash
+npm start      # Start development server
+npm run build  # Build for production
+npm test       # Run tests
+```
+
+## 📁 Project Structure
+```
+cyber-thana/
+├── src/
+│   ├── components/          # Reusable components
+│   │   ├── victim/         # Victim portal components
+│   │   ├── police/         # Police portal components
+│   │   └── common/         # Shared components
+│   ├── pages/              # Page components
+│   ├── context/            # React context
+│   └── styles/             # CSS files
+├── public/                 # Static assets
+└── build/                  # Production build
+```
+
+## 🌐 Deployment
+
+### Firebase Hosting
+```bash
+# Install Firebase CLI
+npm install -g firebase-tools
+
+# Deploy to Firebase
+firebase deploy --project cyber-thana
+```
+
+## 📊 Demo Credentials
+
+### Victim Portal
+- **Email:** victim@demo.com
+- **Password:** demo123
+
+### Police Portal  
+- **Email:** police@demo.com
+- **Password:** demo123
+
+## 👨‍💻 Author
+
+**Your Name** - Project Developer
+
+## 📞 Contact
+
+- **Project Link:** https://github.com/your-username/cyber-thana
+- **Live Demo:** https://cyber-thana.web.app
+
+## 🙏 Acknowledgments
+
+- React.js team for the amazing framework
+- Firebase for hosting services
+- Open source community for inspiration and tools
